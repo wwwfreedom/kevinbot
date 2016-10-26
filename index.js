@@ -32,6 +32,7 @@ app.post('/webhook/', function (req, res) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
     if (event.postback) {
+      console.log(event.postback.payload)
       if (event.postback.payload === 'USER_DEFINED_PAYLOAD') {
         sendWelcomeMessage(sender)
         continue
@@ -56,7 +57,12 @@ app.post('/webhook/', function (req, res) {
         sendGenericMessage(sender)
         continue
       }
-      sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+
+      if (text === 'See menu') {
+        sendTextMessage(sender, "going to home menu")
+        continue
+      }
+      /* sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))*/
     }
 
   }
@@ -91,7 +97,7 @@ function sendInfoAboutMe(sender) {
     "quick_replies": [
       {
         "content_type": "text",
-        "title": "See the home menu",
+        "title": "See menu",
         "payload": "home menu"
       },
       {
