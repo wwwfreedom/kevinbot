@@ -56,11 +56,7 @@ app.post('/webhook/', function (req, res) {
       }
       sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
     }
-    if (event.postback) {
-      let text = JSON.stringify(event.postback)
-      sendTextMessage(sender, "Postback received: " + text.substring(0, 200), token)
-      continue
-    }
+
   }
 
   res.sendStatus(200)
@@ -88,12 +84,13 @@ function sendTextMessage(sender, text) {
 }
 
 function sendWelcomeMessage(sender) {
+  console.log(sender)
   let messageData = {
     "attachment": {
       "type": "template",
       "payload": {
         "template_type": "button",
-        "text": "I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?",
+        "text": `I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`,
         "buttons": [
           {
             "type": "postback",
