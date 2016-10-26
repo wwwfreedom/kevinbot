@@ -32,6 +32,13 @@ app.post('/webhook/', function (req, res) {
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
+    if (event.postback) {
+      console.log(event)
+      let text = "Hello from a my bot"
+      sendTextMessage(sender, "Postback received: " + text.substring(0, 200), token)
+      continue
+    }
+
     if (event.message && event.message.text) {
       let text = event.message.text
       if (text === 'Generic') {
