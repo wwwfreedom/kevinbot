@@ -38,14 +38,16 @@ app.post('/webhook/', function (req, res) {
       }
 
       if (event.postback.payload === 'learn about him') {
-        sendTextMessage(sender, "Kevin's a cool dude, you should say hi to him in person")
+        sendInfoAboutMe(sender)
       }
 
       if (event.postback.payload === 'get my own bot') {
         sendTextMessage(sender, "getting you a bot soon wait up ...")
       }
 
-      console.log(event.postback.payload)
+      if (event.postback.payload === 'home menu') {
+        sendTextMessage(sender, "going to home menu")
+      }
     }
 
     if (event.message && event.message.text) {
@@ -83,14 +85,61 @@ function sendTextMessage(sender, text) {
   })
 }
 
+function sendInfoAboutMe(sender) {
+  let messageData = {
+    "text": "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading.",
+    "quick_replies": [
+      {
+        "content_type": "text",
+        "title": "See the home menu",
+        "payload": "home menu"
+      },
+      {
+        "content_type": "text",
+        "title": "Gimme his story",
+        "payload": "story"
+      },
+      {
+        "content_type": "text",
+        "title": "Take his quiz!",
+        "payload": "quiz"
+      },
+      {
+        "content_type": "text",
+        "title": "His company xinchaobot",
+        "payload": "company"
+      },
+      {
+        "content_type": "text",
+        "title": "Send him a msg 💬",
+        "payload": "msg"
+      }
+    ]
+  }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending messages: ', error)
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error)
+    }
+  })
+}
+
 function sendWelcomeMessage(sender) {
-  console.log(sender)
   let messageData = {
     "attachment": {
       "type": "template",
       "payload": {
         "template_type": "button",
-        "text": `I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`,
+        "text": `Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`,
         "buttons": [
           {
             "type": "postback",
