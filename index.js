@@ -33,7 +33,7 @@ app.post('/webhook/', function (req, res) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
     if (event.postback) {
-      console.log(event.postback)
+      console.log(event.postback.payload)
       sendWelcomeMessage(sender)
       continue
     }
@@ -88,7 +88,7 @@ function sendWelcomeMessage(sender) {
         "buttons": [
           {
             "type": "postback",
-            "title": "Learn about him 　",
+            "title": "Learn about him 👨🏻",
             "payload": "learn about him"
           },
           {
