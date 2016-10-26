@@ -27,15 +27,25 @@ app.get('/webhook/', function (req, res) {
 })
 
 app.post('/webhook/', function (req, res) {
-  console.log(req.body)
   let messaging_events = req.body.entry[0].messaging
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
     if (event.postback) {
+      if (event.postback.payload === 'USER_DEFINED_PAYLOAD') {
+        sendWelcomeMessage(sender)
+        continue
+      }
+
+      if (event.postback.payload === 'learn about him') {
+        sendTextMessage(sender, "Kevin's a cool dude, you should say hi to him in person")
+      }
+
+      if (event.postback.payload === 'get my own bot') {
+        sendTextMessage(sender, "getting you a bot soon wait up ...")
+      }
+
       console.log(event.postback.payload)
-      sendWelcomeMessage(sender)
-      continue
     }
 
     if (event.message && event.message.text) {
@@ -47,7 +57,6 @@ app.post('/webhook/', function (req, res) {
       sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
     }
     if (event.postback) {
-      console.log(event)
       let text = JSON.stringify(event.postback)
       sendTextMessage(sender, "Postback received: " + text.substring(0, 200), token)
       continue
