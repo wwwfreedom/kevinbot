@@ -106,7 +106,7 @@ function sendInfoAboutMe(sender) {
       },
       {
         "content_type": "text",
-        "title": "His company xinchaobot",
+        "title": "His company",
         "payload": "company"
       },
       {
