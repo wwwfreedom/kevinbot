@@ -33,9 +33,8 @@ app.post('/webhook/', function (req, res) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
     if (event.postback) {
-      console.log(event)
-      let text = "Hello from a my bot"
-      sendTextMessage(sender, "Postback received: " + text.substring(0, 200), token)
+      console.log(event.postback)
+      sendWelcomeMessage(sender)
       continue
     }
 
@@ -62,6 +61,46 @@ const token = process.env.FB_PAGE_ACCESS_TOKEN
 
 function sendTextMessage(sender, text) {
   let messageData = { text:text }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending messages: ', error)
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error)
+    }
+  })
+}
+
+function sendWelcomeMessage(sender) {
+  let messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": "I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?",
+        "buttons": [
+          {
+            "type": "postback",
+            "title": "Learn about him 　",
+            "payload": "learn about him"
+          },
+          {
+            "type": "postback",
+            "title": "Get your own bot 🤖",
+            "payload": "get my own bot"
+          }
+        ]
+      }
+    }
+  }
+
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token:token},
