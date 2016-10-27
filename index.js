@@ -135,10 +135,65 @@ app.post('/webhook/', function (req, res) {
          *   } else return
          * }
          * sendTextMessages(sender, a, 0) //OK. It works for me :)*/
-        sendTextMessage(sender, "hello")
-        sendTypingOn(sender)
-        sendTypingOff(sender)
-        sendTextMessage(sender, "world")
+        var queue = [];
+        var queueProcessing = false;
+
+        function queueRequest(request) {
+          queue.push(request);
+          if (queueProcessing) {
+            return;
+          }
+          queueProcessing = true;
+          processQueue();
+        }
+
+        function processQueue() {
+          if (queue.length == 0) {
+            queueProcessing = false;
+            return;
+          }
+          var currentRequest = queue.shift();
+          request(currentRequest, function(error, response, body) {
+            if (error || response.body.error) {
+              console.log("Error sending messages!");
+            }
+            processQueue();
+          });
+        }
+
+        queueRequest({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            message: {text: "hello"},
+          }
+        })
+
+        queueRequest({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            sender_action: "typing_on"
+          }
+        })
+
+        queueRequest({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            message: {text: "world"},
+          }
+        })
+        /* sendTextMessage(sender, "hello")
+         * sendTypingOn(sender)
+         * sendTypingOff(sender)
+         * sendTextMessage(sender, "world")*/
         /* sendTextMessage(sender, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity./nEvery day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place./nOne day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia./n Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university")*/
         continue
       }
