@@ -104,37 +104,41 @@ app.post('/webhook/', function (req, res) {
       }
 
       if (text === 'Life story') {
-        var a = ["hello", "typing", "world", "typing", "it's working"] //my result is a array
-        function sendTextMessages(sender, text, i) {
-          if (i < text.length) {
-            if (text[i] === 'typing') {
-              sendTypingOn(sender)
-              setTimeout(() => {
-                sendTypingOff(sender)
-              }, 300)
-              sendTextMessage(sender, text, i+1)
-            }
-            sendTypingOn(sender)
-            request({
-              url: 'https://graph.facebook.com/v2.6/me/messages',
-              qs: {access_token:token},
-              method: 'POST',
-              json: {
-                recipient: {id:sender},
-                message: {text:text[i]},
-              }
-            }, function(error, response, body) {
-              if (error) {
-                console.log('Error sending messages: ', error)
-              } else if (response.body.error) {
-                console.log('Error: ', response.body.error)
-              }
-              sendTypingOff(sender)
-              sendTextMessages(sender, text, i+1)
-            })
-          } else return
-        }
-        sendTextMessages(sender, a, 0) //OK. It works for me :)
+        /* var a = ["hello", "typing", "world", "typing", "it's working"] //my result is a array
+         * function sendTextMessages(sender, text, i) {
+         *   if (i < text.length) {
+         *     if (text[i] === 'typing') {
+         *       sendTypingOn(sender)
+         *       setTimeout(() => {
+         *         sendTypingOff(sender)
+         *       }, 300)
+         *       sendTextMessage(sender, text, i+1)
+         *     }
+         *     sendTypingOn(sender)
+         *     request({
+         *       url: 'https://graph.facebook.com/v2.6/me/messages',
+         *       qs: {access_token:token},
+         *       method: 'POST',
+         *       json: {
+         *         recipient: {id:sender},
+         *         message: {text:text[i]},
+         *       }
+         *     }, function(error, response, body) {
+         *       if (error) {
+         *         console.log('Error sending messages: ', error)
+         *       } else if (response.body.error) {
+         *         console.log('Error: ', response.body.error)
+         *       }
+         *       sendTypingOff(sender)
+         *       sendTextMessages(sender, text, i+1)
+         *     })
+         *   } else return
+         * }
+         * sendTextMessages(sender, a, 0) //OK. It works for me :)*/
+        sendTextMessage(sender, "hello")
+        sendTypingOn(sender)
+        sendTypingOff(sender)
+        sendTextMessage(sender, "world")
         /* sendTextMessage(sender, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity./nEvery day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place./nOne day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia./n Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university")*/
         continue
       }
