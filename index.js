@@ -104,7 +104,7 @@ app.post('/webhook/', function (req, res) {
                 console.log('Error: ', response.body.error)
               }
               sendTextMessages(sender, text, i+1)
-              setTimeOut(() => {
+              setTimeout(() => {
                 sendTypingToUser(sender)
               }, 300)
             })
