@@ -85,7 +85,9 @@ app.post('/webhook/', function (req, res) {
               } else if (response.body.error) {
                 console.log('Error: ', response.body.error)
               }
-              sendTextMessages(sender, text, i+1)
+              setTimeout(() => {
+                sendTextMessages(sender, text, i+1)
+              }, 2000)
             })
           } else return
         }
