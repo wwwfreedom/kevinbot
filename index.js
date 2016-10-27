@@ -168,7 +168,7 @@ app.post('/webhook/', function (req, res) {
               }
               setTimeout(() => {
                 processQueue();
-              }, 1000)
+              }, 2000)
             });
           }
         }
@@ -179,7 +179,7 @@ app.post('/webhook/', function (req, res) {
           method: 'POST',
           json: {
             recipient: {id:sender},
-            message: {text: "hello"},
+            message: {text: "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity"},
           }
         })
 
@@ -199,13 +199,50 @@ app.post('/webhook/', function (req, res) {
           method: 'POST',
           json: {
             recipient: {id:sender},
-            message: {text: "world"},
+            message: {text: "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place"},
           }
         })
-        /* sendTextMessage(sender, "hello")
-         * sendTypingOn(sender)
-         * sendTypingOff(sender)
-         * sendTextMessage(sender, "world")*/
+
+        queueRequest({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            sender_action: "typing_on"
+          }
+        })
+
+        queueRequest({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            message: {text: "One day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia"},
+          }
+        })
+
+        queueRequest({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            sender_action: "typing_on"
+          }
+        })
+
+        queueRequest({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            message: {text: "Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university"},
+          }
+        })
+
         /* sendTextMessage(sender, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity./nEvery day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place./nOne day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia./n Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university")*/
         continue
       }
