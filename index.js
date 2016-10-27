@@ -77,6 +77,7 @@ app.post('/webhook/', function (req, res) {
               method: 'POST',
               json: {
                 recipient: {id:sender},
+                sender_action: "typing_on",
                 message: {text:text[i]},
               }
             }, function(error, response, body) {
@@ -85,9 +86,7 @@ app.post('/webhook/', function (req, res) {
               } else if (response.body.error) {
                 console.log('Error: ', response.body.error)
               }
-              setTimeout(() => {
-                sendTextMessages(sender, text, i+1)
-              }, 2000)
+              sendTextMessages(sender, text, i+1)
             })
           } else return
         }
