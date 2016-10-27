@@ -46,8 +46,12 @@ app.post('/webhook/', function (req, res) {
         sendTextMessage(sender, "getting you a bot soon wait up ...")
       }
 
-      if (event.postback.payload === 'home menu') {
-        sendTextMessage(sender, "going to home menu")
+      if (event.postback.payload === 'bio') {
+        sendTextMessage(sender, "going to bio")
+      }
+
+      if (event.postback.payload === 'projects') {
+        sendTextMessage(sender, "going to projects")
       }
     }
 
@@ -59,7 +63,7 @@ app.post('/webhook/', function (req, res) {
       }
 
       if (text === 'See menu') {
-        sendTextMessage(sender, "going to home menu")
+        sendHomeMenu(sender)
         continue
       }
       /* sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))*/
@@ -89,6 +93,99 @@ function sendTextMessage(sender, text) {
       console.log('Error: ', response.body.error)
     }
   })
+}
+
+function sendHomeMenu(sender) {
+  let messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [
+          {
+            "title": "About me",
+            "image_url": "https://randomuser.me/api/portraits/lego/5.jpg",
+            "subtitle": "Choose an option below",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Biography",
+                "payload": "bio"
+              },
+              {
+                "type": "postback",
+                "title": "Stuffs I've made",
+                "payload": "projects"
+              },
+              {
+                "type": "postback",
+                "title": "See my location",
+                "payload": "location"
+              }
+            ]
+          },
+
+          {
+            "title": "Connect With Me",
+            "image_url": "https://upload.wikimedia.org/wikipedia/en/5/51/IMessage_Icon.png",
+            "subtitle": "Choose an option below",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Live chat",
+                "payload": "live chat"
+              },
+              {
+                "type": "postback",
+                "title": "Leave a message",
+                "payload": "message"
+              },
+              {
+                "type": "postback",
+                "title": "Book a meeting",
+                "payload": "meeting"
+              }
+            ]
+          },
+
+          {
+            "title": "My Social Stuff",
+            "image_url": "http://cdn.business2community.com/wp-content/uploads/2016/07/social34.jpg",
+            "subtitle": "Choose an option below",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Reading",
+                "payload": "reading"
+              },
+              {
+                "type": "postback",
+                "title": "Listening",
+                "payload": "listening"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending messages: ', error)
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error)
+    }
+  })
+
 }
 
 function sendInfoAboutMe(sender) {
@@ -122,6 +219,7 @@ function sendInfoAboutMe(sender) {
       }
     ]
   }
+
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token:token},
