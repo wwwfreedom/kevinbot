@@ -161,16 +161,14 @@ app.post('/webhook/', function (req, res) {
               }
               setTimeout(() => {
                 processQueue();
-              }, 500)
+              }, 4000)
             });
           } else {
             request(currentRequest, function(error, response, body) {
               if (error || response.body.error) {
                 console.log("Error sending messages!");
               }
-              setTimeout(() => {
-                processQueue();
-              }, 2000)
+              processQueue();
             });
           }
         }
