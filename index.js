@@ -200,7 +200,7 @@ function sendQuickReplies(sender, replies, text, token) {
     }
   })
 
-  let messsageData = {
+  let messageData = {
     "text": text,
     "quick_replies": quickReplies
   }
