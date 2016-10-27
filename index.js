@@ -104,7 +104,7 @@ app.post('/webhook/', function (req, res) {
       }
 
       if (text === 'Life story') {
-        var a = ["hello", "world", "it's working"] //my result is a array
+        var a = ["hello", "typing", "world", "typing", "it's working"] //my result is a array
         function sendTextMessages(sender, text, i) {
           if (i < text.length) {
             if (text[i] === 'typing') {
