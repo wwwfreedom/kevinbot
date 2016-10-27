@@ -67,6 +67,24 @@ app.post('/webhook/', function (req, res) {
         continue
       }
 
+      function sendTypingToUser(sender) {
+        request({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            sender_action: "typing_on",
+          }
+        }, function(error, response, body) {
+          if (error) {
+            console.log('Error sending messages: ', error)
+          } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+          }
+        })
+      }
+
       if (text === 'Life story') {
         var a = ["hello", "world", "it's working"] //my result is a array
         function sendTextMessages(sender, text, i) {
@@ -77,7 +95,6 @@ app.post('/webhook/', function (req, res) {
               method: 'POST',
               json: {
                 recipient: {id:sender},
-                sender_action: "typing_on",
                 message: {text:text[i]},
               }
             }, function(error, response, body) {
@@ -87,6 +104,9 @@ app.post('/webhook/', function (req, res) {
                 console.log('Error: ', response.body.error)
               }
               sendTextMessages(sender, text, i+1)
+              setTimeOut(() => {
+                sendTypingToUser(sender)
+              }, 300)
             })
           } else return
         }
