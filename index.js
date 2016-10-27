@@ -68,11 +68,7 @@ app.post('/webhook/', function (req, res) {
       }
 
       if (text === 'Life story') {
-        sendTextMessage(sender, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.")
-        sendTextMessage(sender, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
-        sendTextMessage(sender, "One day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia")
-        sendTextMessage(sender, "Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become somebody")
-        sendTextMessage(sender, "")
+        sendTextMessage(sender, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity./nEvery day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place./nOne day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia./n Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university")
         continue
       }
       /* sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))*/
