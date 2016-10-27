@@ -153,7 +153,9 @@ app.post('/webhook/', function (req, res) {
             return;
           }
           var currentRequest = queue.shift();
-          console.log(currentRequest)
+          if (currentRequest.json.sender_action) {
+            console.log(currentRequest.json)
+          }
           request(currentRequest, function(error, response, body) {
             if (error || response.body.error) {
               console.log("Error sending messages!");
