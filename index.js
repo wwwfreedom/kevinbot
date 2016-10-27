@@ -67,7 +67,7 @@ app.post('/webhook/', function (req, res) {
         continue
       }
 
-      function sendTypingToUser(sender) {
+      function sendTypingOn(sender) {
         request({
           url: 'https://graph.facebook.com/v2.6/me/messages',
           qs: {access_token:token},
@@ -75,6 +75,24 @@ app.post('/webhook/', function (req, res) {
           json: {
             recipient: {id:sender},
             sender_action: "typing_on",
+          }
+        }, function(error, response, body) {
+          if (error) {
+            console.log('Error sending messages: ', error)
+          } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+          }
+        })
+      }
+
+      function sendTypingOff(sender) {
+        request({
+          url: 'https://graph.facebook.com/v2.6/me/messages',
+          qs: {access_token:token},
+          method: 'POST',
+          json: {
+            recipient: {id:sender},
+            sender_action: "typing_off",
           }
         }, function(error, response, body) {
           if (error) {
@@ -104,8 +122,9 @@ app.post('/webhook/', function (req, res) {
                 console.log('Error: ', response.body.error)
               }
               sendTextMessages(sender, text, i+1)
+              sendTypingOn(sender)
               setTimeout(() => {
-                sendTypingToUser(sender)
+                sendTypingOff(sender)
               }, 300)
             })
           } else return
