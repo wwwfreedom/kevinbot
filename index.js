@@ -153,14 +153,23 @@ app.post('/webhook/', function (req, res) {
             return;
           }
           var currentRequest = queue.shift();
-          request(currentRequest, function(error, response, body) {
-            if (error || response.body.error) {
-              console.log("Error sending messages!");
-            }
-            setTimeout(() => {
+          if (currentRequest.json.sender_action) {
+            request(currentRequest, function(error, response, body) {
+              if (error || response.body.error) {
+                console.log("Error sending messages!");
+              }
               processQueue();
-            }, 1500)
-          });
+            }
+          } else {
+            request(currentRequest, function(error, response, body) {
+              if (error || response.body.error) {
+                console.log("Error sending messages!");
+              }
+              setTimeout(() => {
+                processQueue();
+              }, 1500)
+            });
+          }
         }
 
         queueRequest({
