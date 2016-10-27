@@ -157,7 +157,9 @@ app.post('/webhook/', function (req, res) {
             if (error || response.body.error) {
               console.log("Error sending messages!");
             }
-            processQueue();
+            setTimeout(() => {
+              processQueue();
+            }, 1500)
           });
         }
 
