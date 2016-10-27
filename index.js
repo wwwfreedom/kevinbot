@@ -47,7 +47,7 @@ app.post('/webhook/', function (req, res) {
       }
 
       if (event.postback.payload === 'bio') {
-        sendTextMessage(sender, "going to bio")
+        sendBiographyQuickReplies(sender)
       }
 
       if (event.postback.payload === 'projects') {
@@ -64,6 +64,15 @@ app.post('/webhook/', function (req, res) {
 
       if (text === 'See menu') {
         sendHomeMenu(sender)
+        continue
+      }
+
+      if (text === 'Life story') {
+        sendTextMessage(sender, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.")
+        sendTextMessage(sender, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
+        sendTextMessage(sender, "One day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia")
+        sendTextMessage(sender, "Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become somebody")
+        sendTextMessage(sender, "")
         continue
       }
       /* sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))*/
@@ -95,6 +104,36 @@ function sendTextMessage(sender, text) {
 }
 
 function sendBiographyQuickReplies(sender) {
+  let text = "Do you want to here his whole life story or just skip to a certain thing?"
+  let quickReplies = [
+    {
+      type: "text",
+      title: "Life story",
+      payload: "life story"
+    },
+    {
+      type: "text",
+      title: "Education",
+      payload: "education"
+    },
+    {
+      type: "text",
+      title: "Work history",
+      payload: "work history"
+    },
+    {
+      type: "text",
+      title: "💜 status",
+      payload: "love status"
+    },
+    {
+      type: "text",
+      title: "Random facts",
+      payload: "random facts"
+    }
+  ]
+
+  sendQuickReplies(sender, quickReplies, text, token)
 
 }
 
@@ -253,52 +292,6 @@ function sendInfoAboutMe(sender) {
   let text = "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading."
 
   sendQuickReplies(sender, quickReplies, text, token)
-  /* let messageData = {
-   *   "text": "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading.",
-   *   "quick_replies": [
-   *     {
-   *       "content_type": "text",
-   *       "title": "See menu",
-   *       "payload": "home menu"
-   *     },
-   *     {
-   *       "content_type": "text",
-   *       "title": "Gimme his story",
-   *       "payload": "story"
-   *     },
-   *     {
-   *       "content_type": "text",
-   *       "title": "Take his quiz!",
-   *       "payload": "quiz"
-   *     },
-   *     {
-   *       "content_type": "text",
-   *       "title": "His company",
-   *       "payload": "company"
-   *     },
-   *     {
-   *       "content_type": "text",
-   *       "title": "Send him a msg 💬",
-   *       "payload": "msg"
-   *     }
-   *   ]
-   * }
-
-   * request({
-   *   url: 'https://graph.facebook.com/v2.6/me/messages',
-   *   qs: {access_token:token},
-   *   method: 'POST',
-   *   json: {
-   *     recipient: {id:sender},
-   *     message: messageData,
-   *   }
-   * }, function(error, response, body) {
-   *   if (error) {
-   *     console.log('Error sending messages: ', error)
-   *   } else if (response.body.error) {
-   *     console.log('Error: ', response.body.error)
-   *   }
-   * })*/
 }
 
 function sendWelcomeMessage(sender) {
