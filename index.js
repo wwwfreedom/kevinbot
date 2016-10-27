@@ -43,7 +43,7 @@ app.post('/webhook/', function (req, res) {
       }
 
       if (event.postback.payload === 'get my own bot') {
-        sendTextMessage(sender, "getting you a bot soon wait up ...")
+        sendTextMessage(sender, "getting you a bot soon, you will be the first ...")
       }
 
       if (event.postback.payload === 'bio') {
@@ -68,7 +68,6 @@ app.post('/webhook/', function (req, res) {
       }
       /* sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))*/
     }
-
   }
 
   res.sendStatus(200)
@@ -93,6 +92,10 @@ function sendTextMessage(sender, text) {
       console.log('Error: ', response.body.error)
     }
   })
+}
+
+function sendBiographyQuickReplies(sender) {
+
 }
 
 function sendHomeMenu(sender) {
@@ -188,38 +191,24 @@ function sendHomeMenu(sender) {
 
 }
 
-function sendInfoAboutMe(sender) {
-  let messageData = {
-    "text": "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading.",
-    "quick_replies": [
-      {
-        "content_type": "text",
-        "title": "See menu",
-        "payload": "home menu"
-      },
-      {
-        "content_type": "text",
-        "title": "Gimme his story",
-        "payload": "story"
-      },
-      {
-        "content_type": "text",
-        "title": "Take his quiz!",
-        "payload": "quiz"
-      },
-      {
-        "content_type": "text",
-        "title": "His company",
-        "payload": "company"
-      },
-      {
-        "content_type": "text",
-        "title": "Send him a msg 💬",
-        "payload": "msg"
-      }
-    ]
+function sendQuickReplies(sender, replies, text, token) {
+  let quickReplies = replies.map((reply) => {
+    return {
+      "content_type": reply.type,
+      "title": reply.title,
+      "payload": reply.payload
+    }
+  })
+
+  let messsageData = {
+    "text": text,
+    "quick_replies": quickReplies
   }
 
+  sendToFacebook(token, sender, messageData)
+}
+
+function sendToFacebook(token, sender, messageData) {
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token:token},
@@ -235,6 +224,81 @@ function sendInfoAboutMe(sender) {
       console.log('Error: ', response.body.error)
     }
   })
+}
+
+function sendInfoAboutMe(sender) {
+  let quickReplies = [
+    {
+      type: "text",
+      title: "See menu",
+      payload: "home menu"
+    },
+    {
+      type: "text",
+      title: "Gimme his story",
+      payload: "story"
+    },
+    {
+      type: "text",
+      title: "Take his quiz!",
+      payload: "quiz"
+    },
+    {
+      type: "text",
+      title: "Send him a msg",
+      payload: "msg"
+    }
+  ]
+
+  let text = "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading."
+
+  sendQuickReplies(sender, quickReplies, text, token)
+  /* let messageData = {
+   *   "text": "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading.",
+   *   "quick_replies": [
+   *     {
+   *       "content_type": "text",
+   *       "title": "See menu",
+   *       "payload": "home menu"
+   *     },
+   *     {
+   *       "content_type": "text",
+   *       "title": "Gimme his story",
+   *       "payload": "story"
+   *     },
+   *     {
+   *       "content_type": "text",
+   *       "title": "Take his quiz!",
+   *       "payload": "quiz"
+   *     },
+   *     {
+   *       "content_type": "text",
+   *       "title": "His company",
+   *       "payload": "company"
+   *     },
+   *     {
+   *       "content_type": "text",
+   *       "title": "Send him a msg 💬",
+   *       "payload": "msg"
+   *     }
+   *   ]
+   * }
+
+   * request({
+   *   url: 'https://graph.facebook.com/v2.6/me/messages',
+   *   qs: {access_token:token},
+   *   method: 'POST',
+   *   json: {
+   *     recipient: {id:sender},
+   *     message: messageData,
+   *   }
+   * }, function(error, response, body) {
+   *   if (error) {
+   *     console.log('Error sending messages: ', error)
+   *   } else if (response.body.error) {
+   *     console.log('Error: ', response.body.error)
+   *   }
+   * })*/
 }
 
 function sendWelcomeMessage(sender) {
