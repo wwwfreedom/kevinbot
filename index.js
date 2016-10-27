@@ -107,6 +107,7 @@ app.post('/webhook/', function (req, res) {
         var a = ["hello", "world", "it's working"] //my result is a array
         function sendTextMessages(sender, text, i) {
           if (i < text.length) {
+            sendTypingOn(sender)
             request({
               url: 'https://graph.facebook.com/v2.6/me/messages',
               qs: {access_token:token},
@@ -121,11 +122,8 @@ app.post('/webhook/', function (req, res) {
               } else if (response.body.error) {
                 console.log('Error: ', response.body.error)
               }
+              sendTypingOff(sender)
               sendTextMessages(sender, text, i+1)
-              sendTypingOn(sender)
-              setTimeout(() => {
-                sendTypingOff(sender)
-              }, 300)
             })
           } else return
         }
