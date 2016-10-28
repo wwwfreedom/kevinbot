@@ -10,27 +10,37 @@ if (!process.env.verify_token) {
   process.exit(1);
 }
 
-/* const express = require('express')
- * const bodyParser = require('body-parser')
- * const request = require('request')
- * const app = express()*/
-const Botkit = require('botkit')
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+const facebook_handler = require('./controller/botkit.js')
 
-const controller = Botkit.facebookbot({
-  debug: true,
-  access_token: process.env.page_token,
-  verify_token: process.env.verify_token
+
+app.set('port', (process.env.PORT || 5000))
+
+// Process application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: false}))
+
+// Process application/json
+app.use(bodyParser.json())
+
+// Index route
+app.get('/', function (req, res) {
+  res.send('Hello world, I am a chat bot')
 })
 
-const bot = controller.spawn({
+app.get('/webhook', function (req, res) {
+  // This enables subscription to the webhooks
+  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === process.env.verify_token) {
+    res.send(req.query['hub.challenge'])
+  }
+  else {
+    res.send('Incorrect verify token')
+  }
 })
 
-controller.hears(['hello', 'hi'], 'message_received', (bot, message) => {
-  controller.storage.users.get(message.user, (err, user) => {
-    if (user && user.name) {
-      bot.reply(message, `Hello ${user.name}!!`)
-    } else {
-      bot.reply(message, 'Hello.')
-    }
-  })
+app.post('/webhook', function (req, res) {
+  facebook_handler(req.body)
+
+  res.send('ok')
 })
