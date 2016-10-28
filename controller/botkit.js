@@ -46,15 +46,9 @@ controller.hears('(.*)', 'message_received', function (bot, message) {
   bot.reply(message, 'you said ' + message.match[1])
 })
 
-/* controller.hears(['hello', 'hi'], 'message_received', (bot, message) => {
- *   controller.storage.users.get(message.user, (err, user) => {
- *     if (user && user.name) {
- *       bot.reply(message, `Hello ${user.name}!!`)
- *     } else {
- *       bot.reply(message, 'Hello.')
- *     }
- *   })
- * })*/
+controller.on('facebook_postback', function(bot, message) {
+  console.log(message, message.payload)
+})
 
 
 // this function processes the POST request to the webhook
