@@ -29,7 +29,6 @@ request.post('https://graph.facebook.com/me/subscribed_apps?access_token=' + pro
 console.log('botkit')
 
 controller.on('tick', (bot, event) => {
-  console.log(bot, event)
 })
 
 // this is triggered when a user clicks the send-to-messenger plugin
