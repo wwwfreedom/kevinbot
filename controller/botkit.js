@@ -43,6 +43,7 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 
 // send welcome message after user click get started
 controller.on('facebook_postback', (bot, message) => {
+  console.log(message.payload, message)
   if (message.payload === 'USER_DEFINED_PAYLOAD') {
     let attachment = {
       "type": "template",
@@ -70,6 +71,7 @@ controller.on('facebook_postback', (bot, message) => {
 
 // user says anything else
 controller.hears('(.*)', 'message_received', function (bot, message) {
+  console.log(message)
   bot.reply(message, 'you said ' + message.match[1])
 })
 
