@@ -44,3 +44,8 @@ app.post('/webhook', function (req, res) {
 
   res.send('ok')
 })
+
+// Spin up the server
+app.listen(app.get('port'), function() {
+  console.log('running on port', app.get('port'))
+})
