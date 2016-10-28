@@ -42,40 +42,60 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 })
 
 // user says anything else
-controller.hears('(.*)', 'message_received', function (bot, message) {
-  bot.reply(message, 'you said ' + message.match[1])
-})
+/* controller.hears('(.*)', 'message_received', function (bot, message) {
+ *   bot.reply(message, 'you said ' + message.match[1])
+ * })*/
 
 controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'USER_DEFINED_PAYLOAD') {
 
-    var attachment = {
-      'type':'template',
-      'payload':{
-        'template_type':'generic',
-        'elements':[
-          {
-            'title': "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?",
-            'buttons':[
-              {
-                "type": "postback",
-                "title": "Learn about him 👨🏻",
-                "payload": "learn about him"
-              },
-              {
-                "type": "postback",
-                "title": "Get your own bot 🤖",
-                "payload": "get my own bot"
-              }
-            ]
-          },
-        ]
+    let messageData = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "button",
+          "text": `Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`,
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "Learn about him 👨🏻",
+              "payload": "learn about him"
+            },
+            {
+              "type": "postback",
+              "title": "Get your own bot 🤖",
+              "payload": "get my own bot"
+            }
+          ]
+        }
       }
-    };
+    }
 
-    bot.reply(message, {
-      attachment: attachment,
-    })
+    /* var attachment = {
+     *   'type':'template',
+     *   'payload':{
+     *     'template_type':'generic',
+     *     'elements':[
+     *       {
+     *         'title': "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?",
+     *         'buttons':[
+     *           {
+     *             "type": "postback",
+     *             "title": "Learn about him 👨🏻",
+     *             "payload": "learn about him"
+     *           },
+     *           {
+     *             "type": "postback",
+     *             "title": "Get your own bot 🤖",
+     *             "payload": "get my own bot"
+     *           }
+     *         ]
+     *       },
+     *     ]
+     *   }
+     * };*/
+
+    bot.reply(message, messageData)
 
     /* let attachment = {
      *   "type": "template",
