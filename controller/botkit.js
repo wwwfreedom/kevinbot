@@ -2,7 +2,7 @@ const Botkit = require('botkit')
 const request = require('request')
 
 const controller = Botkit.facebookbot({
-  debug: true,
+  /* debug: true,*/
   access_token: process.env.page_token,
   verify_token: process.env.verify_token
 })
@@ -47,7 +47,7 @@ controller.hears('(.*)', 'message_received', function (bot, message) {
 })
 
 controller.on('facebook_postback', function(bot, message) {
-  console.log(message, message.payload)
+  console.log(message.payload)
 })
 
 
