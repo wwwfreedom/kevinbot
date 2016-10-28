@@ -52,20 +52,19 @@ controller.on('facebook_postback', function(bot, message) {
     var attachment = {
       'type':'template',
       'payload':{
-        'template_type':'generic',
-        'elements':[
+        'template_type':'button',
+        'text': "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
+        'buttons':[
           {
-            'title':'Chocolate Cookie',
-            'image_url':'http://cookies.com/cookie.png',
-            'subtitle':'A delicious chocolate cookie',
-            'buttons':[
-              {
-                'type':'postback',
-                'title':'Eat Cookie',
-                'payload':'chocolate'
-              }
-            ]
+            "type": "postback",
+            "title": "Learn about him 👨🏻",
+            "payload": "learn about him"
           },
+          {
+            "type": "postback",
+            "title": "Get your own bot 🤖",
+            "payload": "get my own bot"
+          }
         ]
       }
     };
