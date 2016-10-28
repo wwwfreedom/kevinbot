@@ -47,7 +47,10 @@ controller.hears('(.*)', 'message_received', function (bot, message) {
 })
 
 controller.on('facebook_postback', function(bot, message) {
-  console.log(message.payload)
+  if (message.payload === 'USER_DEFINED_PAYLOAD') {
+    bot.reply(message, 'yolo')
+    console.log(message.payload)
+  }
 })
 
 
