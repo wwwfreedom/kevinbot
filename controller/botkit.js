@@ -140,4 +140,4 @@ var handler = function (obj) {
   }
 }
 
-exports.handler = handler
+module.exports = handler
