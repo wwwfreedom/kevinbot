@@ -92,14 +92,13 @@ const sendWelcomePromt = (bot, message) => {
   ]
 
   let reply = generateButtonTemplate(text, buttons)
+  console.log(reply)
 
-  bot.reply(message, reply, (err, response) => {
-    if (err) handleError(bot, message, err)
-  })
-}
+  bot.reply(message, reply)
 
 controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'USER_DEFINED_PAYLOAD') {
+    console.log('in postback')
     sendWelcomePromt(bot, message)
   }
 })
