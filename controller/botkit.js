@@ -150,9 +150,9 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 
 // user says anything else
 
-/* controller.hears('(.*)', 'message_received', function (bot, message) {
- *   bot.reply(message, 'you said ' + message.match[1])
- * })*/
+controller.hears('(.*)', 'message_received', function (bot, message) {
+  if (message.match[1] === 'See menu') bot.reply(message, "if you see this")
+})
 
 
 controller.on('facebook_postback', function(bot, message) {
