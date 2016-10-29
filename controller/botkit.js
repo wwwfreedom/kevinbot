@@ -191,17 +191,40 @@ const sendBiographyQuickReplies = (bot, message) => {
   })
 }
 
-const tellLifeStory = (bot, message) => {
-  bot.startConversation(message, (err, convo) => {
-    if (!err) {
-      /* convo.say(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
-       * convo.setTimeout(1000)
-       * convo.say(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
-       */
-      bot.replyWithTyping(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
-      bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
-    }
+askFlavor = function(response, convo) {
+  convo.ask("What flavor of pizza do you want?", function(response, convo) {
+    convo.say("Awesome.")
+    askSize(response, convo)
+    convo.next()
   })
+}
+askSize = function(response, convo) {
+  convo.ask("What size do you want?", function(response, convo) {
+    convo.say("Ok.")
+    askWhereDeliver(response, convo)
+    convo.next()
+  })
+}
+
+askWhereDeliver = function(response, convo) {
+  convo.ask("So where do you want it delivered?", function(response, convo) {
+    convo.say("Ok! Goodbye.")
+    convo.next()
+  })
+}
+
+const tellLifeStory = (bot, message) => {
+  bot.startConversation(message, askFlavor)
+  /* bot.startConversation(message, (err, convo) => {
+   *   if (!err) {
+   *     convo.say(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
+   *     convo.setTimeout(1000)
+   *     convo.say(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
+   *     /
+   *     bot.replyWithTyping(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
+   *     bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
+   *   }
+   * })*/
 }
 
 controller.on('tick', (bot, event) => {
