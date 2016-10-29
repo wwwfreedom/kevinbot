@@ -12,6 +12,19 @@ const controller = Botkit.facebookbot({
 const bot = controller.spawn({
 })
 
+const handleError = function(bot, message, err) {
+	console.log(err)
+	var reply = "Oops! Looks like there was an error. Here are the details.."
+
+	bot.reply(message, reply, function(err, response) {
+
+		bot.reply(message, err, function(err, response) {
+			var reply = "Email kevintruongqt@gmail.com to report this bug."
+			bot.reply(message, reply)
+		})
+	})
+}
+
 // subscribe to page events
 request.post('https://graph.facebook.com/me/subscribed_apps?access_token=' + process.env.page_token,
   function (err, res, body) {
@@ -48,6 +61,8 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
  *   bot.reply(message, 'you said ' + message.match[1])
  * })*/
 
+// Template generators
+
 const generateButtonTemplate = (text, buttons) => {
   let buttonArr = buttons.map((button) => {
     return {
@@ -65,6 +80,20 @@ const generateButtonTemplate = (text, buttons) => {
         buttons: buttonArr
       }
     }
+  }
+}
+
+const generateQuickReplies = (text, replies) => {
+  let quickReplies = replies.map((reply) => {
+    return {
+      "content_type": reply.type,
+      "title": reply.title,
+      "payload": reply.payload
+    }
+  })
+  return {
+    text: text,
+    quick_replies: quickReplies
   }
 }
 
@@ -90,10 +119,44 @@ const sendWelcomePromt = (bot, message) => {
   })
 }
 
+const sendQuickRepliesAboutMe = (bot, message) => {
+  let quickReplies = [
+    {
+      type: "text",
+      title: "See menu",
+      payload: "home menu"
+    },
+    {
+      type: "text",
+      title: "Gimme his story",
+      payload: "story"
+    },
+    {
+      type: "text",
+      title: "Take his quiz!",
+      payload: "quiz"
+    },
+    {
+      type: "text",
+      title: "Send him a msg",
+      payload: "msg"
+    }
+  ]
+
+  let text = "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading."
+
+  let reply = generateQuickReplies(text, quickReplies)
+
+  bot.reply(message, reply, (err, response) => {
+    if (err) handleError(bot, message, err)
+  })
+}
+
 controller.on('facebook_postback', function(bot, message) {
-  if (message.payload === 'USER_DEFINED_PAYLOAD') {
-    sendWelcomePromt(bot, message)
-  }
+  if (message.payload === 'USER_DEFINED_PAYLOAD') sendWelcomePromt(bot, message)
+
+  if (message.payload === 'learn about him') sendQuickRepliesAboutMe(bot, message)
+
 })
 
 
