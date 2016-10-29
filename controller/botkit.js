@@ -214,14 +214,15 @@ const askWhereDeliver = function(response, convo) {
 }
 
 const tellLifeStory = (bot, message) => {
-  bot.startConversation(message, askFlavor)
-  /* bot.startConversation(message, (err, convo) => {
+  bot.replywithtyping(message, "once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity")
+  bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
+  /* bot.startConversation(message, askFlavor)*/
+  /* bot.startconversation(message, (err, convo) => {
    *   if (!err) {
-   *     convo.say(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
-   *     convo.setTimeout(1000)
-   *     convo.say(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
-   *     /
-   *     bot.replyWithTyping(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
+   *     convo.say(message, "once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity")
+   *     convo.settimeout(1000)
+   *     convo.say(message, "every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
+   *     bot.replywithtyping(message, "once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity")
    *     bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
    *   }
    * })*/
