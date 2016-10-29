@@ -149,10 +149,10 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 })
 
 // user says anything else
-controller.hears('(.*)', 'message_received', function (bot, message) {
-  /* console.log(message.match[1])*/
-  bot.reply(message, 'you said ' + message.match[1])
-})
+
+/* controller.hears('(.*)', 'message_received', function (bot, message) {
+ *   bot.reply(message, 'you said ' + message.match[1])
+ * })*/
 
 
 controller.on('facebook_postback', function(bot, message) {
@@ -177,7 +177,7 @@ var handler = function (obj) {
       for (var m = 0; m < obj.entry[e].messaging.length; m++) {
         var facebook_message = obj.entry[e].messaging[m]
 
-        console.log(facebook_message)
+        /* console.log(facebook_message)*/
 
         // normal message
         if (facebook_message.message) {
