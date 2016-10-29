@@ -214,6 +214,7 @@ const askWhereDeliver = function(response, convo) {
 }
 
 const tellLifeStory = (bot, message) => {
+  console.log(bot)
   bot.startTyping(message, function () {
   })
 
