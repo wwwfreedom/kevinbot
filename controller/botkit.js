@@ -154,6 +154,43 @@ const sendGenericMenu = (bot, message) => {
   })
 }
 
+const sendBiographyQuickReplies = (bot, message) => {
+  let text = "Do you want to here his whole life story or just skip to a certain thing?"
+  let quickReplies = [
+    {
+      type: "text",
+      title: "Life story",
+      payload: "life story"
+    },
+    {
+      type: "text",
+      title: "Education",
+      payload: "education"
+    },
+    {
+      type: "text",
+      title: "Work history",
+      payload: "work history"
+    },
+    {
+      type: "text",
+      title: "💜 status",
+      payload: "love status"
+    },
+    {
+      type: "text",
+      title: "Random facts",
+      payload: "random facts"
+    }
+  ]
+
+  let reply = generateQuickReplies(text, quickReplies)
+
+  bot.reply(message, reply, (err, response) => {
+    if (err) handleError(bot, message, err)
+  })
+}
+
 controller.on('tick', (bot, event) => {
 })
 
@@ -182,6 +219,8 @@ controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'learn about him') sendQuickRepliesAboutMe(bot, message)
 
   if (message.payload === 'get my own bot') bot.reply(message, "Kevin's is hard at work creating the tool for you to make your own personal bot. Leave him your email and you'll be the first to know when it's ready :)")
+
+  if (message.payload === 'bio') sendBiographyQuickReplies(bot, message)
 
 })
 
