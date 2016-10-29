@@ -235,7 +235,7 @@ const tellPartOneLifeStory = (bot, message) => {
 
           let reply = generateQuickReplies(text, quickReplies)
 
-          bot.reply(message, reply)
+          bot.replyWithTyping(message, reply)
         })
       })
     })
