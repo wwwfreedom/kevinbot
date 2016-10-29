@@ -2,7 +2,7 @@ const Botkit = require('botkit')
 const request = require('request')
 
 const controller = Botkit.facebookbot({
-  /* debug: true,*/
+  debug: false,
   access_token: process.env.page_token,
   verify_token: process.env.verify_token
 })
@@ -42,34 +42,55 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 })
 
 // user says anything else
-/* controller.hears('(.*)', 'message_received', function (bot, message) {
- *   bot.reply(message, 'you said ' + message.match[1])
- * })*/
+controller.hears('(.*)', 'message_received', function (bot, message) {
+  bot.reply(message, 'you said ' + message.match[1])
+})
 
 controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'USER_DEFINED_PAYLOAD') {
+    var reply = {
+		  attachment: {
+			  type: 'template',
+			  payload: {
+				  template_type: 'button',
+				  text: "just a test",
+				  buttons: [
+					  {
+						  "type":"web_url",
+						  "url": "https://google.com",
+						  "title":"Get It"
+					  },
+					  {
+						  "type":"web_url",
+						  "url": "https://google.com",
+						  "title":"Discuss/Upvote"
+					  }
+				  ]
+			  }
+		  }
+	  }
 
-    let messageData = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "button",
-          "text": `Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`,
-          "buttons": [
-            {
-              "type": "postback",
-              "title": "Learn about him 👨🏻",
-              "payload": "learn about him"
-            },
-            {
-              "type": "postback",
-              "title": "Get your own bot 🤖",
-              "payload": "get my own bot"
-            }
-          ]
-        }
-      }
-    }
+    /* let messageData = {
+     *   "attachment": {
+     *     "type": "template",
+     *     "payload": {
+     *       "template_type": "button",
+     *       "text": `Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`,
+     *       "buttons": [
+     *         {
+     *           "type": "postback",
+     *           "title": "Learn about him 👨🏻",
+     *           "payload": "learn about him"
+     *         },
+     *         {
+     *           "type": "postback",
+     *           "title": "Get your own bot 🤖",
+     *           "payload": "get my own bot"
+     *         }
+     *       ]
+     *     }
+     *   }
+     * }*/
 
     /* var attachment = {
      *   'type':'template',
@@ -95,7 +116,11 @@ controller.on('facebook_postback', function(bot, message) {
      *   }
      * };*/
 
-    bot.reply(message, messageData)
+    bot.reply(message, reply, (err, response) => {
+      if (err) {
+        console.log(err)
+      }
+    })
 
     /* let attachment = {
      *   "type": "template",
