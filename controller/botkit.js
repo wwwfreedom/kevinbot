@@ -194,8 +194,14 @@ const sendBiographyQuickReplies = (bot, message) => {
 const tellLifeStory = (bot, message) => {
   bot.startConversation(message, (err, convo) => {
     if (!err) {
-      convo.say("Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
-      convo.say("Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
+      bot.startTyping(message, () => {})
+      bot.stopTyping(message, () => {
+        convo.say("Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
+      })
+      bot.startTyping(message, () => {})
+      bot.stopTyping(message, () => {
+        convo.say("Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
+      })
     }
   })
 }
