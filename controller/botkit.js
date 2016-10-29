@@ -195,13 +195,17 @@ const tellLifeStory = (bot, message) => {
   bot.startConversation(message, (err, convo) => {
     if (!err) {
       bot.startTyping(message, () => {})
-      bot.stopTyping(message, () => {
-        convo.say("Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
-      })
+      setTimeout(() => {
+        bot.stopTyping(message, () => {
+          convo.say("Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
+        })
+      }, 1500)
       bot.startTyping(message, () => {})
-      bot.stopTyping(message, () => {
-        convo.say("Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
-      })
+      setTimeout(() => {
+        bot.stopTyping(message, () => {
+          convo.say("Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
+        })
+      }, 1500)
     }
   })
 }
