@@ -44,9 +44,9 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 })
 
 // user says anything else
-controller.hears('(.*)', 'message_received', function (bot, message) {
-  bot.reply(message, 'you said ' + message.match[1])
-})
+/* controller.hears('(.*)', 'message_received', function (bot, message) {
+ *   bot.reply(message, 'you said ' + message.match[1])
+ * })*/
 
 const generateButtonTemplate = (text, buttons) => {
   let buttonArr = buttons.map((button) => {
