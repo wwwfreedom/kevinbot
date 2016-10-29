@@ -1,3 +1,4 @@
+'use strict'
 const Botkit = require('botkit')
 const request = require('request')
 const Promise = require("bluebird")
