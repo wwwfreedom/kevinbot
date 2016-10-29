@@ -200,12 +200,7 @@ const tellLifeStory = (bot, message) => {
           convo.say("Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity")
         })
       }, 1500)
-      bot.startTyping(message, () => {})
-      setTimeout(() => {
-        bot.stopTyping(message, () => {
-          convo.say("Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
-        })
-      }, 1500)
+      convo.say("Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
     }
   })
 }
