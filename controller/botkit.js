@@ -43,23 +43,6 @@ request.post('https://graph.facebook.com/me/subscribed_apps?access_token=' + pro
 
 console.log('botkit')
 
-controller.on('tick', (bot, event) => {
-})
-
-// this is triggered when a user clicks the send-to-messenger plugin
-controller.on('facebook_optin', function (bot, message) {
-  bot.reply(message, 'Welcome, friend')
-})
-
-// user said hello
-controller.hears(['hello'], 'message_received', function (bot, message) {
-  bot.reply(message, 'Hey there.')
-})
-
-// user says anything else
-/* controller.hears('(.*)', 'message_received', function (bot, message) {
- *   bot.reply(message, 'you said ' + message.match[1])
- * })*/
 
 // Template generators
 
@@ -152,10 +135,34 @@ const sendQuickRepliesAboutMe = (bot, message) => {
   })
 }
 
+controller.on('tick', (bot, event) => {
+})
+
+// this is triggered when a user clicks the send-to-messenger plugin
+controller.on('facebook_optin', function (bot, message) {
+  bot.reply(message, 'Welcome, friend')
+})
+
+// user said hello
+controller.hears(['hello'], 'message_received', function (bot, message) {
+  bot.reply(message, 'Hey there.')
+})
+
+// user says anything else
+controller.hears('(.*)', 'message_received', function (bot, message) {
+  console.log(message.match[1])
+  bot.reply(message, 'you said ' + message.match[1])
+})
+
+
 controller.on('facebook_postback', function(bot, message) {
+  console.log(message)
+
   if (message.payload === 'USER_DEFINED_PAYLOAD') sendWelcomePromt(bot, message)
 
   if (message.payload === 'learn about him') sendQuickRepliesAboutMe(bot, message)
+
+  if (message.payload === 'get my own bot') bot.reply(message, "Kevin's is hard at work creating the tool for you to make your own personal bot. Leave him your email and you'll be the first to know when it's ready :)")
 
 })
 
