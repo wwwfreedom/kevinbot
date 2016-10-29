@@ -214,20 +214,27 @@ const askWhereDeliver = function(response, convo) {
 }
 
 const tellLifeStory = (bot, message) => {
-  console.log(bot)
-  bot.startTyping(message, function () {
+  bot.replyWithTyping(message, "Once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
+    console.log(response)
+    console.log('just a test')
+    bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
   })
 
-  bot.stopTyping(message, function () {
-    bot.reply(message, "Once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity.")
-  })
+  /* bot.replyWithTyping(message, )
+   * console.log(bot)
+   * bot.startTyping(message, function () {
+   * })
 
-  bot.startTyping(message, function () {
-  })
+   * bot.stopTyping(message, function () {
+   *   bot.reply(message, "Once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity.")
+   * })
 
-  bot.stopTyping(message, function () {
-    bot.reply(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
-  })
+   * bot.startTyping(message, function () {
+   * })
+
+   * bot.stopTyping(message, function () {
+   *   bot.reply(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
+   * })*/
 
   /* bot.startConversation(message, askFlavor)*/
   /* bot.startconversation(message, (err, convo) => {
