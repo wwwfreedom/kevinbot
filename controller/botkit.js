@@ -68,97 +68,31 @@ const generateButtonTemplate = (text, buttons) => {
   }
 }
 
-/* const sendWelcomePromt = (bot, message) => {
- *   let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
- *   let buttons = [
- *     {
- *       type: "postback",
- *       title: "Learn about him 👨🏻",
- *       payload: "learn about him"
- *     },
- *     {
- *       type: "postback",
- *       title: "Get your own bot 🤖",
- *       payload: "get my own bot"
- *     }
- *   ]
- *
- *   let reply = generateButtonTemplate(text, buttons)
- *
- *   bot.reply(message, reply, (err, response) => {
- *     if (err) handleError(bot, message, err)
- *   })
- * }*/
+const sendWelcomePromt = (bot, message) => {
+  let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
+  let buttons = [
+    {
+      type: "postback",
+      title: "Learn about him 👨🏻",
+      payload: "learn about him"
+    },
+    {
+      type: "postback",
+      title: "Get your own bot 🤖",
+      payload: "get my own bot"
+    }
+  ]
+
+  let reply = generateButtonTemplate(text, buttons)
+
+  bot.reply(message, reply, (err, response) => {
+    if (err) handleError(bot, message, err)
+  })
+}
 
 controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'USER_DEFINED_PAYLOAD') {
-    let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
-    let buttons = [
-      {
-        type: "postback",
-        title: "Learn about him 👨🏻",
-        payload: "learn about him"
-      },
-      {
-        type: "postback",
-        title: "Get your own bot 🤖",
-        payload: "get my own bot"
-      }
-    ]
-
-    let generateReply = generateButtonTemplate(text, buttons)
-    console.log(generateReply)
-
-    var reply = {
-		  attachment: {
-			  type: 'template',
-			  payload: {
-			    template_type: 'button',
-			    text: "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?",
-			    buttons: [
-			      {
-              "type": "postback",
-              "title": "Learn about him 👨🏻",
-              "payload": "learn about him"
-            },
-            {
-              "type": "postback",
-              "title": "Get your own bot 🤖",
-              "payload": "get my own bot"
-            }
-			    ]
-			  }
-		  }
-	  }
-
-    bot.reply(message, reply, (err, response) => {
-      if (err) {
-        console.log(err)
-      }
-    })
-
-    /* let attachment = {
-     *   "type": "template",
-     *   "payload": {
-     *     "template_type": "button",
-     *     "text": `Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`,
-     *     "buttons": [
-     *       {
-     *         "type": "postback",
-     *         "title": "Learn about him 👨🏻",
-     *         "payload": "learn about him"
-     *       },
-     *       {
-     *         "type": "postback",
-     *         "title": "Get your own bot 🤖",
-     *         "payload": "get my own bot"
-     *       }
-     *     ]
-     *   }
-     * }
-
-     * bot.reply(message, { attachment: attachment })
-     * console.log(message.payload)*/
+    sendWelcomePromt(bot, message)
   }
 })
 
