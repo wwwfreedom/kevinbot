@@ -150,13 +150,13 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 
 // user says anything else
 controller.hears('(.*)', 'message_received', function (bot, message) {
-  console.log(message.match[1])
+  /* console.log(message.match[1])*/
   bot.reply(message, 'you said ' + message.match[1])
 })
 
 
 controller.on('facebook_postback', function(bot, message) {
-  console.log(message)
+  console.log(message.payload)
 
   if (message.payload === 'USER_DEFINED_PAYLOAD') sendWelcomePromt(bot, message)
 
