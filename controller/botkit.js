@@ -213,42 +213,33 @@ const askWhereDeliver = function(response, convo) {
   })
 }
 
-const tellLifeStory = (bot, message) => {
+const tellPartOneLifeStory = (bot, message) => {
   bot.startTyping(message, () => {})
   setTimeout(() => {
     bot.stopTyping(message, () => {
-      bot.reply(message, "Once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
-        bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
+      bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
+        bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", () => {
+          let text = "Do you want to here his whole life story or just skip to a certain thing?"
+          let quickReplies = [
+            {
+              type: "text",
+              title: "Whole story!",
+              payload: "Whole story!"
+            },
+            {
+              type: "text",
+              title: "Skip around",
+              payload: "Skip around"
+            }
+          ]
+
+          let reply = generateQuickReplies(text, quickReplies)
+
+          bot.reply(message, reply)
+        })
       })
     })
-  }, 1000)
-
-  /* bot.replyWithTyping(message, )
-   * console.log(bot)
-   * bot.startTyping(message, function () {
-   * })
-
-   * bot.stopTyping(message, function () {
-   *   bot.reply(message, "Once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity.")
-   * })
-
-   * bot.startTyping(message, function () {
-   * })
-
-   * bot.stopTyping(message, function () {
-   *   bot.reply(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
-   * })*/
-
-  /* bot.startConversation(message, askFlavor)*/
-  /* bot.startconversation(message, (err, convo) => {
-   *   if (!err) {
-   *     convo.say(message, "once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity")
-   *     convo.settimeout(1000)
-   *     convo.say(message, "every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
-   *     bot.replywithtyping(message, "once upon a time there was a boy named kevin who was born into a restrictive communist country with little opportunity")
-   *     bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place")
-   *   }
-   * })*/
+  }, 800)
 }
 
 controller.on('tick', (bot, event) => {
@@ -269,8 +260,11 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 controller.hears('(.*)', 'message_received', function (bot, message) {
   if (message.match[1] === 'See menu') sendGenericMenu(bot, message)
 
-  if (message.match[1] === 'Life story') tellLifeStory(bot, message)
+  if (message.match[1] === 'Life story') tellPartOneLifeStory(bot, message)
+})
 
+controller.hears(['Whole story!'], 'message_received', (bot, message) => {
+  bot.reply(message, "Cool the story is gonna be long")
 })
 
 
