@@ -80,6 +80,16 @@ const generateQuickReplies = (text, replies) => {
   }
 }
 
+const generateGenericTemplate = (elements) => ({
+  attachment: {
+    type: 'template',
+    payload: {
+      template_type: 'generic',
+      elements: elements
+    }
+  }
+})
+
 const sendWelcomePromt = (bot, message) => {
   let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
   let buttons = [
@@ -135,6 +145,79 @@ const sendQuickRepliesAboutMe = (bot, message) => {
   })
 }
 
+const sendGenericMenu = (bot, message) => {
+  let menu = [
+    {
+      "title": "About me",
+      "image_url": "https://randomuser.me/api/portraits/lego/5.jpg",
+      "subtitle": "Choose an option below",
+      "buttons": [
+        {
+          "type": "postback",
+          "title": "Biography",
+          "payload": "bio"
+        },
+        {
+          "type": "postback",
+          "title": "Stuffs I've made",
+          "payload": "projects"
+        },
+        {
+          "type": "postback",
+          "title": "See my location",
+          "payload": "location"
+        }
+      ]
+    },
+
+    {
+      "title": "Connect With Me",
+      "image_url": "https://upload.wikimedia.org/wikipedia/en/5/51/IMessage_Icon.png",
+      "subtitle": "Choose an option below",
+      "buttons": [
+        {
+          "type": "postback",
+          "title": "Live chat",
+          "payload": "live chat"
+        },
+        {
+          "type": "postback",
+          "title": "Leave a message",
+          "payload": "message"
+        },
+        {
+          "type": "postback",
+          "title": "Book a meeting",
+          "payload": "meeting"
+        }
+      ]
+    },
+
+    {
+      "title": "My Social Stuff",
+      "image_url": "http://cdn.business2community.com/wp-content/uploads/2016/07/social34.jpg",
+      "subtitle": "Choose an option below",
+      "buttons": [
+        {
+          "type": "postback",
+          "title": "Reading",
+          "payload": "reading"
+        },
+        {
+          "type": "postback",
+          "title": "Listening",
+          "payload": "listening"
+        }
+      ]
+    }
+  ]
+
+  let reply = generateGenericTemplate(menu)
+  bot.reply(message, reply, (err, response) => {
+    if (err) handleError(bot, message, err)
+  })
+}
+
 controller.on('tick', (bot, event) => {
 })
 
@@ -151,7 +234,7 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 // user says anything else
 
 controller.hears('(.*)', 'message_received', function (bot, message) {
-  if (message.match[1] === 'See menu') bot.reply(message, "if you see this")
+  if (message.match[1] === 'See menu') sendGenericMenu(bot, message)
 })
 
 
