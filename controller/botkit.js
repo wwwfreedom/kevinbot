@@ -148,24 +148,24 @@ const sendQuickRepliesAboutMe = (bot, message) => {
 const sendGenericMenu = (bot, message) => {
   let menu = [
     {
-      "title": "About me",
-      "image_url": "https://randomuser.me/api/portraits/lego/5.jpg",
-      "subtitle": "Choose an option below",
-      "buttons": [
+      title: "About me",
+      image_url: "https://randomuser.me/api/portraits/lego/5.jpg",
+      subtitle: "Choose an option below",
+      buttons: [
         {
-          "type": "postback",
-          "title": "Biography",
-          "payload": "bio"
+          type: "postback",
+          title: "Biography",
+          payload: "bio"
         },
         {
-          "type": "postback",
-          "title": "Stuffs I've made",
-          "payload": "projects"
+          type: "postback",
+          title: "Stuffs I've made",
+          payload: "projects"
         },
         {
-          "type": "postback",
-          "title": "See my location",
-          "payload": "location"
+          type: "postback",
+          title: "See my location",
+          payload: "location"
         }
       ]
     },
