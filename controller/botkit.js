@@ -217,7 +217,13 @@ const tellPartOneLifeStory = (bot, message) => {
   bot.startTyping(message, () => {})
   setTimeout(() => {
     bot.stopTyping(message, () => {
-      bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
+      return new Promise((resolve, reject) => {
+        bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
+          if (err) reject(err)
+          resolve()
+        })
+      })
+      .then(() => {
         bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", () => {
           let text = "Do you want to here his whole life story or just skip to a certain thing?"
           let quickReplies = [
