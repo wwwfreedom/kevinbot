@@ -246,13 +246,22 @@ const tellPartTwoLifeStory = (bot, message) => {
   bot.startTyping(message, () => {})
   bot.reply(message, "One day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia", () => {
     bot.replyWithTyping(message, "Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university", () => {
+      let text = "Do you want to hear his whole life story or just skip to a certain thing?"
       let quickReplies = [
         {
           type: "text",
-          title: "What happen?",
+          title: "Whole story!",
+          payload: "Whole story!"
+        },
+        {
+          type: "text",
+          title: "Skip around",
+          payload: "Skip around"
         }
       ]
-      let reply = generateQuickReplies("What happen next?", quickReplies)
+
+      let reply = generateQuickReplies(text, quickReplies)
+
       bot.replyWithTyping(message, reply)
     })
   })
