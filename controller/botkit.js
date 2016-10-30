@@ -261,9 +261,13 @@ controller.hears('(.*)', 'message_received', function (bot, message) {
   if (message.match[1] === 'See menu') sendGenericMenu(bot, message)
 
   if (message.match[1] === 'Life story') tellPartOneLifeStory(bot, message)
+
+  if (message.match[1] === 'Whole story!') bot.reply(message, "Cool the story is gonna be long")
+
 })
 
 controller.hears(['Whole story!'], 'message_received', (bot, message) => {
+  console.log("i'm hearing")
   bot.reply(message, "Cool the story is gonna be long")
 })
 
