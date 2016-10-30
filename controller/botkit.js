@@ -252,7 +252,7 @@ const tellPartTwoLifeStory = (bot, message) => {
           title: "What happen?",
         }
       ]
-      let reply = generateQuickReplies("", quickReplies)
+      let reply = generateQuickReplies("What happen next?", quickReplies)
       bot.replyWithTyping(message, reply)
     })
   })
