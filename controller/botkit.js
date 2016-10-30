@@ -214,37 +214,64 @@ const askWhereDeliver = function(response, convo) {
 }
 
 const tellPartOneLifeStory = (bot, message) => {
+  let bot = Promise.promisifyAll(bot)
   bot.startTyping(message, () => {})
   setTimeout(() => {
-    bot.stopTyping(message, () => {
-      return new Promise((resolve, reject) => {
-        bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
-          if (err) reject(err)
-          resolve()
-        })
+    bot.stopTyping(message)
+      .then(() => {
+        bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.")
       })
       .then(() => {
-        bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", () => {
-          let text = "Do you want to here his whole life story or just skip to a certain thing?"
-          let quickReplies = [
-            {
-              type: "text",
-              title: "Whole story!",
-              payload: "Whole story!"
-            },
-            {
-              type: "text",
-              title: "Skip around",
-              payload: "Skip around"
-            }
-          ]
-
-          let reply = generateQuickReplies(text, quickReplies)
-
-          bot.replyWithTyping(message, reply)
-        })
+        bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
       })
-    })
+      .then(() => {
+        let text = "Do you want to here his whole life story or just skip to a certain thing?"
+        let quickReplies = [
+          {
+            type: "text",
+            title: "Whole story!",
+            payload: "Whole story!"
+          },
+          {
+            type: "text",
+            title: "Skip around",
+            payload: "Skip around"
+          }
+        ]
+
+        let reply = generateQuickReplies(text, quickReplies)
+
+        bot.replyWithTyping(message, reply)
+      })
+    /* bot.stopTyping(message, () => {
+     *   return new Promise((resolve, reject) => {
+     *     bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
+     *       if (err) reject(err)
+     *       resolve()
+     *     })
+     *   })*/
+      /* .then(() => {
+       *   bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", () => {
+       *     let text = "Do you want to here his whole life story or just skip to a certain thing?"
+       *     let quickReplies = [
+       *       {
+       *         type: "text",
+       *         title: "Whole story!",
+       *         payload: "Whole story!"
+       *       },
+       *       {
+       *         type: "text",
+       *         title: "Skip around",
+       *         payload: "Skip around"
+       *       }
+       *     ]
+
+       *     let reply = generateQuickReplies(text, quickReplies)
+
+       *     bot.replyWithTyping(message, reply)
+       *   })
+       * })
+         })*/
   }, 800)
 }
 
