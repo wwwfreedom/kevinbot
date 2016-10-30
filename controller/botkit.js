@@ -216,8 +216,7 @@ const askWhereDeliver = function(response, convo) {
 const tellPartOneLifeStory = (bot, message) => {
   bot.startTyping(message, () => {})
   setTimeout(() => {
-    bot.stopTyping(message, () => {
-      return new Promise((resolve, reject) => {
+    bot.stopTyping(message, () => new Promise((resolve, reject) => {
         bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
           if (err) reject(err)
           resolve()
