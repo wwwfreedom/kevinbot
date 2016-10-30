@@ -217,27 +217,25 @@ const tellPartOneLifeStory = (bot, message) => {
   bot.startTyping(message, () => {})
   setTimeout(() => {
     bot.stopTyping(message, () => {
-      bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
-        bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", (err, response) => {
-          let text = "Do you want to here his whole life story or just skip to a certain thing?"
-          let quickReplies = [
-            {
-              type: "text",
-              title: "Whole story!",
-              payload: "Whole story!"
-            },
-            {
-              type: "text",
-              title: "Skip around",
-              payload: "Skip around"
-            }
-          ]
+      bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.")
+      bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.")
+      let text = "Do you want to here his whole life story or just skip to a certain thing?"
+      let quickReplies = [
+        {
+          type: "text",
+          title: "Whole story!",
+          payload: "Whole story!"
+        },
+        {
+          type: "text",
+          title: "Skip around",
+          payload: "Skip around"
+        }
+      ]
 
-          let reply = generateQuickReplies(text, quickReplies)
+      let reply = generateQuickReplies(text, quickReplies)
 
-          bot.replyWithTyping(message, reply)
-        })
-      })
+      bot.replyWithTyping(message, reply)
     })
   }, 800)
 }
