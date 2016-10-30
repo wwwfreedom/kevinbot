@@ -219,7 +219,7 @@ const tellPartOneLifeStory = (bot, message) => {
     bot.stopTyping(message, () => {
       bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
         bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", () => {
-          let text = "Do you want to here his whole life story or just skip to a certain thing?"
+          let text = "Do you want to hear his whole life story or just skip to a certain thing?"
           let quickReplies = [
             {
               type: "text",
@@ -245,7 +245,16 @@ const tellPartOneLifeStory = (bot, message) => {
 const tellPartTwoLifeStory = (bot, message) => {
   bot.startTyping(message, () => {})
   bot.reply(message, "One day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia", () => {
-    bot.replyWithTyping(message, "Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university")
+    bot.replyWithTyping(message, "Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university", () => {
+      let quickReplies = [
+        {
+          type: "text",
+          title: "What happen?",
+        }
+      ]
+      let reply = generateQuickReplies("", quickReplies)
+      bot.replyWithTyping(message, reply)
+    })
   })
 }
 
