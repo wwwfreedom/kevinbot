@@ -288,6 +288,7 @@ controller.hears(['Whole story!'], 'message_received', (bot, message) => {
 
 // user says anything else
 controller.hears('(.*)', 'message_received', function (bot, message) {
+  console.log(message.match[1], "****************************************************")
   if (message.match[1] === 'See menu') sendGenericMenu(bot, message)
 
   if (message.match[1] === 'Life story') tellPartOneLifeStory(bot, message)
@@ -300,7 +301,7 @@ controller.hears('(.*)', 'message_received', function (bot, message) {
 
 
 controller.on('facebook_postback', function(bot, message) {
-  console.log(message.payload)
+  console.log(message.payload, "________________________________________________")
 
   if (message.payload === 'USER_DEFINED_PAYLOAD') sendWelcomePromt(bot, message)
 
