@@ -214,10 +214,10 @@ const askWhereDeliver = function(response, convo) {
 }
 
 const tellPartOneLifeStory = (bot, message) => {
-  let bot = Promise.promisifyAll(bot)
+  let botp = Promise.promisifyAll(bot)
   bot.startTyping(message, () => {})
   setTimeout(() => {
-    bot.stopTyping(message)
+    botp.stopTyping(message)
       .then(() => {
         bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.")
       })
