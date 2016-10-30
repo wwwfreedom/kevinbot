@@ -242,6 +242,13 @@ const tellPartOneLifeStory = (bot, message) => {
   }, 800)
 }
 
+const tellPartTwoLifeStory = (bot, message) => {
+  bot.startTyping(message, () => {})
+  bot.reply(message, "One day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia", () => {
+    bot.replyWithTyping(message, "Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university")
+  })
+}
+
 controller.on('tick', (bot, event) => {
 })
 
@@ -256,8 +263,7 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 })
 
 controller.hears(['Whole story!'], 'message_received', (bot, message) => {
-  console.log('______________________________________________________')
-  bot.reply(message, "Cool the story is gonna be long")
+  tellPartTwoLifeStory(bot, message)
 })
 
 // user says anything else
