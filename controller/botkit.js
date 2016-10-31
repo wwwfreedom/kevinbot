@@ -254,41 +254,36 @@ const sendBiographyQuickReplies = (bot, message) => {
  * }*/
 
 const tellPartOneLifeStory = (bot, message) => {
-  bot.startConversation(message, (err, convo) => {
-    let typing = { sender_action: "typing_on" }
-    let readyImg = generateImageTemplate("https://media0.giphy.com/media/75yYfqYy5tmHm/200_s.gif")
-    let houseImg = generateImageTemplate("https://www.budgetdirect.com.au/blog/wp-content/uploads/2015/09/Australian-Housing-1-e1441262318931.jpg")
-    convo.say("He's had an interesting but complicated story.")
-    convo.say(readyImg)
-    convo.say("He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:")
-    convo.say(houseImg)
-  })
-  /* bot.startTyping(message, () => {})
-   * setTimeout(() => {
-   *   bot.stopTyping(message, () => {
-   *     bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
-   *       bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", () => {
-   *         let text = "Do you want to hear his whole life story or just skip to a certain thing?"
-   *         let quickReplies = [
-   *           {
-   *             type: "text",
-   *             title: "Whole story!",
-   *             payload: "Whole story!"
-   *           },
-   *           {
-   *             type: "text",
-   *             title: "Skip around",
-   *             payload: "Skip around"
-   *           }
-   *         ]
+  let readyImg = generateImageTemplate("https://media0.giphy.com/media/75yYfqYy5tmHm/200_s.gif")
+  let houseImg = generateImageTemplate("http://resources2.news.com.au/images/2012/05/06/1226347/897142-bullet-holes-in-enfield-house.jpg")
+  bot.startTyping(message, () => {})
+  setTimeout(() => {
+    bot.stopTyping(message, () => {
+      bot.reply(message, "He's had an interesting but complicated story.", (err, response) => {
+        bot.replyWithTyping(message, "He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:", () => {
+          bot.reply(message, houseImg, () => {
+            let text = "Do you want to hear his whole life story or just skip to a certain thing?"
+            let quickReplies = [
+              {
+                type: "text",
+                title: "Whole story!",
+                payload: "Whole story!"
+              },
+              {
+                type: "text",
+                title: "Skip around",
+                payload: "Skip around"
+              }
+            ]
 
-   *         let reply = generateQuickReplies(text, quickReplies)
+            let reply = generateQuickReplies(text, quickReplies)
 
-   *         bot.replyWithTyping(message, reply)
-   *       })
-   *     })
-   *   })
-   * }, 800)*/
+            bot.replyWithTyping(message, reply)
+          })
+        })
+      })
+    })
+  }, 800)
 }
 
 const tellPartTwoLifeStory = (bot, message) => {
