@@ -89,6 +89,15 @@ const generateGenericTemplate = (elements) => ({
   }
 })
 
+const generateImageTemplate = (link) => ({
+  attachment: {
+    type: 'image',
+    payload: {
+      url: link
+    }
+  }
+})
+
 const sendWelcomePromt = (bot, message) => {
   let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
   let buttons = [
@@ -190,87 +199,94 @@ const sendBiographyQuickReplies = (bot, message) => {
   })
 }
 
-const askFlavor = function(response, convo) {
-  let text = "Do you want to hear his whole life story or just skip to a certain thing?"
-  let quickReplies = [
-    {
-      type: "text",
-      title: "Life story",
-      payload: "life story"
-    },
-    {
-      type: "text",
-      title: "Education",
-      payload: "education"
-    },
-    {
-      type: "text",
-      title: "Work history",
-      payload: "work history"
-    },
-    {
-      type: "text",
-      title: "💜 status",
-      payload: "love status"
-    },
-    {
-      type: "text",
-      title: "Random facts",
-      payload: "random facts"
-    }
-  ]
-
-  let reply = generateQuickReplies(text, quickReplies)
-
-  convo.ask(reply, function(response, convo) {
-    console.log(response, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-    convo.say("Awesome.")
-    askSize(response, convo)
-    convo.next()
-  })
-}
-const askSize = function(response, convo) {
-  convo.ask("What size do you want?", function(response, convo) {
-    convo.say("Ok.")
-    askWhereDeliver(response, convo)
-    convo.next()
-  })
-}
-
-const askWhereDeliver = function(response, convo) {
-  convo.ask("So where do you want it delivered?", function(response, convo) {
-    convo.say("Ok! Goodbye.")
-    convo.next()
-  })
-}
+/* const askFlavor = function(response, convo) {
+ *   let text = "Do you want to hear his whole life story or just skip to a certain thing?"
+ *   let quickReplies = [
+ *     {
+ *       type: "text",
+ *       title: "Life story",
+ *       payload: "life story"
+ *     },
+ *     {
+ *       type: "text",
+ *       title: "Education",
+ *       payload: "education"
+ *     },
+ *     {
+ *       type: "text",
+ *       title: "Work history",
+ *       payload: "work history"
+ *     },
+ *     {
+ *       type: "text",
+ *       title: "💜 status",
+ *       payload: "love status"
+ *     },
+ *     {
+ *       type: "text",
+ *       title: "Random facts",
+ *       payload: "random facts"
+ *     }
+ *   ]
+ *
+ *   let reply = generateQuickReplies(text, quickReplies)
+ *
+ *   convo.ask(reply, function(response, convo) {
+ *     console.log(response, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+ *     convo.say("Awesome.")
+ *     askSize(response, convo)
+ *     convo.next()
+ *   })
+ * }
+ * const askSize = function(response, convo) {
+ *   convo.ask("What size do you want?", function(response, convo) {
+ *     convo.say("Ok.")
+ *     askWhereDeliver(response, convo)
+ *     convo.next()
+ *   })
+ * }
+ *
+ * const askWhereDeliver = function(response, convo) {
+ *   convo.ask("So where do you want it delivered?", function(response, convo) {
+ *     convo.say("Ok! Goodbye.")
+ *     convo.next()
+ *   })
+ * }*/
 
 const tellPartOneLifeStory = (bot, message) => {
-  bot.startTyping(message, () => {})
-  setTimeout(() => {
-    bot.stopTyping(message, () => {
-      bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
-        bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", () => {
-          let text = "Do you want to hear his whole life story or just skip to a certain thing?"
-          let quickReplies = [
-            {
-              type: "text",
-              title: "Whole story!",
-              payload: "Whole story!"
-            },
-            {
-              type: "text",
-              title: "Skip around",
-              payload: "Skip around"
-            }
-          ]
+  bot.startConversation(message, (err, convo) => {
+    let typing = { sender_action: "typing_on" }
+    let readyImg = generateImageTemplate("http://gph.is/1gPbJba")
+    convo.say(typing)
+    convo.say("He's had an interesting but complicated story.")
+    convo.say(readyImg)
+  })
+  /* bot.startTyping(message, () => {})
+   * setTimeout(() => {
+   *   bot.stopTyping(message, () => {
+   *     bot.reply(message, "Once upon a time there was a boy named Kevin who was born into a restrictive communist country with little opportunity.", (err, response) => {
+   *       bot.replyWithTyping(message, "Every day, his mother would encourage him to stay curious and study hard while she tries to find a way to migrate her family to a better place.", () => {
+   *         let text = "Do you want to hear his whole life story or just skip to a certain thing?"
+   *         let quickReplies = [
+   *           {
+   *             type: "text",
+   *             title: "Whole story!",
+   *             payload: "Whole story!"
+   *           },
+   *           {
+   *             type: "text",
+   *             title: "Skip around",
+   *             payload: "Skip around"
+   *           }
+   *         ]
 
-          let reply = generateQuickReplies(text, quickReplies)
+   *         let reply = generateQuickReplies(text, quickReplies)
 
-          bot.replyWithTyping(message, reply)
-        })
-      })
-    })
-  }, 800)
+   *         bot.replyWithTyping(message, reply)
+   *       })
+   *     })
+   *   })
+   * }, 800)*/
 }
 
 const tellPartTwoLifeStory = (bot, message) => {
@@ -310,9 +326,7 @@ controller.on('facebook_optin', function (bot, message) {
 
 // user said hello
 controller.hears(['hello'], 'message_received', function (bot, message) {
-  console.log(message, "-----------------------------------------------------")
-  bot.startConversation(message, askFlavor)
-  /* bot.reply(message, 'Hey there.')*/
+  bot.reply(message, 'Hey there.')
 })
 
 controller.hears(['Whole story!'], 'message_received', (bot, message) => {
