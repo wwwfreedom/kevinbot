@@ -43,7 +43,6 @@ request.post('https://graph.facebook.com/me/subscribed_apps?access_token=' + pro
 
 console.log('botkit')
 
-
 // Template generators
 
 const generateButtonTemplate = (text, buttons) => {
@@ -155,7 +154,7 @@ const sendGenericMenu = (bot, message) => {
 }
 
 const sendBiographyQuickReplies = (bot, message) => {
-  let text = "Do you want to here his whole life story or just skip to a certain thing?"
+  let text = "Do you want to hear his whole life story or just skip to a certain thing?"
   let quickReplies = [
     {
       type: "text",
@@ -192,7 +191,38 @@ const sendBiographyQuickReplies = (bot, message) => {
 }
 
 const askFlavor = function(response, convo) {
-  convo.ask("What flavor of pizza do you want?", function(response, convo) {
+  let text = "Do you want to hear his whole life story or just skip to a certain thing?"
+  let quickReplies = [
+    {
+      type: "text",
+      title: "Life story",
+      payload: "life story"
+    },
+    {
+      type: "text",
+      title: "Education",
+      payload: "education"
+    },
+    {
+      type: "text",
+      title: "Work history",
+      payload: "work history"
+    },
+    {
+      type: "text",
+      title: "💜 status",
+      payload: "love status"
+    },
+    {
+      type: "text",
+      title: "Random facts",
+      payload: "random facts"
+    }
+  ]
+
+  let reply = generateQuickReplies(text, quickReplies)
+
+  convo.ask(reply, function(response, convo) {
     convo.say("Awesome.")
     askSize(response, convo)
     convo.next()
@@ -279,7 +309,9 @@ controller.on('facebook_optin', function (bot, message) {
 
 // user said hello
 controller.hears(['hello'], 'message_received', function (bot, message) {
-  bot.reply(message, 'Hey there.')
+  console.log(message, "-----------------------------------------------------")
+  bot.startConversation(message, askFlavor)
+  /* bot.reply(message, 'Hey there.')*/
 })
 
 controller.hears(['Whole story!'], 'message_received', (bot, message) => {
@@ -301,7 +333,6 @@ controller.hears('(.*)', 'message_received', function (bot, message) {
 
 
 controller.on('facebook_postback', function(bot, message) {
-  console.log(message.payload, "________________________________________________")
 
   if (message.payload === 'USER_DEFINED_PAYLOAD') sendWelcomePromt(bot, message)
 
