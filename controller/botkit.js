@@ -223,6 +223,7 @@ const askFlavor = function(response, convo) {
   let reply = generateQuickReplies(text, quickReplies)
 
   convo.ask(reply, function(response, convo) {
+    console.log(response, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
     convo.say("Awesome.")
     askSize(response, convo)
     convo.next()
