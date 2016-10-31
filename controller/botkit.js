@@ -256,10 +256,14 @@ const sendBiographyQuickReplies = (bot, message) => {
 const tellPartOneLifeStory = (bot, message) => {
   bot.startConversation(message, (err, convo) => {
     let typing = { sender_action: "typing_on" }
-    let readyImg = generateImageTemplate("http://gph.is/1gPbJba")
-    convo.say(typing)
-    convo.say("He's had an interesting but complicated story.")
-    convo.say(readyImg)
+    let readyImg = generateImageTemplate("http://placehold.it/1910x1000/30c7e1/222222?text=Test")
+    bot.startTyping(message, () => {})
+    setTimeout(() => {
+      bot.stopTyping(message, () => {
+        convo.say("He's had an interesting but complicated story.")
+        convo.say(readyImg)
+      })
+    }, 2000)
   })
   /* bot.startTyping(message, () => {})
    * setTimeout(() => {
