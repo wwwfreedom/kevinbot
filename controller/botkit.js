@@ -260,26 +260,27 @@ const tellPartOneLifeStory = (bot, message) => {
   setTimeout(() => {
     bot.stopTyping(message, () => {
       bot.reply(message, "He's had an interesting but complicated story.", (err, response) => {
-        bot.reply(message, readyImg)
-        bot.reply(message, "He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:", () => {
-          bot.reply(message, houseImg, () => {
-            let text = "Do you want to hear his whole life story or just skip to a certain thing?"
-            let quickReplies = [
-              {
-                type: "text",
-                title: "Whole story!",
-                payload: "Whole story!"
-              },
-              {
-                type: "text",
-                title: "Skip around",
-                payload: "Skip around"
-              }
-            ]
+        bot.reply(message, readyImg, () => {
+          bot.reply(message, "He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:", () => {
+            bot.reply(message, houseImg, () => {
+              let text = "Do you want to hear his whole life story or just skip to a certain thing?"
+              let quickReplies = [
+                {
+                  type: "text",
+                  title: "Whole story!",
+                  payload: "Whole story!"
+                },
+                {
+                  type: "text",
+                  title: "Skip around",
+                  payload: "Skip around"
+                }
+              ]
 
-            let reply = generateQuickReplies(text, quickReplies)
+              let reply = generateQuickReplies(text, quickReplies)
 
-            bot.replyWithTyping(message, reply)
+              bot.replyWithTyping(message, reply)
+            })
           })
         })
       })
