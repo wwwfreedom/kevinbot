@@ -263,7 +263,7 @@ const tellPartOneLifeStory = (bot, message) => {
       bot.stopTyping(message, () => {
         convo.say("He's had an interesting but complicated story.")
         convo.say(readyImg)
-        bot.say(typing)
+        bot.reply(message, typing)
         convo.say("He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:")
         convo.say(houseImg)
       })
