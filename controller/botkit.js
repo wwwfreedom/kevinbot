@@ -258,16 +258,10 @@ const tellPartOneLifeStory = (bot, message) => {
     let typing = { sender_action: "typing_on" }
     let readyImg = generateImageTemplate("https://media0.giphy.com/media/75yYfqYy5tmHm/200_s.gif")
     let houseImg = generateImageTemplate("https://www.budgetdirect.com.au/blog/wp-content/uploads/2015/09/Australian-Housing-1-e1441262318931.jpg")
-    bot.startTyping(message, () => {})
-    setTimeout(() => {
-      bot.stopTyping(message, () => {
-        convo.say("He's had an interesting but complicated story.")
-        convo.say(readyImg)
-        bot.reply(message, typing)
-        convo.say("He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:")
-        convo.say(houseImg)
-      })
-    }, 1000)
+    convo.say("He's had an interesting but complicated story.")
+    convo.say(readyImg)
+    convo.say("He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:")
+    convo.say(houseImg)
   })
   /* bot.startTyping(message, () => {})
    * setTimeout(() => {
