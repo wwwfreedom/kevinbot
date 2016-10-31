@@ -265,8 +265,9 @@ const tellPartOneLifeStory = (bot, message) => {
         convo.say(readyImg)
         convo.ask(typing, (response, convo) => {
           convo.say("He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:")
-          convo.say(houseImg)
+          convo.next()
         })
+        convo.say(houseImg)
       })
     }, 1000)
   })
