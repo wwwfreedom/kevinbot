@@ -254,12 +254,13 @@ const sendBiographyQuickReplies = (bot, message) => {
  * }*/
 
 const tellPartOneLifeStory = (bot, message) => {
-  let readyImg = generateImageTemplate("https://media0.giphy.com/media/75yYfqYy5tmHm/200_s.gif")
+  let readyImg = generateImageTemplate("https://media.giphy.com/media/75yYfqYy5tmHm/giphy.gif")
   let houseImg = generateImageTemplate("http://resources2.news.com.au/images/2012/05/06/1226347/897142-bullet-holes-in-enfield-house.jpg")
   bot.startTyping(message, () => {})
   setTimeout(() => {
     bot.stopTyping(message, () => {
       bot.reply(message, "He's had an interesting but complicated story.", (err, response) => {
+        bot.reply(message, readyImg)
         bot.replyWithTyping(message, "He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:", () => {
           bot.reply(message, houseImg, () => {
             let text = "Do you want to hear his whole life story or just skip to a certain thing?"
