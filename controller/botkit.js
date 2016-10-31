@@ -256,14 +256,23 @@ const sendBiographyQuickReplies = (bot, message) => {
 const tellPartOneLifeStory = (bot, message) => {
   bot.startConversation(message, (err, convo) => {
     let typing = { sender_action: "typing_on" }
-    let readyImg = generateImageTemplate("http://placehold.it/1910x1000/30c7e1/222222?text=Test")
+    let readyImg = generateImageTemplate("https://media0.giphy.com/media/75yYfqYy5tmHm/200_s.gif")
+    let houseImg = generateImageTemplate("https://www.budgetdirect.com.au/blog/wp-content/uploads/2015/09/Australian-Housing-1-e1441262318931.jpg")
     bot.startTyping(message, () => {})
     setTimeout(() => {
       bot.stopTyping(message, () => {
         convo.say("He's had an interesting but complicated story.")
         convo.say(readyImg)
       })
-    }, 2000)
+    }, 1000)
+
+    bot.startTyping(message, () => {})
+    setTimeout(() => {
+      bot.stopTyping(message, () => {
+        convo.say("He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:")
+        convo.say(houseImg)
+      })
+    }, 1000)
   })
   /* bot.startTyping(message, () => {})
    * setTimeout(() => {
