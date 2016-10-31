@@ -264,14 +264,13 @@ const tellPartOneLifeStory = (bot, message) => {
         convo.say("He's had an interesting but complicated story.")
         convo.say(readyImg)
       })
-    }, 1000)
-
-    bot.startTyping(message, () => {})
-    setTimeout(() => {
-      bot.stopTyping(message, () => {
-        convo.say("He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:")
-        convo.say(houseImg)
-      })
+      bot.startTyping(message, () => {})
+      setTimeout(() => {
+        bot.stopTyping(message, () => {
+          convo.say("He grew up on North side of Adelaide - mostly in Salisbury Downs in this house:")
+          convo.say(houseImg)
+        })
+      }, 1000)
     }, 1000)
   })
   /* bot.startTyping(message, () => {})
