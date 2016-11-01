@@ -329,8 +329,26 @@ controller.hears(['Whole story!'], 'message_received', (bot, message) => {
 })
 
 controller.hears(['On to university'], 'message_received', (bot, message) => {
-  bot.reply(message, "He always had a strong internal drive to succeed and make his own way in the world.", () => {
-    bot.reply(message, "Academic life was interesting. In university, he challenged himself by learning Japanse. Spending half a year on a study exchange in Singapore and another one in Austria. ")
+  bot.replyWithTyping(message, "He always had a strong internal drive to succeed and make his own way in the world.", () => {
+    bot.replyWithTyping(message, "Academic life was interesting. In university, he challenged himself by learning Japanse. Spending half a year on a study exchange in Singapore and another one in Austria. ", () => {
+      let text = "Want to know more or skip around?"
+      let quickReplies = [
+        {
+          type: "text",
+          title: "What'd he study?",
+          payload: "What'd he study?"
+        },
+        {
+          type: "text",
+          title: "Skip around",
+          payload: "Skip around"
+        }
+      ]
+
+      let reply = generateQuickReplies(text, quickReplies)
+
+      bot.replyWithTyping(message, reply)
+    })
   })
 })
 
