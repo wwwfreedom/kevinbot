@@ -260,9 +260,9 @@ const tellPartOneLifeStory = (bot, message) => {
   setTimeout(() => {
     bot.stopTyping(message, () => {
       bot.reply(message, "He's had an interesting but complicated story.", (err, response) => {
-        bot.replyWithTyping(message, readyImg, () => {
+        bot.reply(message, readyImg, () => {
           bot.replyWithTyping(message, "He grew up on the North side of Adelaide - mostly in Salisbury Downs in this house:", () => {
-            bot.replyWithTyping(message, houseImg, () => {
+            bot.reply(message, houseImg, () => {
               let text = "Do you want to hear his whole life story or just skip to a certain thing?"
               let quickReplies = [
                 {
