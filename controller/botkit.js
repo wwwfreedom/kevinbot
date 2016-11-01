@@ -256,7 +256,7 @@ const sendBiographyQuickReplies = (bot, message) => {
 const tellPartOneLifeStory = (bot, message) => {
   let readyImg = generateImageTemplate("https://media.giphy.com/media/75yYfqYy5tmHm/giphy.gif")
   let houseImg = generateImageTemplate("http://resources2.news.com.au/images/2012/05/06/1226347/897142-bullet-holes-in-enfield-house.jpg")
-  bot.replyWithTyping(message, "He's had an interesting but complicated story.", (err, response) => {
+  bot.reply(message, "He's had an interesting but complicated story.", () => {
     bot.reply(message, readyImg, () => {
       bot.replyWithTyping(message, "He grew up on the North side of Adelaide - mostly in Salisbury Downs in this house:", () => {
         bot.reply(message, houseImg, () => {
@@ -284,15 +284,16 @@ const tellPartOneLifeStory = (bot, message) => {
 }
 
 const tellPartTwoLifeStory = (bot, message) => {
+  let jupiterBookImg = generateImageTemplate("https://images-na.ssl-images-amazon.com/images/I/51HD1KCKR8L.jpg")
   bot.startTyping(message, () => {})
-  bot.reply(message, "One day, in an act of kindess, Kevin's grandpa who was living in Australia applied to sponsor Kevin's and his family to migrate to Australia", () => {
-    bot.replyWithTyping(message, "Because of that, Kevin was able to grow up in Australia. A land of the free and boundless opportunity. ", () => {
-      bot.replyWithTyping(message, "However, there was a difficult period where language barrier and cultural differences threaten to derails Kevin's plan to become the first in his family to graduate from university", () => {
-        let text = "What to want know more or skip around?"
+  bot.reply(message, "Kevin spent his childhood dreaming of exploring faraway places. He read this book.", () => {
+    bot.reply(message, jupiterBookImg, () => {
+      bot.replyWithTyping(message, "He decided that his life dream would be to travel around the world by motorbike", () => {
+        let text = "Want to know more or skip around?"
         let quickReplies = [
           {
             type: "text",
-            title: "What happen?",
+            title: "On to university",
             payload: "Whole story!"
           },
           {
