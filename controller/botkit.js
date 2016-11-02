@@ -418,7 +418,7 @@ controller.hears(["Learn about his work", "On to his work!", "Work history"], 'm
 })
 
 controller.hears(["Skills & Expertise"], "message_received", (bot, message) => {
-  bot.replyWithTyping(message, "Kevin's expertise is in front-end development specializing in creating single page application with React.js.", () => {
+  bot.reply(message, "Kevin's expertise is in front-end development specializing in creating single page application with React.js.", () => {
     bot.replyWithTyping(message, "His other skills are api development with express, node.js and creating interactive chatbots.", () => {
       let text = "Learn more about his work or to menu."
       let quickReplies = [
@@ -443,6 +443,33 @@ controller.hears(["Skills & Expertise"], "message_received", (bot, message) => {
 
       bot.replyWithTyping(message, reply)
     })
+  })
+})
+
+controller.hears(["Work Interests"], "message_received", (bot, message) => {
+  bot.reply(message, "Kevin is interested in solving business problems via single-page application or innovative chatbots.", () => {
+    let text = "Learn more about his work or to menu."
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Skills & Expertise",
+        payload: "Skills & Expertise"
+      },
+      {
+        type: "text",
+        title: "Demo Projects",
+        payload: "Demo Projects"
+      },
+      {
+        type: "text",
+        title: "See menu",
+        payload: "See menu"
+      }
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    bot.replyWithTyping(message, reply)
   })
 })
 
