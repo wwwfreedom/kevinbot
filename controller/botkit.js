@@ -315,8 +315,8 @@ controller.hears(["What'd he study?", "Education"], 'message_received', (bot, me
         },
         {
           type: "text",
-          title: "Why Commerse?",
-          payload: "Why Commerse?"
+          title: "Why Commerce?",
+          payload: "Why Commerce?"
         }
       ]
 
@@ -327,12 +327,40 @@ controller.hears(["What'd he study?", "Education"], 'message_received', (bot, me
   })
 })
 
-controller.hears(["Why Commerse?"], 'message_received', (bot, message) => {
+controller.hears(['Why Programming'], 'message_received', (bot, message) => {
+  let programingImg = generateImageTemplate("http://i.giphy.com/DnVvp3yHjdhyo.gif")
+  bot.startTyping(message, () => {})
+  bot.reply(message, "Learning how to code was immensely satisfying for him. From seeing a simple hello world program to making advance web application. The fact that he could make something useful that millions could use is awe inspiring for him.", () => {
+    bot.reply(message, programingImg, () => {
+      let text = "Find out why?"
+      let quickReplies = [
+        {
+          type: "text",
+          title: "Why Commerce?",
+          payload: "Why Commerce?"
+        },
+        {
+          type: "text",
+          title: "Learn about his work",
+          payload: "Learn about his work"
+        }
+      ]
+
+      let reply = generateQuickReplies(text, quickReplies)
+
+      bot.replyWithTyping(message, reply)
+    })
+  })
+})
+
+controller.hears(["Why Commerce?"], 'message_received', (bot, message) => {
+  bot.startTyping(message, () => {})
   let moneyImg = generateImageTemplate("http://i.giphy.com/3o7aTvTXlhr9PuWg1i.gif")
-  bot.replyWithTyping(message, "Studying commerse meant digging into interesting problem like inflation, internation trade, debt and globalization.", () => {
+  bot.reply(message, "Studying commerse meant digging into interesting problem like inflation, internation trade, debt and globalization.", () => {
     bot.replyWithTyping(message, "It helped him see the underlying causes of fiscal policy and it's effect on the economy.", () => {
       bot.reply(message, moneyImg, () => {
-        let text = "Why ..."
+        bot.replyWithTyping(message, "It taught him the value of money where it comes from and how to use money to start successful businesses.", () => {
+        let text = "Learn about his work or see his bio"
         let quickReplies = [
           {
             type: "text",
@@ -349,6 +377,7 @@ controller.hears(["Why Commerse?"], 'message_received', (bot, message) => {
         let reply = generateQuickReplies(text, quickReplies)
 
         bot.replyWithTyping(message, reply)
+        })
       })
     })
   })
