@@ -387,7 +387,7 @@ controller.hears(["Why Commerce?"], 'message_received', (bot, message) => {
 })
 
 controller.hears(["Learn about his work", "On to his work!", "Work history"], 'message_received', (bot, message) => {
-  bot.replyWithTyping(message, "Kevin is a professional web developer, consultant and entreprenuer.", () => {
+  bot.reply(message, "Kevin is a professional web developer, consultant and entreprenuer.", () => {
     bot.replyWithTyping(message, "He has two years experience in developing single-page web applications. He is adept at using different open source libraries such as Express (Node.js), React.js and Redux.", () => {
       bot.replyWithTyping(message, "He is currently on the look out for opportunies to work with innovative tech companies.", () => {
         let text = "Learn more about his work."
@@ -485,6 +485,7 @@ controller.hears(["Demo Projects"], "message_received", (bot, message) => {
   ]
 
   let reply = generateButtonTemplate(text, buttons)
+  console.log(reply, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
   bot.replyWithTyping(message, reply)
 })
