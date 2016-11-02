@@ -387,17 +387,41 @@ controller.hears(["Why Commerce?"], 'message_received', (bot, message) => {
 })
 
 controller.hears(["Learn about his work", "On to his work!", "Work history"], 'message_received', (bot, message) => {
-  bot.startTyping(message, () => {})
-  bot.reply(message, "Kevin is a professional web developer, consultant and entreprenuer.")
-  bot.replyWithTyping(message, "He has two years experience in developing single-page web applications. He is adept at using different open source libraries such as Express (Node.js), React.js and Redux.", () => {
-    bot.replyWithTyping(message, "He is currently on the look out for opportunies to work with innovative tech companies.", () => {
-      let text = "Learn more about his work."
+  bot.replyWithTyping(message, "Kevin is a professional web developer, consultant and entreprenuer.", () => {
+    bot.replyWithTyping(message, "He has two years experience in developing single-page web applications. He is adept at using different open source libraries such as Express (Node.js), React.js and Redux.", () => {
+      bot.replyWithTyping(message, "He is currently on the look out for opportunies to work with innovative tech companies.", () => {
+        let text = "Learn more about his work."
+        let quickReplies = [
+          {
+            type: "text",
+            title: "Skills & Expertise",
+            payload: "Skills & Expertise"
+          },
+          {
+            type: "text",
+            title: "Demo Projects",
+            payload: "Demo Projects"
+          },
+          {
+            type: "text",
+            title: "Work Interests",
+            payload: "Work Interests"
+          }
+        ]
+
+        let reply = generateQuickReplies(text, quickReplies)
+
+        bot.replyWithTyping(message, reply)
+      })
+    })
+  })
+})
+
+controller.hears(["Skills & Expertise"], "message_received", (bot, message) => {
+  bot.replyWithTyping(message, "Kevin's expertise is in front-end development specializing in creating single page application with React.js.", () => {
+    bot.replyWithTyping(message, "His other skills are api development with express, node.js and creating interactive chatbots.", () => {
+      let text = "Learn more about his work or to menu."
       let quickReplies = [
-        {
-          type: "text",
-          title: "Skills & Expertise",
-          payload: "Skills & Expertise"
-        },
         {
           type: "text",
           title: "Demo Projects",
@@ -407,6 +431,11 @@ controller.hears(["Learn about his work", "On to his work!", "Work history"], 'm
           type: "text",
           title: "Work Interests",
           payload: "Work Interests"
+        },
+        {
+          type: "text",
+          title: "See menu",
+          payload: "See menu"
         }
       ]
 
