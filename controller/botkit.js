@@ -257,6 +257,9 @@ const tellPartTwoLifeStory = (bot, message) => {
   })
 }
 
+const sendBioMenu = (bot, message) => {
+}
+
 controller.on('tick', (bot, event) => {
 })
 
@@ -356,7 +359,7 @@ controller.hears(['Why Programming'], 'message_received', (bot, message) => {
 controller.hears(["Why Commerce?"], 'message_received', (bot, message) => {
   bot.startTyping(message, () => {})
   let moneyImg = generateImageTemplate("http://i.giphy.com/3o7aTvTXlhr9PuWg1i.gif")
-  bot.reply(message, "Studying commerse meant digging into interesting problem like inflation, internation trade, debt and globalization.", () => {
+  bot.reply(message, "Studying commerce meant digging into interesting problem like inflation, internation trade, debt and globalization.", () => {
     bot.replyWithTyping(message, "It helped him see the underlying causes of fiscal policy and it's effect on the economy.", () => {
       bot.reply(message, moneyImg, () => {
         bot.replyWithTyping(message, "It taught him the value of money where it comes from and how to use money to start successful businesses.", () => {
@@ -381,6 +384,36 @@ controller.hears(["Why Commerce?"], 'message_received', (bot, message) => {
       })
     })
   })
+})
+
+controller.hears(["Learn about his work", "On to his work"], 'message_received', (bot, message) => {
+  bot.startTyping(message, () => {})
+  bot.reply(message, "Kevin is a professional web developer, consultant and entreprenuer.")
+  bot.replyWithTyping(message, "He has two years experience in developing single-page web applications. He is adept at using different open source libraries such as Express (Node.js), React.js and Redux.", () => {
+    bot.replyWithTyping(message, "He is currently on the look out for opportunies to work with innovative tech companies.", () => {
+      let text = "Learn more about his work."
+      let quickReplies = [
+        {
+          type: "text",
+          title: "Skills & Expertise",
+          payload: "Skills & Expertise"
+        },
+        {
+          type: "text",
+          title: "Demo Projects",
+          payload: "Demo Projects"
+        },
+        {
+          type: "text",
+          title: "Work Interests",
+          payload: "Work Interests"
+        }
+      ]
+
+      let reply = generateQuickReplies(text, quickReplies)
+
+      bot.replyWithTyping(message, reply)
+    })
 })
 
 // user says anything else
