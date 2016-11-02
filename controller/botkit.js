@@ -357,7 +357,54 @@ controller.hears(['On to university'], 'message_received', (bot, message) => {
 })
 
 controller.hears(["What'd he study?"], 'message_received', (bot, message) => {
-  bot.replyWithTyping(message, "He got his undergraduate degree in Commerce and Applied Finance at the university of South Australia. ")
+  bot.replyWithTyping(message, "He got his undergraduate degree in Commerce and Applied Finance at the university of South Australia.", () => {
+    bot.replyWithTyping(message, "Throughout university, he also pursued his other passion in programming. He is nearing completion of his full-stack web programming course at 'Free Code Camp'.", () => {
+      let text = "Why ..."
+      let quickReplies = [
+        {
+          type: "text",
+          title: "Why Programming?",
+          payload: "study"
+        },
+        {
+          type: "text",
+          title: "Why Commerse?",
+          payload: "Why Commerse?"
+        }
+      ]
+
+      let reply = generateQuickReplies(text, quickReplies)
+
+      bot.replyWithTyping(message, reply)
+    })
+  })
+})
+
+controller.hears(["Why Commerse?"], 'message_received', (bot, message) => {
+  let moneyImg = generateImageTemplate("http://i.giphy.com/3o7aTvTXlhr9PuWg1i.gif")
+  bot.replyWithTyping(message, "Studying commerse meant digging into interesting problem like inflation, internation trade, debt and globalization.", () => {
+    bot.replyWithTyping(message, "It helped him see the underlying causes of fiscal policy and it's effect on the economy.", () => {
+      bot.reply(message, moneyImg, () => {
+        let text = "Why ..."
+        let quickReplies = [
+          {
+            type: "text",
+            title: "On to his work!",
+            payload: "On to his work!"
+          },
+          {
+            type: "text",
+            title: "Bio menu",
+            payload: "Bio menu"
+          }
+        ]
+
+        let reply = generateQuickReplies(text, quickReplies)
+
+        bot.replyWithTyping(message, reply)
+      })
+    })
+  })
 })
 
 // user says anything else
