@@ -386,7 +386,7 @@ controller.hears(["Why Commerce?"], 'message_received', (bot, message) => {
   })
 })
 
-controller.hears(["Learn about his work", "On to his work"], 'message_received', (bot, message) => {
+controller.hears(["Learn about his work", "On to his work!", "Work history"], 'message_received', (bot, message) => {
   bot.startTyping(message, () => {})
   bot.reply(message, "Kevin is a professional web developer, consultant and entreprenuer.")
   bot.replyWithTyping(message, "He has two years experience in developing single-page web applications. He is adept at using different open source libraries such as Express (Node.js), React.js and Redux.", () => {
@@ -414,6 +414,7 @@ controller.hears(["Learn about his work", "On to his work"], 'message_received',
 
       bot.replyWithTyping(message, reply)
     })
+  })
 })
 
 // user says anything else
@@ -426,9 +427,6 @@ controller.hears('(.*)', 'message_received', function (bot, message) {
   /* if (message.match[1] === 'Whole story!') bot.reply(message, "Cool the story is gonna be long")*/
 
 })
-
-
-
 
 controller.on('facebook_postback', function(bot, message) {
 
