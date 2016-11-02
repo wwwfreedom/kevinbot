@@ -336,7 +336,7 @@ controller.hears(['On to university'], 'message_received', (bot, message) => {
         {
           type: "text",
           title: "What'd he study?",
-          payload: "What'd he study?"
+          payload: "study"
         },
         {
           type: "text",
@@ -350,6 +350,13 @@ controller.hears(['On to university'], 'message_received', (bot, message) => {
       bot.replyWithTyping(message, reply)
     })
   })
+})
+
+controller.hears(["What'd he study?"], 'message_received', (bot, message) => {
+  if (message.quick_replies) {
+    console.log(message.quick_replies, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
+    bot.replyWithTyping(message, "He got his undergraduate degree in Commerce and Applied Finance at the university of South Australia. ")
+  }
 })
 
 // user says anything else
