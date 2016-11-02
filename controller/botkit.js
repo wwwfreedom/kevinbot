@@ -303,9 +303,10 @@ controller.hears(['On to university'], 'message_received', (bot, message) => {
 })
 
 controller.hears(["What'd he study?", "Education"], 'message_received', (bot, message) => {
-  bot.replyWithTyping(message, "He got his undergraduate degree in Commerce and Applied Finance at the university of South Australia.", () => {
+  bot.startTyping(message, () => {})
+  bot.reply(message, "He got his undergraduate degree in Commerce and Applied Finance at the university of South Australia.", () => {
     bot.replyWithTyping(message, "Throughout university, he also pursued his other passion in programming. He is nearing completion of his full-stack web programming course at 'Free Code Camp'.", () => {
-      let text = "Why ..."
+      let text = "Find out why?"
       let quickReplies = [
         {
           type: "text",
