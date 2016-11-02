@@ -199,60 +199,6 @@ const sendBiographyQuickReplies = (bot, message) => {
   })
 }
 
-/* const askFlavor = function(response, convo) {
- *   let text = "Do you want to hear his whole life story or just skip to a certain thing?"
- *   let quickReplies = [
- *     {
- *       type: "text",
- *       title: "Life story",
- *       payload: "life story"
- *     },
- *     {
- *       type: "text",
- *       title: "Education",
- *       payload: "education"
- *     },
- *     {
- *       type: "text",
- *       title: "Work history",
- *       payload: "work history"
- *     },
- *     {
- *       type: "text",
- *       title: "💜 status",
- *       payload: "love status"
- *     },
- *     {
- *       type: "text",
- *       title: "Random facts",
- *       payload: "random facts"
- *     }
- *   ]
- *
- *   let reply = generateQuickReplies(text, quickReplies)
- *
- *   convo.ask(reply, function(response, convo) {
- *     console.log(response, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
- *     convo.say("Awesome.")
- *     askSize(response, convo)
- *     convo.next()
- *   })
- * }
- * const askSize = function(response, convo) {
- *   convo.ask("What size do you want?", function(response, convo) {
- *     convo.say("Ok.")
- *     askWhereDeliver(response, convo)
- *     convo.next()
- *   })
- * }
- *
- * const askWhereDeliver = function(response, convo) {
- *   convo.ask("So where do you want it delivered?", function(response, convo) {
- *     convo.say("Ok! Goodbye.")
- *     convo.next()
- *   })
- * }*/
-
 const tellPartOneLifeStory = (bot, message) => {
   let readyImg = generateImageTemplate("https://media.giphy.com/media/75yYfqYy5tmHm/giphy.gif")
   let houseImg = generateImageTemplate("http://resources2.news.com.au/images/2012/05/06/1226347/897142-bullet-holes-in-enfield-house.jpg")
@@ -356,7 +302,7 @@ controller.hears(['On to university'], 'message_received', (bot, message) => {
   })
 })
 
-controller.hears(["What'd he study?"], 'message_received', (bot, message) => {
+controller.hears(["What'd he study?", "Education"], 'message_received', (bot, message) => {
   bot.replyWithTyping(message, "He got his undergraduate degree in Commerce and Applied Finance at the university of South Australia.", () => {
     bot.replyWithTyping(message, "Throughout university, he also pursued his other passion in programming. He is nearing completion of his full-stack web programming course at 'Free Code Camp'.", () => {
       let text = "Why ..."
