@@ -353,6 +353,7 @@ controller.hears(['On to university'], 'message_received', (bot, message) => {
 })
 
 controller.hears(["What'd he study?"], 'message_received', (bot, message) => {
+  console.log(message, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
   if (message.quick_replies) {
     console.log(message.quick_replies, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
     bot.replyWithTyping(message, "He got his undergraduate degree in Commerce and Applied Finance at the university of South Australia. ")
