@@ -325,7 +325,7 @@ controller.hears(['hello'], 'message_received', function (bot, message) {
 })
 
 controller.hears(['Gimme his story'], 'message_received', (bot, message) => {
-  sendBiographyQuickReplies(bot, messsage)
+  sendBiographyQuickReplies(bot, message)
 })
 
 controller.hears(['Whole story!'], 'message_received', (bot, message) => {
