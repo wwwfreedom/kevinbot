@@ -277,6 +277,35 @@ const tellPartTwoLifeStory = (bot, message) => {
 const sendBioMenu = (bot, message) => {
 }
 
+const sendDemoProjects = (bot, message) => {
+  bot.reply(message, "You can check out my demo projects at my personal site by clicking on the links below.", () => {
+    sendGenericProjectsTemplate(bot, message)
+
+    let text = "Learn more about his work or go back to menu."
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Skills & Expertise",
+        payload: "Skills & Expertise"
+      },
+      {
+        type: "text",
+        title: "Work Interests",
+        payload: "Work Interests"
+      },
+      {
+        type: "text",
+        title: "See menu",
+        payload: "See menu"
+      }
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    bot.replyWithTyping(message, reply)
+  })
+}
+
 controller.on('tick', (bot, event) => {
 })
 
@@ -490,51 +519,9 @@ controller.hears(["Work Interests"], "message_received", (bot, message) => {
   })
 })
 
-const generateQuickRepliesWithoutText = (replies) => {
-  let quickReplies = replies.map((reply) => {
-    return {
-      "content_type": reply.type,
-      "title": reply.title,
-      "payload": reply.payload
-    }
-  })
-  return {
-    attachment:{
-      type:"image",
-      payload:{
-        url: " "
-      }
-    },
-    quick_replies: quickReplies
-  }
-}
 
-controller.hears(["Demo Projects", "Stuffs I've made"], "message_received", (bot, message) => {
-  bot.replyWithTyping(message, "You can check out my demo projects at my personal site by clicking on the links below.", () => {
-    sendGenericProjectsTemplate(bot, message)
-
-    let quickReplies = [
-      {
-        type: "text",
-        title: "Skills & Expertise",
-        payload: "Skills & Expertise"
-      },
-      {
-        type: "text",
-        title: "Work Interests",
-        payload: "Work Interests"
-      },
-      {
-        type: "text",
-        title: "See menu",
-        payload: "See menu"
-      }
-    ]
-
-    let reply = generateQuickRepliesWithoutText(quickReplies)
-
-    bot.reply(message, reply)
-  })
+controller.hears(["Demo Projects"], "message_received", (bot, message) => {
+  sendDemoProjects(bot, message)
 })
 
 // user says anything else
@@ -557,6 +544,8 @@ controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'get my own bot') bot.reply(message, "Kevin's is hard at work creating the tool for you to make your own personal bot. Leave him your email and you'll be the first to know when it's ready :)")
 
   if (message.payload === 'bio') sendBiographyQuickReplies(bot, message)
+
+  if (message.payload === 'projects') sendDemoProjects(bot, message)
 
 })
 
