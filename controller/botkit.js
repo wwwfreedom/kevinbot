@@ -306,6 +306,19 @@ const sendDemoProjects = (bot, message) => {
   })
 }
 
+const sendCurrentLocation = (bot, message) => {
+  bot.reply(message, "Here's where Kevin been most recently.", () => {
+    let location = [{
+      title: "Kevin's Current Location",
+      subtitle: "Kevin is currently in Melbourne",
+      image_url: "http://maps.googleapis.com/maps/api/staticmap?center=melbourne+australia&zoom=13&scale=2&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:tiny%7Ccolor:0xff0000%7Clabel:1%7Cmelbourne+australia"
+    }]
+
+    let reply = generateGenericTemplate(projects)
+
+    bot.reply(message, reply)
+  })
+}
 controller.on('tick', (bot, event) => {
 })
 
@@ -546,6 +559,8 @@ controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'bio') sendBiographyQuickReplies(bot, message)
 
   if (message.payload === 'projects') sendDemoProjects(bot, message)
+
+  if (message.payload === 'location') sendCurrentLocation(bot, message)
 
 })
 
