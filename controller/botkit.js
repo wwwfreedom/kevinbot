@@ -448,7 +448,7 @@ controller.hears(["Skills & Expertise"], "message_received", (bot, message) => {
 
 controller.hears(["Work Interests"], "message_received", (bot, message) => {
   bot.reply(message, "Kevin is interested in solving business problems via single-page application or innovative chatbots.", () => {
-    let text = "Learn more about his work or to menu."
+    let text = "Learn more about his work or go back to menu."
     let quickReplies = [
       {
         type: "text",
@@ -476,6 +476,12 @@ controller.hears(["Work Interests"], "message_received", (bot, message) => {
 controller.hears(["Demo Projects"], "message_received", (bot, message) => {
   let text = "You can check out my demo projects at my personal site by click on the link below"
   let buttons = [
+    {
+      type: "web_url",
+      url: "https://ansabi.xyz/#/projects",
+      title: "View Demo Projects",
+      webview_height_ratio: "compact"
+    },
     {
       type: "web_url",
       url: "https://ansabi.xyz/#/projects",
