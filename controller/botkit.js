@@ -502,7 +502,7 @@ const generateQuickRepliesWithoutText = (replies) => {
     attachment:{
       type:"image",
       payload:{
-        url: "http://i.imgur.com/NTVKdeT.png"
+        url: " "
       }
     },
     quick_replies: quickReplies
