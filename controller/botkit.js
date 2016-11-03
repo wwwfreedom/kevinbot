@@ -490,10 +490,30 @@ controller.hears(["Work Interests"], "message_received", (bot, message) => {
   })
 })
 
-controller.hears(["Demo Projects"], "message_received", (bot, message) => {
+const generateQuickRepliesWithoutText = (replies) => {
+  let quickReplies = replies.map((reply) => {
+    return {
+      "content_type": reply.type,
+      "title": reply.title,
+      "payload": reply.payload
+    }
+  })
+  return {
+    attachment: text,
+    attachment:{
+      type:"image",
+      payload:{
+        url: ""
+      }
+    },
+    quick_replies: quickReplies
+  }
+}
+
+controller.hears(["Demo Projects", "Stuffs I've made"], "message_received", (bot, message) => {
   bot.replyWithTyping(message, "You can check out my demo projects at my personal site by clicking on the links below.", () => {
     sendGenericProjectsTemplate(bot, message)
-    let text = "Learn more about his work or go back to menu."
+
     let quickReplies = [
       {
         type: "text",
@@ -512,9 +532,9 @@ controller.hears(["Demo Projects"], "message_received", (bot, message) => {
       }
     ]
 
-    let reply = generateQuickReplies(text, quickReplies)
+    let reply = generateQuickRepliesWithoutText(quickReplies)
 
-    bot.replyWithTyping(message, reply)
+    bot.reply(message, reply)
   })
 })
 
