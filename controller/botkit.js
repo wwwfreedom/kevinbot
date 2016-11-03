@@ -311,7 +311,7 @@ const sendCurrentLocation = (bot, message) => {
     let location = [{
       title: "Kevin's Current Location",
       subtitle: "Kevin is currently in Melbourne",
-      image_url: "http://maps.googleapis.com/maps/api/staticmap?center=melbourne+australia&zoom=13&scale=2&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:tiny%7Ccolor:0xff0000%7Clabel:1%7Cmelbourne+australia"
+      image_url: "http://maps.googleapis.com/maps/api/staticmap?center=melbourne+australia&zoom=14&scale=2&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:tiny%7Ccolor:0xff0000%7Clabel:1%7Cmelbourne+australia"
     }]
 
     let reply = generateGenericTemplate(location)
@@ -319,6 +319,39 @@ const sendCurrentLocation = (bot, message) => {
     bot.reply(message, reply)
   })
 }
+
+const sendLiveChatInstruction = (bot, message) => {
+  bot.reply(message, "How this works is pretty simple. You'll get notified whenever Kevin turns live chat on... so jump on in when it's on!", () => {
+    let text = "Got it?"
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Got it!",
+        payload: "Got it!"
+      },
+      {
+        type: "text",
+        title: "Leave a message",
+        payload: "Leave a message"
+      }
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    bot.replyWithTyping(message, reply)
+  })
+}
+
+const sendReplyToLeaveAMessage = (bot, message) => {
+  const askForMessage = (response, convo) => {
+    convo.ask("What would you like to say to Kevin?", (response, convo) => {
+      convo.say("Thanks for reaching out 😀")
+      convo.next()
+    })
+  }
+  bot.startConversation(message, askForMessage)
+}
+
 controller.on('tick', (bot, event) => {
 })
 
@@ -537,6 +570,10 @@ controller.hears(["Demo Projects"], "message_received", (bot, message) => {
   sendDemoProjects(bot, message)
 })
 
+controller.hears(["Leave a message"], "message_received", (bot, message) => {
+  sendReplyToLeaveAMessage(bot, message)
+})
+
 // user says anything else
 controller.hears('(.*)', 'message_received', function (bot, message) {
   console.log(message.match[1], "****************************************************")
@@ -561,6 +598,8 @@ controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'projects') sendDemoProjects(bot, message)
 
   if (message.payload === 'location') sendCurrentLocation(bot, message)
+
+  if (message.payload === 'message') sendReplyToLeaveAMessage(bot, message)
 
 })
 
