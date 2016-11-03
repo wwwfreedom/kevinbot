@@ -1,10 +1,9 @@
 var projects = [
   {
     title: "PomoTime",
-    subtitle: "A web application built with React.js, where users can set a timer and set daily goals.",
+    subtitle: "A React.js application where users can set a timer and set daily goals.",
     item_url: "https://ansabi.xyz/#/pomoTime",
     image_url: "http://i.imgur.com/vvEZbX8.png",
-    subtitle: "Tap on option to go to the project live version",
     buttons: [
       {
         type: "web_url",
@@ -17,10 +16,9 @@ var projects = [
 
   {
     title: "Simple English Wikipedia Search",
-    subtitle: "A web application built with React.js, where users can search Wikipedia for explanation in simple English.",
+    subtitle: "A React.js application. A user can search Wikipedia for simple English results.",
     item_url: "https://ansabi.xyz/#/wikipedia",
     image_url: "http://i.imgur.com/yVYtLa3.png",
-    subtitle: "Tap on option to go to the project live version",
     buttons: [
       {
         type: "web_url",
@@ -33,10 +31,9 @@ var projects = [
 
   {
     title: "PollWise",
-    subtitle: "A full-stack web application built with React.js. The back-end built with Express.js and MongoDB. A users can create custom polls and share it via a unique URL.",
+    subtitle: "Full-stack web application. Built with React.js, Express.js and MongoDB.",
     item_url: "https://pollwise.herokuapp.com/",
     image_url: "http://i.imgur.com/8zcWJpJ.png",
-    subtitle: "Tap on option to go to the project live version",
     buttons: [
       {
         type: "web_url",
@@ -52,12 +49,11 @@ var projects = [
     subtitle: "Simple Simon game built with React.js",
     item_url: "https://ansabi.xyz/#/SimonGame",
     image_url: "http://i.imgur.com/kgz9g7o.png",
-    subtitle: "Tap on option to go to the project live version",
     buttons: [
       {
         type: "web_url",
         url: "https://ansabi.xyz/#/SimonGame",
-        title: "View ",
+        title: "View Simon Game",
         webview_height_ratio: "full"
       }
     ]
@@ -68,12 +64,11 @@ var projects = [
     subtitle: "Tic Tac Toe game built with React.js",
     item_url: "https://ansabi.xyz/#/TicTacToe",
     image_url: "http://i.imgur.com/WStyuor.png",
-    subtitle: "Tap on option to go to the project live version",
     buttons: [
       {
         type: "web_url",
         url: "https://ansabi.xyz/#/TicTacToe",
-        title: "View ",
+        title: "View Tic Tac Toe",
         webview_height_ratio: "full"
       }
     ]

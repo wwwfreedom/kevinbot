@@ -491,7 +491,9 @@ controller.hears(["Work Interests"], "message_received", (bot, message) => {
 })
 
 controller.hears(["Demo Projects"], "message_received", (bot, message) => {
-  sendGenericProjectsTemplate(bot, message)
+  bot.replyWithTyping(message, "You can check out my demo projects at my personal site by clicking on the links below.", () => {
+    sendGenericProjectsTemplate(bot, message)
+  })
 })
 
 // user says anything else
