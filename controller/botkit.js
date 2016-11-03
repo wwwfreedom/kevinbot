@@ -486,17 +486,11 @@ controller.hears(["Demo Projects"], "message_received", (bot, message) => {
   let text = "You can check out my demo projects at my personal site by click on the link below"
   let buttons = [
     {
-      type: "postback",
-      title: "Learn about him 👨🏻",
-      payload: "learn about him"
+      type: "web_url",
+      url: "https://ansabi.xyz/#/projects",
+      title: "View Demo Projects",
+      webview_height_ratio: "compact"
     },
-    {
-      type: "postback",
-      title: "Get your own bot 🤖",
-      payload: "get my own bot"
-    }
-  ]
-  let buttons = [
     {
       type: "web_url",
       url: "https://ansabi.xyz/#/projects",
