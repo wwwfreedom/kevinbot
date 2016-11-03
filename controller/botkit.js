@@ -599,6 +599,8 @@ controller.on('facebook_postback', function(bot, message) {
 
   if (message.payload === 'location') sendCurrentLocation(bot, message)
 
+  if (message.payload === 'live chat') sendLiveChatInstruction(bot, message)
+
   if (message.payload === 'message') sendReplyToLeaveAMessage(bot, message)
 
 })
