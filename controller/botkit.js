@@ -47,10 +47,19 @@ console.log('botkit')
 
 const generateButtonTemplate = (text, buttons) => {
   let buttonArr = buttons.map((button) => {
-    return {
-      "type": button.type,
-      "title": button.title,
-      "payload": button.payload
+    if (button.type === 'postback') {
+      return {
+        "type": button.type,
+        "title": button.title,
+        "payload": button.payload
+      }
+    } else if (button.type === 'web_url') {
+      return {
+        type: button.type,
+        url: button.url,
+        title: button.title,
+        webview_height_ratio: button.webview_height_ratio
+      }
     }
   })
   return {
