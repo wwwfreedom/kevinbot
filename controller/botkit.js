@@ -499,7 +499,6 @@ const generateQuickRepliesWithoutText = (replies) => {
     }
   })
   return {
-    attachment: text,
     attachment:{
       type:"image",
       payload:{
