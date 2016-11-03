@@ -171,6 +171,14 @@ const sendGenericMenu = (bot, message) => {
   })
 }
 
+const sendGenericProjectsTemplate = (bot, message) => {
+  let projects = require('../data/projects.js')
+
+  let reply = generateGenericTemplate(projects)
+
+  bot.reply(message, reply)
+}
+
 const sendBiographyQuickReplies = (bot, message) => {
   let text = "Do you want to hear his whole life story or just skip to a certain thing?"
   let quickReplies = [
@@ -483,26 +491,7 @@ controller.hears(["Work Interests"], "message_received", (bot, message) => {
 })
 
 controller.hears(["Demo Projects"], "message_received", (bot, message) => {
-  let text = "You can check out my demo projects at my personal site by click on the link below"
-  let buttons = [
-    {
-      type: "web_url",
-      url: "https://ansabi.xyz/#/projects",
-      title: "View Demo Projects",
-      webview_height_ratio: "full"
-    },
-    {
-      type: "web_url",
-      url: "https://ansabi.xyz/#/projects",
-      title: "View Demo Projects",
-      webview_height_ratio: "tall"
-    }
-  ]
-
-  let reply = generateButtonTemplate(text, buttons)
-  console.log(reply, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-
-  bot.reply(message, reply)
+  sendGenericProjectsTemplate(bot, message)
 })
 
 // user says anything else
