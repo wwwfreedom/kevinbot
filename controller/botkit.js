@@ -493,6 +493,28 @@ controller.hears(["Work Interests"], "message_received", (bot, message) => {
 controller.hears(["Demo Projects"], "message_received", (bot, message) => {
   bot.replyWithTyping(message, "You can check out my demo projects at my personal site by clicking on the links below.", () => {
     sendGenericProjectsTemplate(bot, message)
+    let text = "Learn more about his work or go back to menu."
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Skills & Expertise",
+        payload: "Skills & Expertise"
+      },
+      {
+        type: "text",
+        title: "Work Interests",
+        payload: "Work Interests"
+      },
+      {
+        type: "text",
+        title: "See menu",
+        payload: "See menu"
+      }
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    bot.replyWithTyping(message, reply)
   })
 })
 
