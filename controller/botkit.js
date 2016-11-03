@@ -489,13 +489,13 @@ controller.hears(["Demo Projects"], "message_received", (bot, message) => {
       type: "web_url",
       url: "https://ansabi.xyz/#/projects",
       title: "View Demo Projects",
-      webview_height_ratio: "compact"
+      webview_height_ratio: "full"
     },
     {
       type: "web_url",
       url: "https://ansabi.xyz/#/projects",
       title: "View Demo Projects",
-      webview_height_ratio: "compact"
+      webview_height_ratio: "tall"
     }
   ]
 
