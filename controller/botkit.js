@@ -314,7 +314,7 @@ const sendCurrentLocation = (bot, message) => {
       image_url: "http://maps.googleapis.com/maps/api/staticmap?center=melbourne+australia&zoom=13&scale=2&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:tiny%7Ccolor:0xff0000%7Clabel:1%7Cmelbourne+australia"
     }]
 
-    let reply = generateGenericTemplate(projects)
+    let reply = generateGenericTemplate(location)
 
     bot.reply(message, reply)
   })
