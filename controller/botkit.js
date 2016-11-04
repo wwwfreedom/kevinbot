@@ -454,16 +454,9 @@ const sendQuiz = (bot, message) => {
     let reply = generateQuickReplies(text, quickReplies)
 
     convo.ask(reply, (response, convo) => {
-      if (response === 'Hillary Clinton') {
-        count = count + 1
-        console.log(count, "###################################")
-        convo.say("🙌 Oh yea, definitely voting for the lesserof the evil here.")
-      } else {
-        count = count - 1
-        console.log(count, "###################################")
-        convo.say("Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸")
-      }
-      askSecondQuestion(response, convo)
+      convo.say(response)
+
+      convo.say('test')
       convo.next()
     })
   }
