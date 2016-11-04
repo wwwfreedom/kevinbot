@@ -354,15 +354,27 @@ const sendReplyToLeaveAMessage = (bot, message) => {
 }
 
 const sendBookAMeeting = (bot, message) => {
-  bot.reply(message, "Kevin's available at during the following times to meet with you at your convenience.", () => {
+  bot.startConversation(message, (err, convo) => {
+    convo.say("Kevin's available at during the following times to meet with you at your convenience.")
     let meetingTime = require('../data/meetingTime.js')
 
     let reply = generateGenericTemplate(meetingTime)
+    convo.ask(reply, (response, convo) => {
 
-    bot.reply(message, reply, () => {
-      bot.reply(message, "Thank you. I've noted down the time you like to meet Kevin, he'll send you a quick confirmation message with further instructions soon.")
+      convo.say("Thank you. I've noted down the time you like to meet Kevin, he'll send you a quick confirmation message with further instructions soon.")
+      convo.next()
     })
   })
+
+  /* bot.reply(message, "Kevin's available at during the following times to meet with you at your convenience.", () => {
+   *   let meetingTime = require('../data/meetingTime.js')
+
+   *   let reply = generateGenericTemplate(meetingTime)
+
+   *   bot.reply(message, reply)
+   *   bot.reply(message, "Thank you. I've noted down the time you like to meet Kevin, he'll send you a quick confirmation message with further instructions soon.")
+
+   * })*/
 }
 
 controller.on('tick', (bot, event) => {
