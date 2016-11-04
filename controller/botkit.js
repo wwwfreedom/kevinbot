@@ -407,8 +407,85 @@ const sendBookAMeeting = (bot, message) => {
 }
 
 const sendQuiz = (bot, message) => {
+  let count = 0
+  const askSecondQuestion = (response, convo) => {
+    let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Hillary Clinton",
+      },
+      {
+        type: "text",
+        title: "Donald Trump",
+      },
+      {
+        type: "text",
+        title: "Someone else",
+      }
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    convo.ask(reply, (response, convo) => {
+      convo.say('yolo')
+      convo.next()
+    })
+  }
+
+  const askFirstQuestion = (response, convo) => {
+    let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Hillary Clinton",
+      },
+      {
+        type: "text",
+        title: "Donald Trump",
+      },
+      {
+        type: "text",
+        title: "Someone else",
+      }
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    convo.ask(reply, (response, convo) => {
+      if (response === 'Hillary Clinton') {
+        count = count + 1
+        console.log(count, "###################################")
+        convo.say("🙌 Oh yea, definitely voting for the lesserof the evil here.")
+      } else {
+        count = count - 1
+        console.log(count, "###################################")
+        convo.say("Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸")
+      }
+      askSecondQuestion(response, convo)
+      convo.next()
+    })
+  }
+
+  const askToStart = (response, convo) => {
+    let text = "Ok cool. Let's see how well you know him..."
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Start the quiz!",
+        payload: "Start the quiz!"
+      },
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    convo.ask(reply, (response, convo) => {
+      askFirstQuestion(response, convo)
+      convo.next()
+    })
+  }
   bot.startConversation(message, (err, convo) => {
-    let text = "Got it?"
+    let text = "Ok cool. Let's see how well you know him..."
     let quickReplies = [
       {
         type: "text",
@@ -419,7 +496,6 @@ const sendQuiz = (bot, message) => {
 
     let reply = generateQuickReplies(text, quickReplies)
     convo.ask(reply, (response, convo) => {
-      console.log(response, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
       convo.say(response)
       convo.say('Yolo peeps')
       convo.next()
