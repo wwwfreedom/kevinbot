@@ -500,25 +500,25 @@ const sendQuiz = (bot, message) => {
    *     askFirstQuestion(response, convo)
    *     convo.next()
    *   })*/
-  }
+  /* }*/
 
-  bot.startConversation(message, (err, convo) => {
-    let text = "Ok cool. Let's see how well you know him..."
-    let quickReplies = [
-      {
-        type: "text",
-        title: "Start the quiz!",
-        payload: "Start the quiz!"
-      },
-    ]
+/* bot.startConversation(message, (err, convo) => {
+ *   let text = "Ok cool. Let's see how well you know him..."
+ *   let quickReplies = [
+ *     {
+ *       type: "text",
+ *       title: "Start the quiz!",
+ *       payload: "Start the quiz!"
+ *     },
+ *   ]
 
-    let reply = generateQuickReplies(text, quickReplies)
+ *   let reply = generateQuickReplies(text, quickReplies)
 
-    convo.ask(reply, (response, convo) => {
-      askFirstQuestion(response, convo)
-      convo.next()
-    })
-  })
+ *   convo.ask(reply, (response, convo) => {
+ *     askFirstQuestion(response, convo)
+ *     convo.next()
+ *   })
+ * })*/
 }
 
 controller.on('tick', (bot, event) => {
