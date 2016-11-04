@@ -143,6 +143,11 @@ const sendQuickRepliesAboutMe = (bot, message) => {
     },
     {
       type: "text",
+      title: "See his works",
+      payload: "work"
+    },
+    {
+      type: "text",
       title: "Take his quiz!",
       payload: "quiz"
     },
@@ -361,20 +366,11 @@ const sendBookAMeeting = (bot, message) => {
     let reply = generateGenericTemplate(meetingTime)
     convo.ask(reply, (response, convo) => {
 
+      // maybe send email at this stage to myself.
       convo.say("Thank you. I've noted down the time you like to meet Kevin, he'll send you a quick confirmation message with further instructions soon.")
       convo.next()
     })
   })
-
-  /* bot.reply(message, "Kevin's available at during the following times to meet with you at your convenience.", () => {
-   *   let meetingTime = require('../data/meetingTime.js')
-
-   *   let reply = generateGenericTemplate(meetingTime)
-
-   *   bot.reply(message, reply)
-   *   bot.reply(message, "Thank you. I've noted down the time you like to meet Kevin, he'll send you a quick confirmation message with further instructions soon.")
-
-   * })*/
 }
 
 controller.on('tick', (bot, event) => {
@@ -591,11 +587,11 @@ controller.hears(["Work Interests"], "message_received", (bot, message) => {
 })
 
 
-controller.hears(["Demo Projects"], "message_received", (bot, message) => {
+controller.hears(["Demo Projects", "See his works"], "message_received", (bot, message) => {
   sendDemoProjects(bot, message)
 })
 
-controller.hears(["Leave a message"], "message_received", (bot, message) => {
+controller.hears(["Leave a message", "Send him a msg"], "message_received", (bot, message) => {
   sendReplyToLeaveAMessage(bot, message)
 })
 

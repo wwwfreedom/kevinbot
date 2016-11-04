@@ -43,24 +43,6 @@ var menu = [
         payload: "meeting"
       }
     ]
-  },
-
-  {
-    title: "My Social Stuff",
-    image_url: "http://cdn.business2community.com/wp-content/uploads/2016/07/social34.jpg",
-    subtitle: "Choose an option below",
-    buttons: [
-      {
-        type: "postback",
-        title: "Reading",
-        payload: "reading"
-      },
-      {
-        type: "postback",
-        title: "Listening",
-        payload: "listening"
-      }
-    ]
   }
 ]
 
