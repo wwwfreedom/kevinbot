@@ -1,7 +1,6 @@
 'use strict'
 const Botkit = require('botkit')
 const request = require('request')
-const Promise = require("bluebird")
 
 const controller = Botkit.facebookbot({
   debug: false,
@@ -117,7 +116,7 @@ const sendWelcomePromt = (bot, message) => {
     },
     {
       type: "postback",
-      title: "Get your own bot 🤖",
+      title: "Get my own bot 🤖",
       payload: "get my own bot"
     }
   ]
@@ -598,7 +597,7 @@ controller.hears(["Skills & Expertise"], "message_received", (bot, message) => {
 })
 
 controller.hears(["Work Interests"], "message_received", (bot, message) => {
-  bot.reply(message, "Kevin is interested in solving business problems via single-page application or innovative chatbots.", () => {
+  bot.reply(message, "Kevin is interested in solving business problems via single-page applications or innovative chatbots.", () => {
     let text = "Learn more about his work or go back to menu."
     let quickReplies = [
       {
