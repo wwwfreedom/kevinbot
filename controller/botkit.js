@@ -355,7 +355,7 @@ const sendReplyToLeaveAMessage = (bot, message) => {
 
 const sendBookAMeeting = (bot, message) => {
   bot.reply(message, "Kevin's available at during the following times to meet with you at your convenience.", () => {
-    let meetingTime = require('../data/meetingTime.js')
+    let meetingTime = require('../data/menu.js')
 
     let reply = generateGenericTemplate(meetingTime)
 
