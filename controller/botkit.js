@@ -415,6 +415,11 @@ const sendQuiz = (bot, message) => {
         title: "Start the quiz!",
         payload: "Start the quiz!"
       },
+      {
+        type: "text",
+        title: "Start quiz!",
+        payload: "Start the quiz!"
+      }
     ]
 
     let reply = generateQuickReplies(text, quickReplies)
