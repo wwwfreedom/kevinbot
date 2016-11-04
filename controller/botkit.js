@@ -280,6 +280,40 @@ const tellPartTwoLifeStory = (bot, message) => {
 }
 
 const sendBioMenu = (bot, message) => {
+  let text = "Choose an option below"
+  let quickReplies = [
+    {
+      type: "text",
+      title: "Life story",
+      payload: "life story"
+    },
+    {
+      type: "text",
+      title: "Education",
+      payload: "education"
+    },
+    {
+      type: "text",
+      title: "Work history",
+      payload: "work history"
+    },
+    {
+      type: "text",
+      title: "💜 status",
+      payload: "love status"
+    },
+    {
+      type: "text",
+      title: "Random facts",
+      payload: "random facts"
+    }
+  ]
+
+  let reply = generateQuickReplies(text, quickReplies)
+
+  bot.reply(message, reply, (err, response) => {
+    if (err) handleError(bot, message, err)
+  })
 }
 
 const sendDemoProjects = (bot, message) => {
@@ -351,7 +385,7 @@ const sendLiveChatInstruction = (bot, message) => {
 const sendReplyToLeaveAMessage = (bot, message) => {
   const askForMessage = (response, convo) => {
     convo.ask("What would you like to say to Kevin?", (response, convo) => {
-      convo.say("Thanks for reaching out 😀")
+      convo.say("Thanks for reaching out 😀, Kevin will get back to you soon.")
       convo.next()
     })
   }
@@ -371,6 +405,10 @@ const sendBookAMeeting = (bot, message) => {
       convo.next()
     })
   })
+}
+
+const sendBioMenu = (bot, message) => {
+
 }
 
 controller.on('tick', (bot, event) => {
@@ -416,6 +454,10 @@ controller.hears(['On to university'], 'message_received', (bot, message) => {
       bot.replyWithTyping(message, reply)
     })
   })
+})
+
+controller.hears(["Skip around"], 'message_received', (bot, message) => {
+  sendBioMenu(bot, message)
 })
 
 controller.hears(["What'd he study?", "Education"], 'message_received', (bot, message) => {
