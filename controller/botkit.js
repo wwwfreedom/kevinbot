@@ -408,6 +408,7 @@ const sendBookAMeeting = (bot, message) => {
 
 const sendQuiz = (bot, message) => {
   let count = 0
+
   const askSecondQuestion = (response, convo) => {
     let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
     let quickReplies = [
@@ -480,6 +481,7 @@ const sendQuiz = (bot, message) => {
     let reply = generateQuickReplies(text, quickReplies)
 
     convo.ask(reply, (response, convo) => {
+      convo.say("What")
       askFirstQuestion(response, convo)
       convo.next()
     })
