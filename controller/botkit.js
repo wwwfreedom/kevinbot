@@ -408,7 +408,18 @@ const sendBookAMeeting = (bot, message) => {
 
 const sendQuiz = (bot, message) => {
   const askToStart = (response, convo) => {
-    convo.ask("Would you like to start?", (response, convo) => {
+    let text = "Ok cool. Let's see how well you know him..."
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Start the quiz!",
+        payload: "Start the quiz!"
+      },
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    convo.ask(reply, (response, convo) => {
       console.log(response, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
       convo.say("test")
       convo.next()
