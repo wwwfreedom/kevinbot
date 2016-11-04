@@ -419,7 +419,8 @@ const sendQuiz = (bot, message) => {
 
     let reply = generateQuickReplies(text, quickReplies)
     convo.ask(reply, function(response, convo) {
-      askSize(response, convo)
+      console.log(response, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+      convo.say("yolo")
       convo.next()
     })
   }
