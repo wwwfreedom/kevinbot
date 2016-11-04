@@ -356,8 +356,11 @@ const sendReplyToLeaveAMessage = (bot, message) => {
 const sendBookAMeeting = (bot, message) => {
   bot.reply(message, "Kevin's available at during the following times to meet with you at your convenience.", () => {
 
-    bot.reply(message, "test", () => {
-      bot.reply(message, "yolo much")
+    let meetingTime = require('../data/meetingTime.js')
+
+    let reply = generateGenericTemplate(meetingTime)
+    bot.reply(message, reply, () => {
+      bot.reply("Thank you. I've noted down the time you like to meet Kevin, he'll send you a quick confirmation message with further instructions soon.")
     })
   })
 }
