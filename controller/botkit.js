@@ -407,10 +407,6 @@ const sendBookAMeeting = (bot, message) => {
   })
 }
 
-const sendBioMenu = (bot, message) => {
-
-}
-
 controller.on('tick', (bot, event) => {
 })
 
