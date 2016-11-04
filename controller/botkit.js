@@ -468,7 +468,7 @@ const sendQuiz = (bot, message) => {
     })
   }
 
-  const askToStart = (response, convo) => {
+  function askToStart(response, convo) {
     let text = "Ok cool. Let's see how well you know him..."
     let quickReplies = [
       {
