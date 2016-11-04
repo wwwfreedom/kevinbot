@@ -424,8 +424,27 @@ const sendQuiz = (bot, message) => {
     })
   }
   let askSize = function(response, convo) {
-    convo.ask("What size do you want?", function(response, convo) {
-      convo.say("Ok.")
+    let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Hillary Clinton",
+      },
+      {
+        type: "text",
+        title: "Donald Trump",
+      },
+      {
+        type: "text",
+        title: "Someone else",
+      }
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    convo.ask(reply, function(response, convo) {
+      convo.say(response)
+      console.log(response, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
       askWhereDeliver(response, convo)
       convo.next()
     })
@@ -509,8 +528,8 @@ const sendQuiz = (bot, message) => {
    *     askFirstQuestion(response, convo)
    *     convo.next()
    *   })
-   * /* }*/
-
+   *   /* }
+   */
 /* bot.startConversation(message, (err, convo) => {
  *   let text = "Ok cool. Let's see how well you know him..."
  *   let quickReplies = [
