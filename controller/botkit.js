@@ -411,6 +411,7 @@ const sendQuiz = (bot, message) => {
     convo.ask("Would you like to start?", (response, convo) => {
       console.log(response, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
       convo.say("test")
+      convo.next()
     })
   }
   bot.startConversation(message, askToStart)
