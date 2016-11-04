@@ -34,5 +34,7 @@ var meetingTime = [
         payload: "tuesday"
       }
     ]
-  },
+  }
 ]
+
+module.exports = meetingTime
