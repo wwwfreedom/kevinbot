@@ -407,76 +407,99 @@ const sendBookAMeeting = (bot, message) => {
 }
 
 const sendQuiz = (bot, message) => {
-  let count = 0
-
-  const askSecondQuestion = (response, convo) => {
-    let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
-    let quickReplies = [
-      {
-        type: "text",
-        title: "Hillary Clinton",
-      },
-      {
-        type: "text",
-        title: "Donald Trump",
-      },
-      {
-        type: "text",
-        title: "Someone else",
-      }
-    ]
-
-    let reply = generateQuickReplies(text, quickReplies)
-
-    convo.ask(reply, (response, convo) => {
-      convo.say('yolo')
-      convo.next()
-    })
+  let askFlavor = function(response, convo) {
+    convo.ask("What flavor of pizza do you want?", function(response, convo) {
+      convo.say("Awesome.");
+      askSize(response, convo);
+      convo.next();
+    });
+  }
+  let askSize = function(response, convo) {
+    convo.ask("What size do you want?", function(response, convo) {
+      convo.say("Ok.")
+      askWhereDeliver(response, convo);
+      convo.next();
+    });
+  }
+  let askWhereDeliver = function(response, convo) {
+    convo.ask("So where do you want it delivered?", function(response, convo) {
+      convo.say("Ok! Goodbye.");
+      convo.next();
+    });
   }
 
-  const askFirstQuestion = (response, convo) => {
-    let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
-    let quickReplies = [
-      {
-        type: "text",
-        title: "Hillary Clinton",
-      },
-      {
-        type: "text",
-        title: "Donald Trump",
-      },
-      {
-        type: "text",
-        title: "Someone else",
-      }
-    ]
+  bot.startConversation(message, askFlavor);
 
-    let reply = generateQuickReplies(text, quickReplies)
+  /* let count = 0
 
-    convo.ask(reply, (response, convo) => {
-      convo.say(response)
+   * const askSecondQuestion = (response, convo) => {
+   *   let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
+   *   let quickReplies = [
+   *     {
+   *       type: "text",
+   *       title: "Hillary Clinton",
+   *     },
+   *     {
+   *       type: "text",
+   *       title: "Donald Trump",
+   *     },
+   *     {
+   *       type: "text",
+   *       title: "Someone else",
+   *     }
+   *   ]
 
-      convo.say('test')
-      convo.next()
-    })
-  }
+   *   let reply = generateQuickReplies(text, quickReplies)
 
-  function askToStart(response, convo) {
-    let text = "Ok cool. Let's see how well you know him..."
-    let quickReplies = [
-      {
-        type: "text",
-        title: "Start the quiz!",
-        payload: "Start the quiz!"
-      },
-    ]
+   *   convo.ask(reply, (response, convo) => {
+   *     convo.say('yolo')
+   *     convo.next()
+   *   })
+   * }
 
-    let reply = generateQuickReplies(text, quickReplies)
+   * const askFirstQuestion = (response, convo) => {
+   *   let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
+   *   let quickReplies = [
+   *     {
+   *       type: "text",
+   *       title: "Hillary Clinton",
+   *     },
+   *     {
+   *       type: "text",
+   *       title: "Donald Trump",
+   *     },
+   *     {
+   *       type: "text",
+   *       title: "Someone else",
+   *     }
+   *   ]
 
-    convo.ask(reply, (response, convo) => {
-      askFirstQuestion(response, convo)
-      convo.next()
-    })
+   *   let reply = generateQuickReplies(text, quickReplies)
+
+   *   convo.ask(reply, (response, convo) => {
+   *     convo.say(response)
+
+   *     convo.say('test')
+   *     convo.next()
+   *   })
+   * }
+
+   * function askToStart(response, convo) {
+   *   let text = "Ok cool. Let's see how well you know him..."
+   *   let quickReplies = [
+   *     {
+   *       type: "text",
+   *       title: "Start the quiz!",
+   *       payload: "Start the quiz!"
+   *     },
+   *   ]
+
+   *   let reply = generateQuickReplies(text, quickReplies)
+
+   *   convo.ask(reply, (response, convo) => {
+   *     askFirstQuestion(response, convo)
+   *     convo.next()
+   *   })*/
   }
 
   bot.startConversation(message, (err, convo) => {
