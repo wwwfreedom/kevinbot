@@ -408,27 +408,36 @@ const sendBookAMeeting = (bot, message) => {
 
 const sendQuiz = (bot, message) => {
   let askFlavor = function(response, convo) {
-    convo.ask("What flavor of pizza do you want?", function(response, convo) {
-      convo.say("Awesome.");
-      askSize(response, convo);
-      convo.next();
-    });
+    let text = "Ok cool. Let's see how well you know him..."
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Start the quiz!",
+        payload: "Start the quiz!"
+      },
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+    convo.ask(reply, function(response, convo) {
+      askSize(response, convo)
+      convo.next()
+    })
   }
   let askSize = function(response, convo) {
     convo.ask("What size do you want?", function(response, convo) {
       convo.say("Ok.")
-      askWhereDeliver(response, convo);
-      convo.next();
-    });
+      askWhereDeliver(response, convo)
+      convo.next()
+    })
   }
   let askWhereDeliver = function(response, convo) {
     convo.ask("So where do you want it delivered?", function(response, convo) {
-      convo.say("Ok! Goodbye.");
-      convo.next();
-    });
+      convo.say("Ok! Goodbye.")
+      convo.next()
+    })
   }
 
-  bot.startConversation(message, askFlavor);
+  bot.startConversation(message, askFlavor)
 
   /* let count = 0
 
@@ -499,8 +508,8 @@ const sendQuiz = (bot, message) => {
    *   convo.ask(reply, (response, convo) => {
    *     askFirstQuestion(response, convo)
    *     convo.next()
-   *   })*/
-  /* }*/
+   *   })
+   * /* }*/
 
 /* bot.startConversation(message, (err, convo) => {
  *   let text = "Ok cool. Let's see how well you know him..."
