@@ -484,23 +484,8 @@ const sendQuiz = (bot, message) => {
       convo.next()
     })
   }
-  bot.startConversation(message, (err, convo) => {
-    let text = "Ok cool. Let's see how well you know him..."
-    let quickReplies = [
-      {
-        type: "text",
-        title: "Start the quiz!",
-        payload: "Start the quiz!"
-      },
-    ]
 
-    let reply = generateQuickReplies(text, quickReplies)
-    convo.ask(reply, (response, convo) => {
-      convo.say(response)
-      convo.say('Yolo peeps')
-      convo.next()
-    })
-  })
+  bot.startConversation(message, askToStart)
 }
 
 controller.on('tick', (bot, event) => {
