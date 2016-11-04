@@ -413,7 +413,7 @@ const sendQuiz = (bot, message) => {
       convo.say("test")
     })
   }
-  bot.startConversation(message, askForMessage)
+  bot.startConversation(message, askToStart)
 }
 
 controller.on('tick', (bot, event) => {
