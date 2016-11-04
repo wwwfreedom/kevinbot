@@ -342,6 +342,7 @@ const sendLiveChatInstruction = (bot, message) => {
   })
 }
 
+
 const sendReplyToLeaveAMessage = (bot, message) => {
   const askForMessage = (response, convo) => {
     convo.ask("What would you like to say to Kevin?", (response, convo) => {
@@ -350,6 +351,18 @@ const sendReplyToLeaveAMessage = (bot, message) => {
     })
   }
   bot.startConversation(message, askForMessage)
+}
+
+const sendBookAMeeting = (bot, message) => {
+  bot.reply("Kevin's available at during the following times to meet with you at your convenience.", () => {
+    let meetingTime = require('../data/meetingTime.js')
+
+    let reply = generateGenericTemplate(meetingTime)
+    bot.reply(message, reply, (err, response) => {
+      if (err) handleError(bot, message, err)
+      bot.reply("Thank you. I've noted down the time you like to meet Kevin, he'll send you a quick confirmation message with further instructions soon.")
+    })
+  })
 }
 
 controller.on('tick', (bot, event) => {
@@ -602,6 +615,8 @@ controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'live chat') sendLiveChatInstruction(bot, message)
 
   if (message.payload === 'message') sendReplyToLeaveAMessage(bot, message)
+
+  if (message.payload === 'meeting') sendBookAMeeting(bot, message)
 
 })
 
