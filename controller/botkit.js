@@ -414,22 +414,38 @@ const sendQuiz = (bot, message) => {
         type: "text",
         title: "Start the quiz!",
         payload: "Start the quiz!"
-      },
-      {
-        type: "text",
-        title: "Start quiz!",
-        payload: "Start the quiz!"
       }
     ]
 
     let reply = generateQuickReplies(text, quickReplies)
 
     convo.ask(reply, (response, convo) => {
-      console.log(response, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+      let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
+      let quickReplies = [
+        {
+          type: "text",
+          title: "Hillary Clinton",
+        },
+        {
+          type: "text",
+          title: "Donald Trump",
+        },
+        {
+          type: "text",
+          title: "Someone else",
+        }
+      ]
+
+      let reply2 = generateQuickReplies(text, quickReplies)
+      convo.ask(reply2, (response, convo) => {
+        convo.say(response)
+        convo.next()
+      })
       convo.say("test")
       convo.next()
     })
   }
+
   bot.startConversation(message, askToStart)
 }
 
