@@ -424,6 +424,7 @@ const sendQuiz = (bot, message) => {
     })
   }
   let askSize = function(response, convo) {
+    console.log(response, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
     let quickReplies = [
       {
