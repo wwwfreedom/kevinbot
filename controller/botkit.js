@@ -406,6 +406,27 @@ const sendBookAMeeting = (bot, message) => {
   })
 }
 
+const sendQuiz = (bot, message) => {
+  bot.startConversation(message, (err, convo) => {
+    let text = "Got it?"
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Start the quiz!",
+        payload: "Start the quiz!"
+      },
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+    convo.ask(reply, (response, convo) => {
+      console.log(response, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+      convo.say(response)
+      convo.say('Yolo peeps')
+      convo.next()
+    })
+  })
+}
+
 controller.on('tick', (bot, event) => {
 })
 
