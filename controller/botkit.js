@@ -408,6 +408,7 @@ const sendBookAMeeting = (bot, message) => {
 
 const sendQuiz = (bot, message) => {
 
+  let askMore= function(response, convo) {
   let text = "Ok cool. Let's see how well you know him..."
 
     let buttons = [
@@ -424,7 +425,6 @@ const sendQuiz = (bot, message) => {
     ]
 
     let reply = generateButtonTemplate(text, buttons)
-
     convo.ask(reply, function(response, convo) {
       convo.say("Awesome.")
       convo.next()
