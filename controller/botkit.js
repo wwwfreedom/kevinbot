@@ -456,20 +456,20 @@ const sendQuiz = (bot, message) => {
 
   let askToStart = function (response, convo) {
     let text = "Ok cool. Let's see how well you know him..."
-    let quickReplies = [
+    let buttons = [
       {
-        type: "text",
-        title: "Start the quiz!",
-        payload: "Start the quiz!"
+        type: "postback",
+        title: "Learn about him 👨🏻",
+        payload: "learn about him"
       },
       {
-        type: "text",
-        title: "Start quiz!",
-        payload: "Start the quiz!"
+        type: "postback",
+        title: "Get my own bot 🤖",
+        payload: "get my own bot"
       }
     ]
 
-    let reply = generateQuickReplies(text, quickReplies)
+    let reply = generateButtonTemplate(text, buttons)
 
     convo.ask(reply, function (response, convo) {
       askFlavor(response, convo)
