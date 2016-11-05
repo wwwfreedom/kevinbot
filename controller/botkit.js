@@ -1,6 +1,7 @@
 'use strict'
 const Botkit = require('botkit')
 const request = require('request')
+const sendQuiz = require('./quiz.js')
 
 const controller = Botkit.facebookbot({
   debug: false,
@@ -380,7 +381,6 @@ const sendLiveChatInstruction = (bot, message) => {
   })
 }
 
-
 const sendReplyToLeaveAMessage = (bot, message) => {
   const askForMessage = (response, convo) => {
     convo.ask("What would you like to say to Kevin?", (response, convo) => {
@@ -404,100 +404,6 @@ const sendBookAMeeting = (bot, message) => {
       convo.next()
     })
   })
-}
-
-const sendQuiz = (bot, message) => {
-  let askLess = function(response, convo) {
-    let text = "Ok cool. Let's see how well you know him..."
-    let quickReplies = [
-      {
-        type: "text",
-        title: "Start the quiz!",
-        payload: "Start the quiz!"
-      },
-    ]
-
-    let reply = generateQuickReplies(text, quickReplies)
-
-    convo.ask(reply, function(response, convo) {
-      convo.say("Awesome.")
-      convo.next()
-    })
-  }
-
-  let askMore = function(response, convo) {
-  let text = "Ok cool. Let's see how well you know him..."
-
-    let buttons = [
-      {
-        type: "postback",
-        title: "Learn about him 👨🏻",
-        payload: "yolojj"
-      },
-      {
-        type: "postback",
-        title: "Get my own bot 🤖",
-        payload: "yoloasdfssa"
-      }
-    ]
-
-    let reply = generateButtonTemplate(text, buttons)
-    convo.ask(reply, function(response, convo) {
-      console.log(response, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-      askLess(response, convo)
-      convo.say("Awesome.")
-      convo.next()
-    })
-  }
-
-  let askFlavor = function(response, convo) {
-
-    let text = "Ok cool. Let's see how well you know him..."
-    let buttons = [
-      {
-        type: "postback",
-        title: "Learn about him 👨🏻",
-        payload: "yolojj"
-      },
-      {
-        type: "postback",
-        title: "Get my own bot 🤖",
-        payload: "yoloasdfssa"
-      }
-    ]
-
-    let reply = generateButtonTemplate(text, buttons)
-
-    convo.ask(reply, function(response, convo) {
-      askMore(response, convo)
-      convo.next()
-    })
-  }
-
-  let askToStart = function (response, convo) {
-    let text = "Ok cool. Let's see how well you know him..."
-    let buttons = [
-      {
-        type: "postback",
-        title: "Learn about him 👨🏻",
-        payload: "yolojj"
-      },
-      {
-        type: "postback",
-        title: "Get my own bot 🤖",
-        payload: "yoloasdfssa"
-      }
-    ]
-
-    let reply = generateButtonTemplate(text, buttons)
-
-    convo.ask(reply, function (response, convo) {
-      askFlavor(response, convo)
-      convo.next()
-    })
-  }
-
-  bot.startConversation(message, askToStart)
 }
 
 controller.on('tick', (bot, event) => {
