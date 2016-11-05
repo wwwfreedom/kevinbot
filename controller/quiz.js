@@ -1,5 +1,6 @@
 'use strict'
 
+
 let firstQ= function(response, convo) {
   let text = "1. If he could vote in the upcoming 🇺🇸 election he'll be voting for:"
 

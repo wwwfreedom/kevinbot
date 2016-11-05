@@ -2,6 +2,7 @@
 const Botkit = require('botkit')
 const request = require('request')
 const sendQuiz = require('./quiz.js')
+const generator = require('./generators.js')
 
 const controller = Botkit.facebookbot({
   debug: false,
@@ -43,70 +44,6 @@ request.post('https://graph.facebook.com/me/subscribed_apps?access_token=' + pro
 
 console.log('botkit')
 
-// Template generators
-
-const generateButtonTemplate = (text, buttons) => {
-  let buttonArr = buttons.map((button) => {
-    if (button.type === 'postback') {
-      return {
-        "type": button.type,
-        "title": button.title,
-        "payload": button.payload
-      }
-    } else if (button.type === 'web_url') {
-      return {
-        type: button.type,
-        url: button.url,
-        title: button.title,
-        webview_height_ratio: button.webview_height_ratio
-      }
-    }
-  })
-  return {
-    attachment: {
-      type: 'template',
-      payload: {
-        template_type: 'button',
-        text: text,
-        buttons: buttonArr
-      }
-    }
-  }
-}
-
-const generateQuickReplies = (text, replies) => {
-  let quickReplies = replies.map((reply) => {
-    return {
-      "content_type": reply.type,
-      "title": reply.title,
-      "payload": reply.payload
-    }
-  })
-  return {
-    text: text,
-    quick_replies: quickReplies
-  }
-}
-
-const generateGenericTemplate = (elements) => ({
-  attachment: {
-    type: 'template',
-    payload: {
-      template_type: 'generic',
-      elements: elements
-    }
-  }
-})
-
-const generateImageTemplate = (link) => ({
-  attachment: {
-    type: 'image',
-    payload: {
-      url: link
-    }
-  }
-})
-
 const sendWelcomePromt = (bot, message) => {
   let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
   let buttons = [
@@ -122,7 +59,7 @@ const sendWelcomePromt = (bot, message) => {
     }
   ]
 
-  let reply = generateButtonTemplate(text, buttons)
+  let reply = generator.buttonTemplate(text, buttons)
 
   bot.reply(message, reply, (err, response) => {
     if (err) handleError(bot, message, err)
