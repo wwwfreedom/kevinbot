@@ -452,6 +452,7 @@ const sendQuiz = (bot, message) => {
       askMore(response, convo)
       convo.next()
     })
+  }
 
   let askToStart = function (response, convo) {
     let text = "Ok cool. Let's see how well you know him..."
