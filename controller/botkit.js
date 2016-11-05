@@ -409,7 +409,23 @@ const sendBookAMeeting = (bot, message) => {
 const sendQuiz = (bot, message) => {
 
   let askFlavor = function(response, convo) {
-    convo.ask("What flavor of pizza do you want?", function(response, convo) {
+    let text = "Yolo much more"
+    let quickReplies = [
+      {
+        type: "text",
+        title: "yolo",
+        payload: "Start the quiz!"
+      },
+      {
+        type: "text",
+        title: "asdfasjjj",
+        payload: "Start the quiz!"
+      }
+    ]
+
+    let reply = generateQuickReplies(text, quickReplies)
+
+    convo.ask(reply, function(response, convo) {
       convo.say("Awesome.")
       convo.next()
     })
