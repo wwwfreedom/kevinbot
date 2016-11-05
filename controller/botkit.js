@@ -408,22 +408,22 @@ const sendBookAMeeting = (bot, message) => {
 
 const sendQuiz = (bot, message) => {
 
-  let askMore = function(response, convo) {
-    let text = "Yolo much more"
-    let quickReplies = [
+  let text = "Ok cool. Let's see how well you know him..."
+
+    let buttons = [
       {
-        type: "text",
-        title: "yolo",
-        payload: "Start the quiz!"
+        type: "postback",
+        title: "Learn about him 👨🏻",
+        payload: "yolojj"
       },
       {
-        type: "text",
-        title: "asdfasjjj",
-        payload: "Start the quiz!"
+        type: "postback",
+        title: "Get my own bot 🤖",
+        payload: "yoloasdfssa"
       }
     ]
 
-    let reply = generateQuickReplies(text, quickReplies)
+    let reply = generateButtonTemplate(text, buttons)
 
     convo.ask(reply, function(response, convo) {
       convo.say("Awesome.")
@@ -432,21 +432,22 @@ const sendQuiz = (bot, message) => {
   }
 
   let askFlavor = function(response, convo) {
-    let text = "Yolo much more"
-    let quickReplies = [
+
+    let text = "Ok cool. Let's see how well you know him..."
+    let buttons = [
       {
-        type: "text",
-        title: "yolo",
-        payload: "Start the quiz!"
+        type: "postback",
+        title: "Learn about him 👨🏻",
+        payload: "yolojj"
       },
       {
-        type: "text",
-        title: "asdfasjjj",
-        payload: "Start the quiz!"
+        type: "postback",
+        title: "Get my own bot 🤖",
+        payload: "yoloasdfssa"
       }
     ]
 
-    let reply = generateQuickReplies(text, quickReplies)
+    let reply = generateButtonTemplate(text, buttons)
 
     convo.ask(reply, function(response, convo) {
       askMore(response, convo)
