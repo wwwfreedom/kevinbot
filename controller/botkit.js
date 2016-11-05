@@ -409,24 +409,7 @@ const sendBookAMeeting = (bot, message) => {
 const sendQuiz = (bot, message) => {
 
   let askFlavor = function(response, convo) {
-    let text = "Yolo for life mate is good"
-    let quickReplies = [
-      {
-        type: "text",
-        title: "just a test",
-        payload: "Start the quiz!"
-      },
-      {
-        type: "text",
-        title: "just another test",
-        payload: "Start the quiz!"
-      }
-    ]
-
-    let reply = generateQuickReplies(text, quickReplies)
-
-    convo.ask(reply, function(response, convo) {
-      console.log(response)
+    convo.ask("What flavor of pizza do you want?", function(response, convo) {
       convo.say("Awesome.")
       convo.next()
     })
@@ -445,7 +428,6 @@ const sendQuiz = (bot, message) => {
     let reply = generateQuickReplies(text, quickReplies)
 
     convo.ask(reply, (response, convo) => {
-      console.log(response, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
       askFlavor(response, convo)
       convo.next()
     })
