@@ -407,41 +407,29 @@ const sendBookAMeeting = (bot, message) => {
 }
 
 const sendQuiz = (bot, message) => {
-  const askToStart = (response, convo) => {
+
+  let askFlavor = function(response, convo) {
+    convo.ask("What flavor of pizza do you want?", function(response, convo) {
+      convo.say("Awesome.")
+      convo.next()
+    })
+  }
+
+  let askToStart = function (response, convo) {
     let text = "Ok cool. Let's see how well you know him..."
     let quickReplies = [
       {
         type: "text",
         title: "Start the quiz!",
         payload: "Start the quiz!"
-      }
+      },
     ]
 
     let reply = generateQuickReplies(text, quickReplies)
 
     convo.ask(reply, (response, convo) => {
-      let text = "1. In the upcoming 🇺🇸 election, if he could vote he'll be voting for:"
-      let quickReplies = [
-        {
-          type: "text",
-          title: "Hillary Clinton",
-        },
-        {
-          type: "text",
-          title: "Donald Trump",
-        },
-        {
-          type: "text",
-          title: "Someone else",
-        }
-      ]
-
-      let reply2 = generateQuickReplies(text, quickReplies)
-      convo.ask(reply2, (response, convo) => {
-        convo.say(response)
-        convo.next()
-      })
-      convo.say("test")
+      console.log(response, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+      askFlavor(response, convo)
       convo.next()
     })
   }
