@@ -1,7 +1,8 @@
 'use strict'
 
+const generator = require('./generators.js')
 
-let firstQ= function(response, convo) {
+let firstQ = function(response, convo) {
   let text = "1. If he could vote in the upcoming 🇺🇸 election he'll be voting for:"
 
   let buttons = [
@@ -22,7 +23,7 @@ let firstQ= function(response, convo) {
     }
   ]
 
-  let reply = generateButtonTemplate(text, buttons)
+  let reply = generator.buttonTemplate(text, buttons)
 
   convo.say("Ok cool. Let's see how well you know him...")
   convo.ask(reply, function(response, convo) {
@@ -59,7 +60,7 @@ const sendQuiz = (bot, message) => {
       }
     ]
 
-    let reply = generateButtonTemplate(text, buttons)
+    let reply = generator.buttonTemplate(text, buttons)
 
     convo.ask(reply, function(response, convo) {
       askMore(response, convo)
@@ -82,7 +83,7 @@ const sendQuiz = (bot, message) => {
       }
     ]
 
-    let reply = generateButtonTemplate(text, buttons)
+    let reply = generator.buttonTemplate(text, buttons)
 
     convo.ask(reply, function (response, convo) {
       askFlavor(response, convo)

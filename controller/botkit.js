@@ -97,7 +97,7 @@ const sendQuickRepliesAboutMe = (bot, message) => {
 
   let text = "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading."
 
-  let reply = generateQuickReplies(text, quickReplies)
+  let reply = generator.quickReplies(text, quickReplies)
 
   bot.reply(message, reply, (err, response) => {
     if (err) handleError(bot, message, err)
@@ -107,7 +107,7 @@ const sendQuickRepliesAboutMe = (bot, message) => {
 const sendGenericMenu = (bot, message) => {
   let menu = require('../data/menu.js')
 
-  let reply = generateGenericTemplate(menu)
+  let reply = generator.genericTemplate(menu)
   bot.reply(message, reply, (err, response) => {
     if (err) handleError(bot, message, err)
   })
@@ -116,7 +116,7 @@ const sendGenericMenu = (bot, message) => {
 const sendGenericProjectsTemplate = (bot, message) => {
   let projects = require('../data/projects.js')
 
-  let reply = generateGenericTemplate(projects)
+  let reply = generator.genericTemplate(projects)
 
   bot.reply(message, reply)
 }
@@ -151,7 +151,7 @@ const sendBiographyQuickReplies = (bot, message) => {
     }
   ]
 
-  let reply = generateQuickReplies(text, quickReplies)
+  let reply = generator.quickReplies(text, quickReplies)
 
   bot.reply(message, reply, (err, response) => {
     if (err) handleError(bot, message, err)
@@ -159,8 +159,8 @@ const sendBiographyQuickReplies = (bot, message) => {
 }
 
 const tellPartOneLifeStory = (bot, message) => {
-  let readyImg = generateImageTemplate("https://media.giphy.com/media/75yYfqYy5tmHm/giphy.gif")
-  let houseImg = generateImageTemplate("http://resources2.news.com.au/images/2012/05/06/1226347/897142-bullet-holes-in-enfield-house.jpg")
+  let readyImg = generator.imageTemplate("https://media.giphy.com/media/75yYfqYy5tmHm/giphy.gif")
+  let houseImg = generator.imageTemplate("http://resources2.news.com.au/images/2012/05/06/1226347/897142-bullet-holes-in-enfield-house.jpg")
   bot.reply(message, "He's had an interesting but complicated story.", () => {
     bot.reply(message, readyImg, () => {
       bot.replyWithTyping(message, "He grew up on the North side of Adelaide - mostly in Salisbury Downs in this house:", () => {
@@ -179,7 +179,7 @@ const tellPartOneLifeStory = (bot, message) => {
             }
           ]
 
-          let reply = generateQuickReplies(text, quickReplies)
+          let reply = generator.quickReplies(text, quickReplies)
 
           bot.replyWithTyping(message, reply)
         })
@@ -189,7 +189,7 @@ const tellPartOneLifeStory = (bot, message) => {
 }
 
 const tellPartTwoLifeStory = (bot, message) => {
-  let jupiterBookImg = generateImageTemplate("https://images-na.ssl-images-amazon.com/images/I/51HD1KCKR8L.jpg")
+  let jupiterBookImg = generator.imageTemplate("https://images-na.ssl-images-amazon.com/images/I/51HD1KCKR8L.jpg")
   bot.startTyping(message, () => {})
   bot.reply(message, "Kevin spent his childhood dreaming of exploring faraway places. He read this book.", () => {
     bot.reply(message, jupiterBookImg, () => {
@@ -208,7 +208,7 @@ const tellPartTwoLifeStory = (bot, message) => {
           }
         ]
 
-        let reply = generateQuickReplies(text, quickReplies)
+        let reply = generator.quickReplies(text, quickReplies)
 
         bot.replyWithTyping(message, reply)
       })
@@ -246,7 +246,7 @@ const sendBioMenu = (bot, message) => {
     }
   ]
 
-  let reply = generateQuickReplies(text, quickReplies)
+  let reply = generator.quickReplies(text, quickReplies)
 
   bot.reply(message, reply, (err, response) => {
     if (err) handleError(bot, message, err)
@@ -276,7 +276,7 @@ const sendDemoProjects = (bot, message) => {
       }
     ]
 
-    let reply = generateQuickReplies(text, quickReplies)
+    let reply = generator.quickReplies(text, quickReplies)
 
     bot.replyWithTyping(message, reply)
   })
@@ -290,7 +290,7 @@ const sendCurrentLocation = (bot, message) => {
       image_url: "http://maps.googleapis.com/maps/api/staticmap?center=melbourne+australia&zoom=14&scale=2&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:tiny%7Ccolor:0xff0000%7Clabel:1%7Cmelbourne+australia"
     }]
 
-    let reply = generateGenericTemplate(location)
+    let reply = generator.genericTemplate(location)
 
     bot.reply(message, reply)
   })
@@ -312,7 +312,7 @@ const sendLiveChatInstruction = (bot, message) => {
       }
     ]
 
-    let reply = generateQuickReplies(text, quickReplies)
+    let reply = generator.quickReplies(text, quickReplies)
 
     bot.replyWithTyping(message, reply)
   })
@@ -333,7 +333,7 @@ const sendBookAMeeting = (bot, message) => {
     convo.say("Kevin's available at during the following times to meet with you at your convenience.")
     let meetingTime = require('../data/meetingTime.js')
 
-    let reply = generateGenericTemplate(meetingTime)
+    let reply = generator.genericTemplate(meetingTime)
     convo.ask(reply, (response, convo) => {
 
       // maybe send email at this stage to myself.
@@ -385,7 +385,7 @@ controller.hears(['On to university'], 'message_received', (bot, message) => {
         }
       ]
 
-      let reply = generateQuickReplies(text, quickReplies)
+      let reply = generator.quickReplies(text, quickReplies)
 
       bot.replyWithTyping(message, reply)
     })
@@ -414,7 +414,7 @@ controller.hears(["What'd he study?", "Education"], 'message_received', (bot, me
         }
       ]
 
-      let reply = generateQuickReplies(text, quickReplies)
+      let reply = generator.quickReplies(text, quickReplies)
 
       bot.replyWithTyping(message, reply)
     })
@@ -422,7 +422,7 @@ controller.hears(["What'd he study?", "Education"], 'message_received', (bot, me
 })
 
 controller.hears(['Why Programming'], 'message_received', (bot, message) => {
-  let programingImg = generateImageTemplate("http://i.giphy.com/DnVvp3yHjdhyo.gif")
+  let programingImg = generator.imageTemplate("http://i.giphy.com/DnVvp3yHjdhyo.gif")
   bot.startTyping(message, () => {})
   bot.reply(message, "Learning how to code was immensely satisfying for him. From seeing a simple hello world program to making advance web application. The fact that he could make something useful that millions could use is awe inspiring for him.", () => {
     bot.reply(message, programingImg, () => {
@@ -440,7 +440,7 @@ controller.hears(['Why Programming'], 'message_received', (bot, message) => {
         }
       ]
 
-      let reply = generateQuickReplies(text, quickReplies)
+      let reply = generator.quickReplies(text, quickReplies)
 
       bot.replyWithTyping(message, reply)
     })
@@ -449,7 +449,7 @@ controller.hears(['Why Programming'], 'message_received', (bot, message) => {
 
 controller.hears(["Why Commerce?"], 'message_received', (bot, message) => {
   bot.startTyping(message, () => {})
-  let moneyImg = generateImageTemplate("http://i.giphy.com/3o7aTvTXlhr9PuWg1i.gif")
+  let moneyImg = generator.imageTemplate("http://i.giphy.com/3o7aTvTXlhr9PuWg1i.gif")
   bot.reply(message, "Studying commerce meant digging into interesting problem like inflation, internation trade, debt and globalization.", () => {
     bot.replyWithTyping(message, "It helped him see the underlying causes of fiscal policy and it's effect on the economy.", () => {
       bot.reply(message, moneyImg, () => {
@@ -468,7 +468,7 @@ controller.hears(["Why Commerce?"], 'message_received', (bot, message) => {
           }
         ]
 
-        let reply = generateQuickReplies(text, quickReplies)
+        let reply = generator.quickReplies(text, quickReplies)
 
         bot.replyWithTyping(message, reply)
         })
@@ -500,7 +500,7 @@ controller.hears(["Learn about his work", "On to his work!", "Work history"], 'm
           }
         ]
 
-        let reply = generateQuickReplies(text, quickReplies)
+        let reply = generator.quickReplies(text, quickReplies)
 
         bot.replyWithTyping(message, reply)
       })
@@ -530,7 +530,7 @@ controller.hears(["Skills & Expertise"], "message_received", (bot, message) => {
         }
       ]
 
-      let reply = generateQuickReplies(text, quickReplies)
+      let reply = generator.quickReplies(text, quickReplies)
 
       bot.replyWithTyping(message, reply)
     })
@@ -558,7 +558,7 @@ controller.hears(["Work Interests"], "message_received", (bot, message) => {
       }
     ]
 
-    let reply = generateQuickReplies(text, quickReplies)
+    let reply = generator.quickReplies(text, quickReplies)
 
     bot.replyWithTyping(message, reply)
   })
