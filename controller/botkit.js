@@ -460,12 +460,12 @@ const sendQuiz = (bot, message) => {
       {
         type: "postback",
         title: "Learn about him 👨🏻",
-        payload: "learn about him"
+        payload: "yolojj"
       },
       {
         type: "postback",
         title: "Get my own bot 🤖",
-        payload: "get my own bot"
+        payload: "yoloasdfssa"
       }
     ]
 
