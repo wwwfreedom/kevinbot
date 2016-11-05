@@ -409,6 +409,7 @@ const sendBookAMeeting = (bot, message) => {
 const sendQuiz = (bot, message) => {
 
   let askFlavor = function(response, convo) {
+    console.log(response, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     convo.ask("What flavor of pizza do you want?", function(response, convo) {
       convo.say("Awesome.")
       convo.next()
