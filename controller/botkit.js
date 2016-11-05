@@ -407,8 +407,25 @@ const sendBookAMeeting = (bot, message) => {
 }
 
 const sendQuiz = (bot, message) => {
+  let askLess = function(response, convo) {
+    let text = "Ok cool. Let's see how well you know him..."
+    let quickReplies = [
+      {
+        type: "text",
+        title: "Start the quiz!",
+        payload: "Start the quiz!"
+      },
+    ]
 
-  let askMore= function(response, convo) {
+    let reply = generateQuickReplies(text, quickReplies)
+
+    convo.ask(reply, function(response, convo) {
+      convo.say("Awesome.")
+      convo.next()
+    })
+  }
+
+  let askMore = function(response, convo) {
   let text = "Ok cool. Let's see how well you know him..."
 
     let buttons = [
@@ -426,6 +443,8 @@ const sendQuiz = (bot, message) => {
 
     let reply = generateButtonTemplate(text, buttons)
     convo.ask(reply, function(response, convo) {
+      console.log(response, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+      askLess(response, convo)
       convo.say("Awesome.")
       convo.next()
     })
