@@ -364,7 +364,7 @@ controller.hears(['Whole story!'], 'message_received', (bot, message) => {
   tellPartTwoLifeStory(bot, message)
 })
 
-controller.hears(['Take his quiz!'], 'message_received', (bot, message) => {
+controller.hears(['Take his quiz!'], 'message_received', function(bot, message) {
   sendQuiz(bot, message)
 })
 
