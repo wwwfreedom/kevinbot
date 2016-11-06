@@ -14,10 +14,26 @@ let correctHillary = function(response, convo) {
 
   let reply = generator.buttonTemplate(text, buttons)
   convo.ask(reply, function(response, convo) {
-
-
+    secondQ(response, convo)
+    convo.next()
   })
+}
 
+let incorrectHillary = function(response, convo) {
+  let text = "Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸"
+  let buttons = [
+    {
+      type: "postback",
+      title: "Next ➡️",
+      payload: "next"
+    }
+  ]
+
+  let reply = generator.buttonTemplate(text, buttons)
+  convo.ask(reply, function(response, convo) {
+    secondQ(response, convo)
+    convo.next()
+  })
 }
 
 let firstQ = function(response, convo) {
@@ -46,12 +62,12 @@ let firstQ = function(response, convo) {
   convo.say("Ok cool. Let's see how well you know him...")
   convo.ask(reply, function(response, convo) {
     if (response.text === 'hillary') {
-
-
+      correctHillary(response, convo)
+      convo.next()
+    } else {
+      incorrectHillary(response, convo)
+      convo.next()
     }
-    console.log(response.text, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-    convo.say("Awesome.")
-    convo.next()
   })
 }
 
@@ -80,58 +96,7 @@ let secondQ = (respones, convo) => {
   convo.ask(reply, fa)
 }
 
-const temp = function(response, convo) {
-  let text = "Ok cool. Let's see how well you know him..."
-  let quickReplies = [
-    {
-      type: "text",
-      title: "Start the quiz!",
-      payload: "Start the quiz!"
-    },
-  ]
-
-  let reply = generator.quickReplies(text, quickReplies)
-  convo.ask(reply, function(response, convo) {
-    firstQ(response, convo)
-    convo.next()
-  })
-}
-
 const sendQuiz = (bot, message) => {
-
-  let askMore = function(response, convo) {
-    convo.ask(reply, function(response, convo) {
-      console.log(response, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-      askLess(response, convo)
-      convo.say("Awesome.")
-      convo.next()
-    })
-  }
-
-  let askFlavor = function(response, convo) {
-
-    let text = "Ok cool. Let's see how well you know him..."
-    let buttons = [
-      {
-        type: "postback",
-        title: "Learn about him 👨🏻",
-        payload: "yolojj"
-      },
-      {
-        type: "postback",
-        title: "Get my own bot 🤖",
-        payload: "yoloasdfssa"
-      }
-    ]
-
-    let reply = generator.buttonTemplate(text, buttons)
-
-    convo.ask(reply, function(response, convo) {
-      askMore(response, convo)
-      convo.next()
-    })
-  }
-
   bot.startConversation(message, temp)
 }
 
