@@ -94,7 +94,13 @@ let secondQ = (respones, convo) => {
 
   let reply = generator.buttonTemplate(text, buttons)
   convo.ask(reply, (response, convo) => {
-    convo.say("awesome")
+    if (response.text === '1') {
+      correctHillary(response, convo)
+      convo.next()
+    } else {
+      incorrectHillary(response, convo)
+      convo.next()
+    }
   })
 }
 
