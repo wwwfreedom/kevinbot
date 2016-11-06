@@ -94,6 +94,7 @@ let secondQ = (respones, convo) => {
 
   let reply = generator.buttonTemplate(text, buttons)
   convo.ask(reply, (response, convo) => {
+    console.log(response.text, response, "@@@@@@@@@@@@@@@@@@@@")
     if (response.text === '1') {
       correctHillary(response, convo)
       convo.next()
