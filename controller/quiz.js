@@ -90,7 +90,7 @@ const temp = function(response, convo) {
     },
   ]
 
-  let reply = generateQuickReplies(text, quickReplies)
+  let reply = generator.quickReplies(text, quickReplies)
   convo.ask(reply, function(response, convo) {
     firstQ(response, convo)
     convo.next()
