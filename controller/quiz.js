@@ -99,24 +99,6 @@ const temp = function(response, convo) {
 
 const sendQuiz = (bot, message) => {
 
-  let text = "Ok cool. Let's see how well you know him..."
-  let quickReplies = [
-    {
-      type: "text",
-      title: "Start the quiz!",
-      payload: "Start the quiz!"
-    },
-  ]
-
-  let reply = generateQuickReplies(text, quickReplies)
-  convo.ask(reply, function(response, convo) {
-    console.log(response, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    convo.say("yolo")
-    convo.next()
-  })
-
-
-
   let askMore = function(response, convo) {
     convo.ask(reply, function(response, convo) {
       console.log(response, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
