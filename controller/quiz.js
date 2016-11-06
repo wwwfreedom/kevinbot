@@ -93,11 +93,13 @@ let secondQ = (respones, convo) => {
   ]
 
   let reply = generator.buttonTemplate(text, buttons)
-  convo.ask(reply, fa)
+  convo.ask(reply, (response, convo) => {
+    convo.say("awesome")
+  })
 }
 
 const sendQuiz = (bot, message) => {
-  bot.startConversation(message, temp)
+  bot.startConversation(message, firstQ)
 }
 
 module.exports = sendQuiz
