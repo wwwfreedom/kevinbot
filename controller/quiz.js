@@ -93,10 +93,10 @@ let secondQ = (respones, convo) => {
   let reply = generator.buttonTemplate(text, buttons)
   convo.ask(reply, (response, convo) => {
     if (response.text === '1') {
-      nextQuestion(response, convo, "🙌 Oh yea, that was the correct choice!")
+      nextQuestion(response, convo, "🙌 Oh yea, that was the correct choice!", thirdQ)
       convo.next()
     } else {
-      nextQuestion(response, convo, "Oh 💩 - you're wrong. He's only has one younger brother.")
+      nextQuestion(response, convo, "Oh 💩 - you're wrong. He's only has one younger brother.",thirdQ)
       convo.next()
     }
   })
