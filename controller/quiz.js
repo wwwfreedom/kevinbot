@@ -1,9 +1,8 @@
 'use strict'
 
 const generator = require('./generators.js')
-let score = 0
 
-let correctAns = function(response, convo, text, cb) {
+let nextQuestion = function(response, convo, text, cb) {
   let buttons = [
     {
       type: "postback",
@@ -19,12 +18,12 @@ let correctAns = function(response, convo, text, cb) {
   })
 }
 
-let incorrectAns= function(response, convo, text, cb) {
+let quizComplete = function(response, convo, text, cb) {
   let buttons = [
     {
       type: "postback",
-      title: "Next ➡️",
-      payload: "next"
+      title: "Quiz complete!",
+      payload: "Quiz complete!"
     }
   ]
 
@@ -61,10 +60,10 @@ let firstQ = function(response, convo) {
   convo.say("Ok cool. Let's see how well you know him...")
   convo.ask(reply, function(response, convo) {
     if (response.text === 'hillary') {
-      correctAns(response, convo, "🙌 Oh yea, that was the correct choice!", secondQ)
+      nextQuestion(response, convo, "🙌 Oh yea, that was the correct choice!", secondQ)
       convo.next()
     } else {
-      incorrectAns(response, convo, "Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸", secondQ)
+      nextQuestion(response, convo, "Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸", secondQ)
       convo.next()
     }
   })
@@ -93,15 +92,73 @@ let secondQ = (respones, convo) => {
 
   let reply = generator.buttonTemplate(text, buttons)
   convo.ask(reply, (response, convo) => {
-    console.log(response.text, response, "@@@@@@@@@@@@@@@@@@@@")
     if (response.text === '1') {
-      correctAns(response, convo, "🙌 Oh yea, that was the correct choice!")
+      nextQuestion(response, convo, "🙌 Oh yea, that was the correct choice!")
       convo.next()
     } else {
-      incorrectAns(response, convo, "Oh 💩 - you're wrong. He's only has one younger brother.")
+      nextQuestion(response, convo, "Oh 💩 - you're wrong. He's only has one younger brother.")
       convo.next()
     }
   })
+}
+
+let thirdQ = (respones, convo) => {
+  let text = "3. The issue he cares most about is"
+
+  let buttons = [
+    {
+      type: "postback",
+      title: "Automation",
+      payload: "Automation"
+    },
+    {
+      type: "postback",
+      title: "AI development",
+      payload: "AI development"
+    },
+    {
+      type: "postback",
+      title: "Climate change",
+      payload: "Climate change"
+    },
+    {
+      type: "postback",
+      title: "Mars exploration",
+      payload: "Mars exploration"
+    }
+  ]
+
+  let reply = generator.buttonTemplate(text, buttons)
+  convo.ask(reply, (response, convo) => {
+    if (response.text === 'AI development') {
+      quizComplete(response, convo, "🙌 Oh yea, He's hoping that the AI overlord won't happen.", endQuiz)
+      convo.next()
+    } else {
+      quizComplete(response, convo, "Nope, But that's important too! He's been learning about AI development and hoping to be in a position to steer AI development for good.", endQuiz)
+      convo.next()
+    }
+  })
+}
+
+let endQuiz = (respones, convo) => {
+  let text = "Nice work, on the quiz! Want to build your own? You need to create a bot!"
+
+  let buttons = [
+    {
+      type: "postback",
+      title: "Get my own bot",
+      payload: "get my own bot"
+    },
+    {
+      type: "postback",
+      title: "No thanks",
+      payload: "no thanks, to bot"
+    }
+  ]
+
+  let reply = generator.buttonTemplate(text, buttons)
+  convo.say(reply)
+  convo.next()
 }
 
 const sendQuiz = (bot, message) => {
