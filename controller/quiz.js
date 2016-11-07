@@ -3,7 +3,7 @@
 const generator = require('./generators.js')
 let score = 0
 
-let correctAns = function(response, convo, text) {
+let correctAns = function(response, convo, text, cb) {
   let buttons = [
     {
       type: "postback",
@@ -14,12 +14,12 @@ let correctAns = function(response, convo, text) {
 
   let reply = generator.buttonTemplate(text, buttons)
   convo.ask(reply, function(response, convo) {
-    secondQ(response, convo)
+    cb(response, convo)
     convo.next()
   })
 }
 
-let incorrectAns= function(response, convo, text) {
+let incorrectAns= function(response, convo, text, cb) {
   let buttons = [
     {
       type: "postback",
@@ -30,7 +30,7 @@ let incorrectAns= function(response, convo, text) {
 
   let reply = generator.buttonTemplate(text, buttons)
   convo.ask(reply, function(response, convo) {
-    secondQ(response, convo)
+    cb(response, convo)
     convo.next()
   })
 }
@@ -61,10 +61,10 @@ let firstQ = function(response, convo) {
   convo.say("Ok cool. Let's see how well you know him...")
   convo.ask(reply, function(response, convo) {
     if (response.text === 'hillary') {
-      correctAns(response, convo, "🙌 Oh yea, that was the correct choice!")
+      correctAns(response, convo, "🙌 Oh yea, that was the correct choice!", secondQ)
       convo.next()
     } else {
-      incorrectAns(response, convo, "Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸")
+      incorrectAns(response, convo, "Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸", secondQ)
       convo.next()
     }
   })
@@ -77,17 +77,17 @@ let secondQ = (respones, convo) => {
     {
       type: "postback",
       title: "10",
-      payload: "hillary"
+      payload: "10"
     },
     {
       type: "postback",
       title: "1",
-      payload: "trump"
+      payload: "1"
     },
     {
       type: "postback",
       title: "3",
-      payload: "someone"
+      payload: "3"
     }
   ]
 
