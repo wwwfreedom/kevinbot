@@ -71,7 +71,7 @@ let firstQ = function(response, convo) {
 }
 
 let secondQ = (respones, convo) => {
-  let text = "2. he's got how many siblings:"
+  let text = "2. He's got how many siblings:"
 
   let buttons = [
     {
@@ -96,7 +96,8 @@ let secondQ = (respones, convo) => {
     if (response.text === '1') {
       nextQuestion(response, convo, "🙌 Oh yea, that was the correct choice!", thirdQ)
       convo.next()
-    } else {
+    }
+    if (response.text === '10' || response.text === '3') {
       nextQuestion(response, convo, "Oh 💩 - you're wrong. He's only has one younger brother.",thirdQ)
       convo.next()
     }
@@ -129,7 +130,8 @@ let thirdQ = (respones, convo) => {
     if (response.text === 'AI development') {
       quizComplete(response, convo, "🙌 Oh yea, He's hoping that the AI overlord won't happen.", endQuiz)
       convo.next()
-    } else {
+    }
+    if (response.text === 'Climate change' || response.text === 'Mars exploration') {
       quizComplete(response, convo, "Nope, But that's important too! He's been learning about AI development and hoping to be in a position to steer AI development for good.", endQuiz)
       convo.next()
     }

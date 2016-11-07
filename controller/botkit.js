@@ -604,6 +604,7 @@ controller.on('facebook_postback', function(bot, message) {
 
   if (message.payload === 'meeting') sendBookAMeeting(bot, message)
 
+  if (message.payload === 'no thanks, to bot') bot.reply(message, "just a test to see if it's working")
 })
 
 
