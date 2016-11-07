@@ -108,11 +108,6 @@ let thirdQ = (respones, convo) => {
   let buttons = [
     {
       type: "postback",
-      title: "Automation",
-      payload: "Automation"
-    },
-    {
-      type: "postback",
       title: "AI development",
       payload: "AI development"
     },
