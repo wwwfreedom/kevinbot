@@ -62,7 +62,8 @@ let firstQ = function(response, convo) {
     if (response.text === 'hillary') {
       nextQuestion(response, convo, "🙌 Oh yea, that was the correct choice!", secondQ)
       convo.next()
-    } else {
+    }
+    if (response.text === 'trump' || response.text === 'someone'){
       nextQuestion(response, convo, "Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸", secondQ)
       convo.next()
     }
