@@ -1,9 +1,9 @@
 'use strict'
 
 const generator = require('./generators.js')
+let score = 0
 
-let correctHillary = function(response, convo) {
-  let text = "🙌 Oh yea, that was the correct choice!"
+let correctAns = function(response, convo, text) {
   let buttons = [
     {
       type: "postback",
@@ -19,8 +19,7 @@ let correctHillary = function(response, convo) {
   })
 }
 
-let incorrectHillary = function(response, convo) {
-  let text = "Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸"
+let incorrectAns= function(response, convo, text) {
   let buttons = [
     {
       type: "postback",
@@ -62,10 +61,10 @@ let firstQ = function(response, convo) {
   convo.say("Ok cool. Let's see how well you know him...")
   convo.ask(reply, function(response, convo) {
     if (response.text === 'hillary') {
-      correctHillary(response, convo)
+      correctAns(response, convo, "🙌 Oh yea, that was the correct choice!")
       convo.next()
     } else {
-      incorrectHillary(response, convo)
+      incorrectAns(response, convo, "Oh 💩 - you're wrong. He's voting for Hillary! 🇺🇸")
       convo.next()
     }
   })
@@ -96,10 +95,10 @@ let secondQ = (respones, convo) => {
   convo.ask(reply, (response, convo) => {
     console.log(response.text, response, "@@@@@@@@@@@@@@@@@@@@")
     if (response.text === '1') {
-      correctHillary(response, convo)
+      correctAns(response, convo, "🙌 Oh yea, that was the correct choice!")
       convo.next()
     } else {
-      incorrectHillary(response, convo)
+      incorrectAns(response, convo, "Oh 💩 - you're wrong. He's only has one younger brother.")
       convo.next()
     }
   })
