@@ -343,6 +343,36 @@ const sendBookAMeeting = (bot, message) => {
   })
 }
 
+const sendReplyToNothanks = (bot, message) => {
+  let text = "No worries! It’s easy to book a time to chat 1:1 via Messenger, leave a private 💬, or even 📅 schedule an in-person meeting."
+
+  let quickReplies = [
+    {
+      type: "text",
+      title: "See menu",
+      payload: "home menu"
+    },
+    {
+      type: "text",
+      title: "Gimme his story",
+      payload: "story"
+    },
+    {
+      type: "text",
+      title: "See his works",
+      payload: "work"
+    },
+    {
+      type: "text",
+      title: "Send him a msg",
+      payload: "msg"
+    }
+  ]
+
+  let reply = generator.quickReplies(text, quickReplies)
+  bot.reply(message, reply)
+}
+
 controller.on('tick', (bot, event) => {
 })
 
@@ -604,7 +634,7 @@ controller.on('facebook_postback', function(bot, message) {
 
   if (message.payload === 'meeting') sendBookAMeeting(bot, message)
 
-  if (message.payload === 'no thanks, to bot') bot.reply(message, "just a test to see if it's working")
+  if (message.payload === 'no thanks, to bot') sendReplyToNothanks(bot, message)
 })
 
 
