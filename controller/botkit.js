@@ -635,6 +635,11 @@ controller.on('facebook_postback', function(bot, message) {
   if (message.payload === 'meeting') sendBookAMeeting(bot, message)
 
   if (message.payload === 'no thanks, to bot') sendReplyToNothanks(bot, message)
+
+  if (message.payload === 'work') sendDemoProjects(bot, message)
+
+  if (message.payload === 'home menu') sendGenericMenu(bot, message)
+
 })
 
 

@@ -577,3 +577,35 @@ app.listen(app.get('port'), function() {
  * }
  * ]
  *  }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAQle8UCzGwBANste5znw00stMNIYIygo7aZBGXUSY2fAlgEU7YGDF2O9ZCBLs0vHh7gSvp1oo0s849UaXY9J6nzbSsmTYrHaFRZBZBRcyGjEkTonhllsSCfOkRIp2HPHOG34PzaXEK8igY5Vo3SZBv69cUCL5SboZCYOQCHgYugZDZD"*/
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "setting_type" : "call_to_actions",
+  "thread_state" : "existing_thread",
+  "call_to_actions":[
+    {
+      "type":"postback",
+      "title":"Leave him a message",
+      "payload":"message"
+    },
+    {
+      "type":"postback",
+      "title":"Book a meeting with him",
+      "payload":"meeting"
+    },
+    {
+      "type":"postback",
+      "title":"See his works",
+      "payload":"work"
+    },
+    {
+      "type":"postback",
+      "title":"See his bio",
+      "payload":"bio"
+    },
+    {
+      "type":"postback",
+      "title":"Home",
+      "payload":"home menu"
+    },
+  ]
+}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAQle8UCzGwBANste5znw00stMNIYIygo7aZBGXUSY2fAlgEU7YGDF2O9ZCBLs0vHh7gSvp1oo0s849UaXY9J6nzbSsmTYrHaFRZBZBRcyGjEkTonhllsSCfOkRIp2HPHOG34PzaXEK8igY5Vo3SZBv69cUCL5SboZCYOQCHgYugZDZD"
