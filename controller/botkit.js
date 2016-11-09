@@ -48,9 +48,8 @@ const sendWelcomePromt = (bot, message) => {
     qs: {access_token:process.env.page_token},
     method: 'GET',
   }, function(error, response, body) {
-    console.log(body, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    console.log(body.toString())
     console.log(JSON.parse(body))
+    console.log(JSON.parse(body.toString()), "####################")
     if (error) {
       console.log('Error sending messages: ', error)
     } else if (response.body.error) {
