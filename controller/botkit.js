@@ -49,7 +49,7 @@ const sendWelcomePromt = (bot, message) => {
     method: 'GET',
   }, function(error, response, body) {
     console.log(body)
-    console.log(body.first_name)
+    console.log(body["first_name"])
     if (error) {
       console.log('Error sending messages: ', error)
     } else if (response.body.error) {
