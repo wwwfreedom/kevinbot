@@ -50,6 +50,7 @@ const sendWelcomePromt = (bot, message) => {
   }, function(error, response, body) {
     console.log(body, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     console.log(body.toString())
+    console.log(JSON.parse(body))
     if (error) {
       console.log('Error sending messages: ', error)
     } else if (response.body.error) {
