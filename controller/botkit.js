@@ -43,7 +43,18 @@ request.post('https://graph.facebook.com/me/subscribed_apps?access_token=' + pro
 )
 
 const sendWelcomePromt = (bot, message) => {
-  console.log(message, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+  request({
+    url: `https://graph.facebook.com/v2.6/${message.user}?fields=first_name,last_name`,
+    qs: {access_token:process.env.page_token},
+    method: 'GET',
+  }, function(error, response, body) {
+    console.log(response, body)
+    if (error) {
+      console.log('Error sending messages: ', error)
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error)
+    }
+  })
   let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
   let buttons = [
     {
