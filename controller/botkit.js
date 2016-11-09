@@ -46,7 +46,6 @@ request.post('https://graph.facebook.com/me/subscribed_apps?access_token=' + pro
 const sendWelcomePromt = (bot, message) => {
   axios.get(`https://graph.facebook.com/v2.6/${message.user}?fields=first_name,last_name&access_token=${process.env.page_token}`)
     .then((response) => {
-      console.log(response)
       let text = `Hi ${response.data.first_name}! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`
       let buttons = [
         {
@@ -67,20 +66,9 @@ const sendWelcomePromt = (bot, message) => {
         if (err) handleError(bot, message, err)
       })
     })
-  /* request({
-   *   url: `https://graph.facebook.com/v2.6/${message.user}?fields=first_name,last_name`,
-   *   qs: {access_token:process.env.page_token},
-   *   method: 'GET',
-   * }, function(error, response, body) {
-   *   console.log(JSON.parse(body))
-   *   console.log(JSON.parse(body.toString()), "####################")
-   *   if (error) {
-   *     console.log('Error sending messages: ', error)
-   *   } else if (response.body.error) {
-   *     console.log('Error: ', response.body.error)
-   *   } else {
-   *         }
-   * })*/
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 const sendQuickRepliesAboutMe = (bot, message) => {
@@ -112,7 +100,7 @@ const sendQuickRepliesAboutMe = (bot, message) => {
     }
   ]
 
-  let text = "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even see what he’s reading."
+  let text = "You should know, I can share a ton of stuff about Kevin. 📚 You can dig into his background, projects he's done, and even play a quiz."
 
   let reply = generator.quickReplies(text, quickReplies)
 
