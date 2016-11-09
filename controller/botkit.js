@@ -53,26 +53,27 @@ const sendWelcomePromt = (bot, message) => {
       console.log('Error sending messages: ', error)
     } else if (response.body.error) {
       console.log('Error: ', response.body.error)
-    }
-  })
-  let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
-  let buttons = [
-    {
-      type: "postback",
-      title: "Learn about him 👨🏻",
-      payload: "learn about him"
-    },
-    {
-      type: "postback",
-      title: "Get my own bot 🤖",
-      payload: "get my own bot"
-    }
-  ]
+    } else {
+      let text = `Hi ${body.first_name}! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`
+      let buttons = [
+        {
+          type: "postback",
+          title: "Learn about him 👨🏻",
+          payload: "learn about him"
+        },
+        {
+          type: "postback",
+          title: "Get my own bot 🤖",
+          payload: "get my own bot"
+        }
+      ]
 
-  let reply = generator.buttonTemplate(text, buttons)
+      let reply = generator.buttonTemplate(text, buttons)
 
-  bot.reply(message, reply, (err, response) => {
-    if (err) handleError(bot, message, err)
+      bot.reply(message, reply, (err, response) => {
+        if (err) handleError(bot, message, err)
+      })
+    }
   })
 }
 
