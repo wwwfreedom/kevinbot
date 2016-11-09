@@ -560,23 +560,23 @@ app.listen(app.get('port'), function() {
   console.log('running on port', app.get('port'))
 })
 
-/* curl -X POST -H "Content-Type: application/json" -d '{
- *    "setting_type":"greeting",
- *    "greeting":{
- *      "text":"Hi {{user_first_name}}, I am the personal bot of Kevin, a web developer from Melbourne. Press the get started button to begin."
- *    }
- *  }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAQle8UCzGwBANste5znw00stMNIYIygo7aZBGXUSY2fAlgEU7YGDF2O9ZCBLs0vHh7gSvp1oo0s849UaXY9J6nzbSsmTYrHaFRZBZBRcyGjEkTonhllsSCfOkRIp2HPHOG34PzaXEK8igY5Vo3SZBv69cUCL5SboZCYOQCHgYugZDZD"
- *
- *
- * curl -X POST -H "Content-Type: application/json" -d '{
- *    "setting_type":"call_to_actions",
- *    "thread_state": "new_thread",
- *    "call_to_actions": [
- * {
- *   "payload": "USER_DEFINED_PAYLOAD"
- * }
- * ]
- *  }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAQle8UCzGwBANste5znw00stMNIYIygo7aZBGXUSY2fAlgEU7YGDF2O9ZCBLs0vHh7gSvp1oo0s849UaXY9J6nzbSsmTYrHaFRZBZBRcyGjEkTonhllsSCfOkRIp2HPHOG34PzaXEK8igY5Vo3SZBv69cUCL5SboZCYOQCHgYugZDZD"*/
+curl -X POST -H "Content-Type: application/json" -d '{
+    "setting_type":"greeting",
+    "greeting":{
+      "text":"Hi {{user_first_name}}, I am the personal bot of Kevin. Kevin created me to share factoids about him. Press the get started button to begin."
+    }
+  }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAaOT7kVwBsBAJjQGvv8mAaycvtd6rVmJbMiF5pZBVeS69ZAe6Y52ttA1KZCeqikbEj0Hhjx4GeGPTiMKj2vOg00KSPnbTAVZAD1BQJHlyCE1pZBxSeEZB1kbdPRC60VX1XUVawznZB2caNzTc22HcjkNHNyBuaU963Ikc5c4TmZBgZDZD"
+
+
+curl -X POST -H "Content-Type: application/json" -d '{
+    "setting_type":"call_to_actions",
+    "thread_state": "new_thread",
+    "call_to_actions": [
+ {
+   "payload": "USER_DEFINED_PAYLOAD"
+ }
+ ]
+  }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAaOT7kVwBsBAJjQGvv8mAaycvtd6rVmJbMiF5pZBVeS69ZAe6Y52ttA1KZCeqikbEj0Hhjx4GeGPTiMKj2vOg00KSPnbTAVZAD1BQJHlyCE1pZBxSeEZB1kbdPRC60VX1XUVawznZB2caNzTc22HcjkNHNyBuaU963Ikc5c4TmZBgZDZD"
 
 curl -X POST -H "Content-Type: application/json" -d '{
   "setting_type" : "call_to_actions",
@@ -608,4 +608,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
       "payload":"home menu"
     },
   ]
-}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAQle8UCzGwBANste5znw00stMNIYIygo7aZBGXUSY2fAlgEU7YGDF2O9ZCBLs0vHh7gSvp1oo0s849UaXY9J6nzbSsmTYrHaFRZBZBRcyGjEkTonhllsSCfOkRIp2HPHOG34PzaXEK8igY5Vo3SZBv69cUCL5SboZCYOQCHgYugZDZD"
+}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAaOT7kVwBsBAJjQGvv8mAaycvtd6rVmJbMiF5pZBVeS69ZAe6Y52ttA1KZCeqikbEj0Hhjx4GeGPTiMKj2vOg00KSPnbTAVZAD1BQJHlyCE1pZBxSeEZB1kbdPRC60VX1XUVawznZB2caNzTc22HcjkNHNyBuaU963Ikc5c4TmZBgZDZD"
+
+
+curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=EAAaOT7kVwBsBAJjQGvv8mAaycvtd6rVmJbMiF5pZBVeS69ZAe6Y52ttA1KZCeqikbEj0Hhjx4GeGPTiMKj2vOg00KSPnbTAVZAD1BQJHlyCE1pZBxSeEZB1kbdPRC60VX1XUVawznZB2caNzTc22HcjkNHNyBuaU963Ikc5c4TmZBgZDZD"

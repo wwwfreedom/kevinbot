@@ -42,9 +42,8 @@ request.post('https://graph.facebook.com/me/subscribed_apps?access_token=' + pro
   }
 )
 
-console.log('botkit')
-
 const sendWelcomePromt = (bot, message) => {
+  console.log(message, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
   let text = "Hi! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?"
   let buttons = [
     {
@@ -233,16 +232,6 @@ const sendBioMenu = (bot, message) => {
       type: "text",
       title: "Work history",
       payload: "work history"
-    },
-    {
-      type: "text",
-      title: "💜 status",
-      payload: "love status"
-    },
-    {
-      type: "text",
-      title: "Random facts",
-      payload: "random facts"
     }
   ]
 
