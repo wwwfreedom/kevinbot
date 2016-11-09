@@ -47,7 +47,7 @@ const sendWelcomePromt = (bot, message) => {
   axios.get(`https://graph.facebook.com/v2.6/${message.user}?fields=first_name,last_name&access_token=${process.env.page_token}`)
     .then((response) => {
       console.log(response)
-      let text = `Hi ${body.first_name}! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`
+      let text = `Hi ${response.data.first_name}! I’m Kevin's personal bot 🤖. Are you wanting to connect with him or get your own bot that people can talk to?`
       let buttons = [
         {
           type: "postback",
